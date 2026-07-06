@@ -12,6 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
 <style>
   * { box-sizing: border-box; }
   body { margin: 0; background: #eef4f9; font-family: 'Hanken Grotesk', system-ui, sans-serif; -webkit-font-smoothing: antialiased; color: #0f2a3f; }
@@ -24,10 +25,11 @@
 <div style="width: 100%; overflow-x: hidden;">
 
   <!-- ============ TOOLBAR (solid; animation never touches it) ============ -->
-  <div style="background: #060b16; border-bottom: 1px solid rgba(127,214,255,.12);">
-    <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 24px 40px;">
+  <div class="nav-bar--dark" style="background: #060b16; border-bottom: 1px solid rgba(127,214,255,.12);">
+    <div class="nav-inner home-pad" style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding-top: 24px; padding-bottom: 24px;">
       <img src="assets/logo.svg" alt="Lareau Lab" style="height: 30px; width: auto; filter: brightness(0) invert(1);">
-      <nav style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+      <label class="nav-toggle" aria-label="Toggle menu"><input type="checkbox" class="nav-toggle-cb"></label>
+      <nav class="nav-links">
         <sc-for list="{{ nav }}" as="item" hint-placeholder-count="6">
           <a href="{{ item.href }}" style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: #bcd6ea; padding: 9px 15px; border: 1px solid rgba(127,214,255,.18); border-radius: 999px;">{{ item.label }}</a>
         </sc-for>
@@ -45,13 +47,13 @@
     <div style="position: absolute; left: 0; right: 0; bottom: 0; height: 120px; background: linear-gradient(180deg, rgba(10,24,48,0), #0a1830); pointer-events: none;"></div>
 
     <!-- eyebrow, pinned just under the toolbar -->
-    <div style="position: relative; z-index: 3; max-width: 1200px; margin: 0 auto; padding: 26px 40px 0;">
+    <div class="home-pad" style="position: relative; z-index: 3; max-width: 1200px; margin: 0 auto; padding-top: 26px;">
       <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: #4fd8ff;">Computational &amp; Systems Immunology &middot; MSK</span>
     </div>
   </section>
 
   <!-- ============ CONTENT ============ -->
-  <div style="max-width: 1200px; margin: 0 auto; padding: 0 40px;">
+  <div class="home-pad" style="max-width: 1200px; margin: 0 auto;">
 
     <!-- news teasers -->
     <div style="padding: 64px 0 12px; display: flex; align-items: baseline; justify-content: space-between;">
@@ -60,7 +62,7 @@
     </div>
     <div style="padding: 6px 0 56px;">
       <sc-for list="{{ teasers }}" as="item" hint-placeholder-count="3">
-        <a href="News.dc.html" style="display: grid; grid-template-columns: 130px 1fr; gap: 20px; align-items: baseline; padding: 18px 0; border-top: 1px solid rgba(57,99,175,.14);">
+        <a href="News.dc.html" class="teaser-row" style="padding: 18px 0; border-top: 1px solid rgba(57,99,175,.14);">
           <span style="font-family: 'Space Mono', monospace; font-size: 13px; color: #6a8296;">{{ item.date }}</span>
           <span style="font-family: 'Space Grotesk', sans-serif; font-size: 19px; font-weight: 400; color: #16324a;">{{ item.title }}</span>
         </a>
@@ -69,20 +71,20 @@
   </div>
 
   <!-- photo reel -->
-  <div style="max-width: 1200px; margin: 0 auto; padding: 8px 40px 14px;">
+  <div class="home-pad" style="max-width: 1200px; margin: 0 auto; padding-top: 8px; padding-bottom: 14px;">
     <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #0091c7;">Life in the lab &middot; New York City</span>
   </div>
   <div style="overflow: hidden; padding: 6px 0 64px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);">
     <div style="display: flex; gap: 18px; width: max-content; animation: marquee 42s linear infinite; padding: 0 40px;">
       <sc-for list="{{ photos }}" as="item" hint-placeholder-count="3">
-        <figure style="margin: 0; width: 420px; flex: 0 0 auto;">
-          <img src="{{ item.src }}" alt="{{ item.cap }}" style="width: 100%; height: 250px; object-fit: cover; border-radius: 18px; display: block;">
+        <figure class="reel-figure" style="margin: 0; flex: 0 0 auto;">
+          <img src="{{ item.src }}" alt="{{ item.cap }}" style="width: 100%; object-fit: cover; border-radius: 18px; display: block;">
           <figcaption style="font-family: 'Space Mono', monospace; font-size: 12px; color: #5c7488; margin-top: 10px;">{{ item.cap }}</figcaption>
         </figure>
       </sc-for>
       <sc-for list="{{ photos }}" as="item" hint-placeholder-count="3">
-        <figure style="margin: 0; width: 420px; flex: 0 0 auto;">
-          <img src="{{ item.src }}" alt="{{ item.cap }}" style="width: 100%; height: 250px; object-fit: cover; border-radius: 18px; display: block;">
+        <figure class="reel-figure" style="margin: 0; flex: 0 0 auto;">
+          <img src="{{ item.src }}" alt="{{ item.cap }}" style="width: 100%; object-fit: cover; border-radius: 18px; display: block;">
           <figcaption style="font-family: 'Space Mono', monospace; font-size: 12px; color: #5c7488; margin-top: 10px;">{{ item.cap }}</figcaption>
         </figure>
       </sc-for>
@@ -90,7 +92,7 @@
   </div>
 
   <!-- footer -->
-  <div style="position: relative; background: #0a1830; color: #cfe6f2; padding: 48px 40px; overflow: hidden;">
+  <div class="home-pad" style="position: relative; background: #0a1830; color: #cfe6f2; padding-top: 48px; padding-bottom: 48px; overflow: hidden;">
     <div style="max-width: 1200px; margin: 0 auto; position: relative; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap;">
       <div>
         <div style="font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 500; color: #eef6ff;">{{ footer.name }}</div>

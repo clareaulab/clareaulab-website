@@ -1,0 +1,102 @@
+/* ===========================================================================
+   styles.css — shared layout + responsive rules for every page.
+   Linked from each page's <helmet>. This is the ONE place that controls how
+   the site reflows on tablets and phones.
+
+   How it works: the multi-column layouts (nav, people grids, cards, etc.) live
+   here as classes instead of inline styles, so the mobile breakpoints below
+   can override them cleanly. Two breakpoints are used:
+       max-width: 900px  → tablet  (people grids go 4 → 3 columns)
+       max-width: 640px  → phone   (hamburger nav, everything stacks)
+   =========================================================================== */
+
+html { -webkit-text-size-adjust: 100%; }
+
+/* --- Top navigation ------------------------------------------------------- */
+/* The bar is a flex row: logo on the left, links on the right. On phones the
+   links collapse behind a ☰ button (pure CSS — a hidden checkbox toggles them). */
+.nav-inner { position: relative; }
+.nav-links { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.nav-toggle { display: none; }
+/* the checkbox is nested inside the ☰ label, kept off-screen but toggleable */
+.nav-toggle-cb { position: absolute; width: 1px; height: 1px; opacity: 0; }
+
+@media (max-width: 640px) {
+  /* the ☰ / ✕ button */
+  .nav-toggle {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 42px; height: 42px; border-radius: 12px; cursor: pointer;
+    font-size: 20px; line-height: 1; user-select: none;
+    border: 1px solid rgba(57,99,175,.22); color: #16324a;
+  }
+  .nav-toggle::before { content: '\2630'; }                                  /* ☰ */
+  .nav-inner:has(.nav-toggle-cb:checked) .nav-toggle::before { content: '\2715'; }  /* ✕ */
+
+  /* the links, revealed as a dropdown panel under the bar when checked */
+  .nav-links {
+    display: none;
+    position: absolute; top: calc(100% + 10px); left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 8px;
+    padding: 12px; border-radius: 16px; z-index: 40;
+    background: rgba(244,251,255,.98);
+    border: 1px solid rgba(57,99,175,.14);
+    box-shadow: 0 24px 50px -28px rgba(20,50,80,.55);
+  }
+  .nav-inner:has(.nav-toggle-cb:checked) .nav-links { display: flex; }
+  .nav-links a { text-align: center; }
+
+  /* dark variant used on the Home hero toolbar */
+  .nav-bar--dark .nav-toggle { color: #bcd6ea; border-color: rgba(127,214,255,.28); }
+  .nav-bar--dark .nav-links {
+    background: #0a1526; border-color: rgba(127,214,255,.16);
+    box-shadow: 0 24px 50px -28px rgba(0,0,0,.6);
+  }
+}
+
+/* --- Page headings + header padding --------------------------------------- */
+.page-title { font-size: clamp(38px, 11vw, 68px); }
+.page-head { padding: 76px 32px 0; }        /* bottom padding stays inline per page */
+@media (max-width: 640px) { .page-head { padding: 44px 20px 0; } }
+
+/* --- Team: people grids, pets, bio modal ---------------------------------- */
+.people-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+@media (max-width: 900px) { .people-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 640px) { .people-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; } }
+
+.pets-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; }
+@media (max-width: 640px) { .pets-grid { grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 10px; } }
+
+.modal-overlay { padding: 24px; }
+@media (max-width: 640px) { .modal-overlay { padding: 14px; } }
+
+.modal-card { padding: 30px; }
+@media (max-width: 640px) { .modal-card { padding: 20px; } }
+
+.modal-grid { display: grid; grid-template-columns: 150px 1fr; gap: 24px; }
+@media (max-width: 640px) { .modal-grid { grid-template-columns: 96px 1fr; gap: 16px; } }
+
+/* --- News: year sections --------------------------------------------------- */
+.news-grid { display: grid; grid-template-columns: 180px 1fr; gap: 32px; }
+@media (max-width: 640px) { .news-grid { grid-template-columns: 1fr; gap: 10px; } }
+
+.news-year { position: sticky; top: 96px; align-self: start; }
+@media (max-width: 640px) { .news-year { position: static; } }
+
+/* --- Publications: result cards ------------------------------------------- */
+.pub-card { display: grid; grid-template-columns: 150px 1fr; gap: 22px; align-items: start; }
+@media (max-width: 640px) { .pub-card { grid-template-columns: 84px 1fr; gap: 14px; } }
+
+/* --- Home: news teasers + photo reel + horizontal padding ----------------- */
+.teaser-row { display: grid; grid-template-columns: 130px 1fr; gap: 20px; align-items: baseline; }
+@media (max-width: 640px) { .teaser-row { grid-template-columns: 82px 1fr; gap: 12px; } }
+
+.reel-figure { width: 420px; }
+.reel-figure img { height: 250px; }
+@media (max-width: 640px) {
+  .reel-figure { width: 76vw; max-width: 330px; }
+  .reel-figure img { height: 200px; }
+}
+
+/* side gutters on the Home content wrappers (vertical padding stays inline) */
+.home-pad { padding-left: 40px; padding-right: 40px; }
+@media (max-width: 640px) { .home-pad { padding-left: 20px; padding-right: 20px; } }
