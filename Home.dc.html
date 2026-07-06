@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<script src="./site.js"></script>
 </head>
 <body>
 <x-dc>
@@ -92,10 +93,10 @@
   <div style="position: relative; background: #0a1830; color: #cfe6f2; padding: 48px 40px; overflow: hidden;">
     <div style="max-width: 1200px; margin: 0 auto; position: relative; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap;">
       <div>
-        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 500; color: #eef6ff;">Lareau Lab</div>
-        <div style="font-size: 14px; color: #8fb6cc; margin-top: 6px;">Memorial Sloan Kettering Cancer Center &middot; Zuckerman Research Center, New York, NY</div>
+        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 500; color: #eef6ff;">{{ footer.name }}</div>
+        <div style="font-size: 14px; color: #8fb6cc; margin-top: 6px;">{{ footer.org }}</div>
       </div>
-      <div style="font-family: 'Space Mono', monospace; font-size: 12px; color: #7fa7bf;">clareaulab.com</div>
+      <div style="font-family: 'Space Mono', monospace; font-size: 12px; color: #7fa7bf;">{{ footer.url }}</div>
     </div>
   </div>
 
@@ -103,32 +104,29 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
+  state = { teasers: [], photos: [] };
+
   componentWillUnmount() { this._stop = true; if (this._ro) this._ro.disconnect(); }
 
+  async _loadContent() {
+    try {
+      const home = await window.SITE.loadYaml('content/home.yaml');
+      this.setState({ teasers: home.teasers || [], photos: home.photos || [] });
+    } catch (e) { console.error('Failed to load home content:', e); }
+  }
+
   renderVals() {
-    const nav = [
-      { label: 'Home', href: '#' },
-      { label: 'Research', href: '#' },
-      { label: 'News', href: 'News.dc.html' },
-      { label: 'Publications', href: 'Publications.dc.html' },
-      { label: 'Team', href: 'Team.dc.html' },
-      { label: 'Contact', href: '#' },
-    ];
-    const teasers = [
-      { date: 'May 2026', title: 'Caleb awarded the 2026 Pershing Square Sohn Cancer Prize' },
-      { date: 'Apr 2026', title: 'Two new preprints: GIFT lineage tracing & HSV-1 reactivation in the brain' },
-      { date: 'Mar 2026', title: 'The lab joins the 2nd annual Human Virome Program Meeting' },
-    ];
-    const photos = [
-      { src: 'assets/team-photos/bigpizza.png', cap: 'The hunt for NYC\u2019s best slice' },
-      { src: 'assets/team-photos/c4s2026.png', cap: 'Longest pizza on the Lower East Side' },
-      { src: 'assets/team-photos/rickmorty2024.png', cap: 'Funniest costume \u2014 MSK IGO open house' },
-    ];
-    return { nav, teasers, photos };
+    return {
+      nav: window.SITE.nav,
+      teasers: this.state.teasers,
+      photos: this.state.photos,
+      footer: window.SITE.footer,
+    };
   }
 
   componentDidMount() {
     this._stop = false;
+    this._loadContent();
     const bases = ['A', 'C', 'G', 'T'];
     const baseColor = { A: '#45e6c4', C: '#33d1f0', G: '#5f9dff', T: '#5fd6d8' };
     const bitColor = '#8ff2ff';
