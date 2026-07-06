@@ -12,6 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
 <style>
   * { box-sizing: border-box; }
   body { margin: 0; background: linear-gradient(180deg, #eafff5 0%, #e6f9ff 40%, #f4fbff 100%); font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #0f2a3f; -webkit-font-smoothing: antialiased; }
@@ -23,9 +24,10 @@
 
   <!-- nav -->
   <div style="position: sticky; top: 0; z-index: 20; backdrop-filter: blur(12px); background: rgba(244,251,255,.72); border-bottom: 1px solid rgba(57,99,175,.12);">
-    <div style="max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 20px 32px;">
+    <div class="nav-inner" style="max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 20px 32px;">
       <a href="Home.dc.html"><img src="assets/logo.svg" alt="Lareau Lab" style="height: 30px; width: auto;"></a>
-      <nav style="display: flex; gap: 8px; align-items: center;">
+      <label class="nav-toggle" aria-label="Toggle menu"><input type="checkbox" class="nav-toggle-cb"></label>
+      <nav class="nav-links">
         <sc-for list="{{ nav }}" as="item" hint-placeholder-count="6">
           <a href="{{ item.href }}" style="{{ item.style }}">{{ item.label }}</a>
         </sc-for>
@@ -34,9 +36,9 @@
   </div>
 
   <!-- page header -->
-  <div style="max-width: 1120px; margin: 0 auto; padding: 76px 32px 32px;">
+  <div class="page-head" style="max-width: 1120px; margin: 0 auto; padding-bottom: 32px;">
     <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #0091c7;">The people</span>
-    <h1 style="font-family: 'Space Grotesk', sans-serif; font-weight: 400; font-size: 68px; line-height: 1.02; letter-spacing: -.02em; margin: 18px 0 16px;">Team</h1>
+    <h1 class="page-title" style="font-family: 'Space Grotesk', sans-serif; font-weight: 400; line-height: 1.02; letter-spacing: -.02em; margin: 18px 0 16px;">Team</h1>
     <p style="font-size: 19px; line-height: 1.55; color: #33566f; max-width: 640px; margin: 0;">A computational and experimental group in the Computational &amp; Systems Biology Program at Memorial Sloan Kettering — geneticists, engineers, physicians, and immunologists working side by side in New York City. <span style="color:#6a8296;">Click anyone to read their bio.</span></p>
   </div>
 
@@ -46,7 +48,7 @@
       <div style="padding: 24px 0 8px;">
         <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #0091c7;">{{ g.label }}</span>
       </div>
-      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; padding: 8px 0 20px;">
+      <div class="people-grid" style="padding: 8px 0 20px;">
         <sc-for list="{{ g.members }}" as="m" hint-placeholder-count="4">
           <button onClick="{{ m.onClick }}" type="button" style="text-align: left; font: inherit; color: inherit; cursor: pointer; background: rgba(255,255,255,.6); border: 1px solid rgba(57,99,175,.14); border-radius: 20px; padding: 14px 14px 18px;" style-hover="border: 1px solid rgba(0,145,199,.55); box-shadow: 0 16px 34px -24px rgba(20,50,80,.7); transform: translateY(-2px);">
             <img src="{{ m.img }}" alt="{{ m.name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 14px; display: block; margin-bottom: 14px;">
@@ -63,7 +65,7 @@
     <div style="padding: 24px 0 4px;">
       <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #0091c7;">Technical support</span>
     </div>
-    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; padding: 10px 0 20px;">
+    <div class="pets-grid" style="padding: 10px 0 20px;">
       <sc-for list="{{ pets }}" as="p" hint-placeholder-count="8">
         <div style="background: rgba(255,255,255,.5); border: 1px solid rgba(57,99,175,.12); border-radius: 14px; padding: 8px 8px 10px;">
           <img src="{{ p.img }}" alt="{{ p.name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; display: block; margin-bottom: 8px;">
@@ -78,7 +80,7 @@
     <div style="padding: 24px 0 8px;">
       <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #0091c7;">Alumni</span>
     </div>
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; padding: 8px 0;">
+    <div class="people-grid" style="padding: 8px 0;">
       <sc-for list="{{ alumni }}" as="m" hint-placeholder-count="7">
         <button onClick="{{ m.onClick }}" type="button" style="text-align: left; font: inherit; color: inherit; cursor: pointer; background: rgba(255,255,255,.6); border: 1px solid rgba(57,99,175,.14); border-radius: 20px; padding: 14px 14px 18px;" style-hover="border: 1px solid rgba(0,145,199,.55); box-shadow: 0 16px 34px -24px rgba(20,50,80,.7); transform: translateY(-2px);">
           <img src="{{ m.img }}" alt="{{ m.name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 14px; display: block; margin-bottom: 14px;">
@@ -102,9 +104,9 @@
 
   <!-- bio modal -->
   <sc-if value="{{ hasSel }}" hint-placeholder-val="{{ false }}">
-    <div onClick="{{ close }}" style="position: fixed; inset: 0; z-index: 60; background: rgba(9,26,42,.55); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 24px;">
-      <div onClick="{{ stop }}" style="background: #fff; border-radius: 24px; max-width: 640px; width: 100%; max-height: 86vh; overflow: auto; box-shadow: 0 50px 100px -40px rgba(10,30,55,.6); padding: 30px;">
-        <div style="display: grid; grid-template-columns: 150px 1fr; gap: 24px; align-items: start;">
+    <div onClick="{{ close }}" class="modal-overlay" style="position: fixed; inset: 0; z-index: 60; background: rgba(9,26,42,.55); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center;">
+      <div onClick="{{ stop }}" class="modal-card" style="background: #fff; border-radius: 24px; max-width: 640px; width: 100%; max-height: 86vh; overflow: auto; box-shadow: 0 50px 100px -40px rgba(10,30,55,.6);">
+        <div class="modal-grid" style="align-items: start;">
           <img src="{{ sel.img }}" alt="{{ sel.name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 18px; display: block;">
           <div>
             <div style="display: flex; align-items: start; justify-content: space-between; gap: 12px;">

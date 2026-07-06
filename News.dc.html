@@ -12,6 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
 <style>
   * { box-sizing: border-box; }
   body { margin: 0; background: linear-gradient(180deg, #eafff5 0%, #e6f9ff 40%, #f4fbff 100%); font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #0f2a3f; -webkit-font-smoothing: antialiased; }
@@ -23,9 +24,10 @@
 
   <!-- nav -->
   <div style="position: sticky; top: 0; z-index: 20; backdrop-filter: blur(12px); background: rgba(244,251,255,.72); border-bottom: 1px solid rgba(57,99,175,.12);">
-    <div style="max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 20px 32px;">
+    <div class="nav-inner" style="max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 20px 32px;">
       <a href="Home.dc.html"><img src="assets/logo.svg" alt="Lareau Lab" style="height: 30px; width: auto;"></a>
-      <nav style="display: flex; gap: 8px; align-items: center;">
+      <label class="nav-toggle" aria-label="Toggle menu"><input type="checkbox" class="nav-toggle-cb"></label>
+      <nav class="nav-links">
         <sc-for list="{{ nav }}" as="item" hint-placeholder-count="6">
           <a href="{{ item.href }}" style="{{ item.style }}">{{ item.label }}</a>
         </sc-for>
@@ -34,17 +36,17 @@
   </div>
 
   <!-- page header -->
-  <div style="max-width: 1120px; margin: 0 auto; padding: 76px 32px 40px;">
+  <div class="page-head" style="max-width: 1120px; margin: 0 auto; padding-bottom: 40px;">
     <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #0091c7;">Lab notebook</span>
-    <h1 style="font-family: 'Space Grotesk', sans-serif; font-weight: 400; font-size: 68px; line-height: 1.02; letter-spacing: -.02em; margin: 18px 0 16px;">News</h1>
+    <h1 class="page-title" style="font-family: 'Space Grotesk', sans-serif; font-weight: 400; line-height: 1.02; letter-spacing: -.02em; margin: 18px 0 16px;">News</h1>
     <p style="font-size: 19px; line-height: 1.55; color: #33566f; max-width: 620px; margin: 0;">Papers, grants, new faces, and the occasional 100-mile run — everything the lab has been up to since we opened in New York.</p>
   </div>
 
   <!-- years -->
   <div style="max-width: 1120px; margin: 0 auto; padding: 8px 32px 120px;">
     <sc-for list="{{ years }}" as="yr" hint-placeholder-count="4">
-      <section style="display: grid; grid-template-columns: 180px 1fr; gap: 32px; padding: 40px 0; border-top: 1px solid rgba(57,99,175,.16);">
-        <div style="position: sticky; top: 96px; align-self: start;">
+      <section class="news-grid" style="padding: 40px 0; border-top: 1px solid rgba(57,99,175,.16);">
+        <div class="news-year">
           <div style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 42px; color: #0f2a3f; line-height: 1;">{{ yr.year }}</div>
           <div style="font-family: 'Space Mono', monospace; font-size: 12px; color: #6a8296; margin-top: 8px;">{{ yr.count }}</div>
         </div>
