@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<script src="./site.js"></script>
 </head>
 <body>
 <x-dc>
@@ -38,7 +39,7 @@
   <div style="max-width: 1120px; margin: 0 auto; padding: 72px 32px 8px;">
     <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #0091c7;">The work</span>
     <h1 style="font-family: 'Space Grotesk', sans-serif; font-weight: 400; font-size: 68px; line-height: 1.02; letter-spacing: -.02em; margin: 18px 0 16px;">Publications</h1>
-    <p style="font-size: 18px; line-height: 1.55; color: #33566f; max-width: 640px; margin: 0;">Sourced from <code style="font-family: 'Space Mono', monospace; font-size: 15px; background: rgba(57,99,175,.08); padding: 2px 7px; border-radius: 6px;">sources.yaml</code> — citation details are resolved automatically from each DOI. Add a paper by adding its DOI to the file.</p>
+    <p style="font-size: 18px; line-height: 1.55; color: #33566f; max-width: 640px; margin: 0;">Sourced from <code style="font-family: 'Space Mono', monospace; font-size: 15px; background: rgba(57,99,175,.08); padding: 2px 7px; border-radius: 6px;">content/publications.yaml</code> — citation details are resolved automatically from each DOI. Add a paper by adding its DOI to the file.</p>
   </div>
 
   <!-- controls (pinned bar) -->
@@ -112,10 +113,10 @@
   <div style="background: #0f2a3f; color: #cfe6f2; padding: 44px 0;">
     <div style="max-width: 1120px; margin: 0 auto; padding: 0 32px; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap;">
       <div>
-        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 500; color: #eafff5;">Lareau Lab</div>
-        <div style="font-size: 14px; color: #8fb6cc; margin-top: 6px;">Memorial Sloan Kettering Cancer Center · Zuckerman Research Center, New York, NY</div>
+        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 500; color: #eafff5;">{{ footer.name }}</div>
+        <div style="font-size: 14px; color: #8fb6cc; margin-top: 6px;">{{ footer.org }}</div>
       </div>
-      <div style="font-family: 'Space Mono', monospace; font-size: 12px; color: #7fa7bf;">clareaulab.com</div>
+      <div style="font-family: 'Space Mono', monospace; font-size: 12px; color: #7fa7bf;">{{ footer.url }}</div>
     </div>
   </div>
 
@@ -124,16 +125,6 @@
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   state = { items: [], search: '', loading: true, done: 0, total: 0, errorMsg: '' };
-
-  navStyle(active) {
-    return {
-      fontFamily: "'Space Mono', monospace", fontSize: '12px', letterSpacing: '.08em',
-      textTransform: 'uppercase', padding: '9px 15px', borderRadius: '999px',
-      color: active ? '#f4fbff' : '#24425c',
-      background: active ? '#0f2a3f' : 'transparent',
-      border: active ? '1px solid #0f2a3f' : '1px solid rgba(57,99,175,.16)',
-    };
-  }
 
   ICONS = {
     paper: 'M7 3h8l4 4v14H7z M15 3v4h4',
@@ -216,8 +207,8 @@ class Component extends DCLogic {
       let tries = 0;
       while (!window.jsyaml && tries++ < 100) await new Promise(r => setTimeout(r, 50));
       if (!window.jsyaml) throw new Error('YAML parser failed to load.');
-      const res = await fetch('sources.yaml', { cache: 'no-store' });
-      if (!res.ok) throw new Error('Could not load sources.yaml (' + res.status + ').');
+      const res = await fetch('content/publications.yaml', { cache: 'no-store' });
+      if (!res.ok) throw new Error('Could not load content/publications.yaml (' + res.status + ').');
       const raw = window.jsyaml.load(await res.text()) || [];
 
       const seen = new Set();
@@ -289,14 +280,7 @@ class Component extends DCLogic {
   }
 
   renderVals() {
-    const nav = [
-      { label: 'Home', href: 'Home.dc.html', active: false },
-      { label: 'Research', href: '#', active: false },
-      { label: 'News', href: 'News.dc.html', active: false },
-      { label: 'Publications', href: 'Publications.dc.html', active: true },
-      { label: 'Team', href: 'Team.dc.html', active: false },
-      { label: 'Contact', href: '#', active: false },
-    ].map(n => ({ ...n, style: this.navStyle(n.active) }));
+    const nav = window.SITE.navItems('Publications.dc.html');
 
     const q = this.state.search.trim().toLowerCase();
     const items = this.state.items;
@@ -365,6 +349,7 @@ class Component extends DCLogic {
 
     return {
       nav, chips, groups,
+      footer: window.SITE.footer,
       search: this.state.search,
       onSearch: (e) => this.setState({ search: e.target.value }),
       loading: this.state.loading,

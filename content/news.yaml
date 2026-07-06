@@ -1,0 +1,232 @@
+# =============================================================================
+# News page content.  Each entry is one news post, with:
+#   date:  'YYYY-MM-DD'  (keep the quotes — they matter)
+#   title: The headline
+#   body:  The post text, on the indented lines under `body: |-`.
+#          Markdown links [text](https://url) and _italics_ work. Links to
+#          other pages (e.g. Team.dc.html) work too. :emoji: shortcodes are
+#          removed on the News page.
+#
+# Posts can be in any order — the page sorts them by date and groups by year.
+# To add a post, copy an entry below and edit it.
+# =============================================================================
+
+- date: '2023-04-01'
+  title: NHGRI Research Training Meeting
+  body: |-
+    Supported by the group's K99/R00 Pathway to Independence Award, the lab attends the NHGRI Research Training and Career Development [Annual Meeting](https://www.genome.gov/event-calendar/NHGRI-Research-Training-and-Career-Development-Annual-Meeting) in Salt Lake City, Utah.
+
+- date: '2023-04-23'
+  title: New preprint on synonymous mtDNA variation
+  body: |-
+    A new preprint outlining a potential role for synonymous variation in the mitochondrial genome just dropped on [bioRxiv](https://www.biorxiv.org/content/10.1101/2023.04.23.537997v1)! In brief, we provide new lines of evidence that synonymous variation in the mitochondrial genome may have a functional role due to the limited tRNA pool requiring wobble-dependent translation. Check out a digest in [our twitter thread](https://twitter.com/CalebLareau/status/1650390670904016897)!
+
+- date: '2023-05-18'
+  title: Emerging Leader in Computational Oncology
+  body: |-
+    Caleb is named an [Emerging Leader in Computational Oncology](https://componcmsk.org/event/computational-oncology-emerging-leaders-2023/) by Memorial Sloan Kettering Cancer Center! Awardees took part in a two-day symposium in New York hosted by faculty in the Computational Oncology program.
+
+- date: '2023-06-29'
+  title: New paper today on purifying selection of mtDNA
+  body: |-
+    Our work resolving purifying selection of pathogenic mtDNA in specific immune cells has been published in [Nature Genetics](https://www.nature.com/articles/s41588-023-01433-8)! Check out [our tweetorial](https://twitter.com/CalebLareau/status/1674442591717433344) and a [News and Views](https://www.nature.com/articles/s41588-023-01436-5) piece from colleagues at the Wellcome Centre for Mitochondrial Research.
+
+- date: '2023-07-10'
+  title: Human Cell Atlas General Meeting, 2023
+  body: |-
+    The lab joins the [Human Cell Atlas General Meeting](https://www.humancellatlas.org/hcameetings/) in Toronto, Canada. We are grateful to the organizers for the invitation to present!
+
+- date: '2023-08-29'
+  title: Grand opening!
+  body: |-
+    The lab officially opens today at Memorial Sloan Kettering. Our official institute [page can be found here](https://www.mskcc.org/research/ski/labs/caleb-lareau). Come see our window views from the 11th floor of the Zuckerman Research Center on 68th in NYC!
+
+- date: '2023-09-11'
+  title: Lab++
+  body: |-
+    [Benan Nalbant](Team.dc.html) (Senior Research Technician) joins the lab as its first member! Benan joins after years at CSHL developing cell models to study transcription factor dependencies in cancer. Welcome Benan!
+
+- date: '2023-09-28'
+  title: Sparkathon Emerging Leader, 2023
+  body: |-
+    Caleb participates in the [SITC Sparkathon 2023](https://www.sitcancer.org/professional-development/sitc-sparkathon/sparkathon-2023) emerging leaders symposium in Chicago, IL, where he received a Distinguished Young Investigator award. We're excited to participate in the main conference in San Diego this November!
+
+- date: '2023-10-02'
+  title: Arthur Chow, our first postdoc, joins!
+  body: |-
+    [Arthur Chow, PhD](Team.dc.html), joins the group as the lab's first postdoctoral fellow! Arthur completed his PhD at Icahn School of Medicine at Mount Sinai and brings a wealth of experimental expertise. Welcome Arthur!
+
+- date: '2023-11-08'
+  title: New paper on HHV-6 reactivation out today!
+  body: |-
+    Our paper describing HHV-6 reactivation in T cells, including therapeutic CAR T cells, [is online today](https://www.nature.com/articles/s41586-023-06704-2). See Caleb's [tweetorial](https://twitter.com/CalebLareau/status/1722295109184573935) and coverage from [STAT News](https://www.statnews.com/2023/11/08/car-t-cancer-therapy-complications-herpes-encephalitis/).
+
+- date: '2023-12-04'
+  title: Welcome Josch and Laura!
+  body: |-
+    [Laura Kida](Team.dc.html) and [Josch Hsieh](Team.dc.html) join the group! Laura is studying for her MD in Berlin, and Josch is a PhD candidate in [Leif Ludwig's group](https://www.mdc-berlin.de/ludwig). Both will help establish new directions as they study for their theses. Welcome!
+
+- date: '2024-01-08'
+  title: New rotation students!
+  body: |-
+    The lab welcomes [Sherry Nyeo](Team.dc.html), [Jonathan Levine](Team.dc.html), and [Hoyin Chu](Team.dc.html) as its first rotation students from the Cornell Tri-I CBM program!
+
+- date: '2024-02-14'
+  title: 2nd Annual Probing Human Disease
+  body: |-
+    The lab presents its work in beautiful Cancun, Mexico at the 2nd Annual Probing Human Disease with [Single Cell Technologies](https://www.fusion-conferences.com/conference/154) Conference. Thank you to the organizers for inviting us back!
+
+- date: '2024-03-29'
+  title: Single Cell Genomics Day 2024
+  body: |-
+    The lab debuts its work on PERFF-seq at [Single Cell Genomics Day 2024](https://satijalab.org/scgd24/) via a YouTube livestream. Thank you to Rahul for the invitation to present!
+
+- date: '2024-04-02'
+  title: Erin Cumming, our second postdoc, joins!
+  body: |-
+    [Erin Cumming, PhD](Team.dc.html), joins the group as the second postdoctoral fellow. Erin completed her PhD at the Cancer Research Scotland Institute (formerly the CRUK Beatson Institute). Welcome Erin!
+
+- date: '2024-05-22'
+  title: Tumor ecosystems symposium
+  body: |-
+    The lab takes part in the [U54 Tumor Ecosystems](https://www.mskcc.org/research-programs/tumor-immune-systems-biology) symposium at MSK. Caleb shared the lab's work on PERFF-seq.
+
+- date: '2024-06-03'
+  title: Emma joins as our first summer intern!
+  body: |-
+    Emma Tran joins the lab for the summer as the first ever intern in the lab! Emma joins us as part of the MSKCC [CBSP](https://www.mskcc.org/education-training/summer-scientific-undergraduate-programs/computational-biology-summer-program-cbsp) for undergraduate students. Welcome!
+
+- date: '2024-07-01'
+  title: Review on mitochondrial genetics & single cell is online!
+  body: |-
+    A [collaborative review article](https://www.nature.com/articles/s41588-024-01794-8) written with the [Leif Ludwig Lab](https://www.mdc-berlin.de/ludwig) is online today at _Nature Genetics_. It summarizes the rapid development of single-cell genomics technologies that have informed a new era of mitochondrial genetics.
+
+- date: '2024-08-01'
+  title: Review paper on single-cell technology development
+  body: |-
+    The first review paper from the lab is out in _Trends in Biotechnology_, exploring key concepts in technology development for droplet-based single-cell assays. Congratulations to Arthur for leading the writing! Find the manuscript [online here](https://doi.org/10.1016/j.tibtech.2024.07.006).
+
+- date: '2024-09-16'
+  title: "Erin wins People's Choice at the MSK postdoc slam!"
+  body: |-
+    Congrats to Erin for winning the People's Choice Award at the [MSKCC postdoc slam competition](https://www.mskcc.org/education-training/postdoctoral/career-development/special-postdoc-events/postdoc-slam-videos). Erin presented how the same infections can influence individuals differently, including germline-transmitted HHV-6.
+
+- date: '2024-09-21'
+  title: New grant to study the human virome awarded!
+  body: |-
+    The lab receives its [first independent grant](https://reporter.nih.gov/search/pMjdDQYMzECGV5qI_Zor5Q/project-details/10987464) to study the Human Virome from the National Center for Complementary and Integrative Health and the NIH Office of Director. Stay tuned for more!
+
+- date: '2024-10-31'
+  title: Funniest lab costumes!
+  body: |-
+    At the Annual MSK IGO open house, [our crew dressed up as Rick and Morty's (and portals)](https://x.com/CalebLareau/status/1852019342650617930). We were voted the funniest group costume — that means a free pizza party! Thanks to our friends at IGO!
+
+- date: '2024-11-19'
+  title: Highly cited researcher
+  body: |-
+    Caleb is recognized as one of [Clarivate's Highly Cited Researchers](https://clarivate.com/highly-cited-researchers/) in 2024 in the Cross-Field category. We appreciate the recognition of the impact of our work!
+
+- date: '2025-01-08'
+  title: PERFF-seq out in Nature Genetics!
+  body: |-
+    The finalized manuscript describing [PERFF-seq](https://www.nature.com/articles/s41588-024-02036-7) is online today in _Nature Genetics_. A [PDF is available here](https://clareaulab.github.io/pdfs/AbayStickelsTakizawa-NG-2025.pdf). Congrats Tsion, Benan, and all of our wonderful collaborators!
+
+- date: '2025-01-23'
+  title: "The lab's work on the virome is highlighted!"
+  body: |-
+    Erin and Caleb sat down with [Ian Demsky](https://www.linkedin.com/in/idemsky/) to discuss the lab's ongoing work to study the human virome, including our new U01 grant. Check out the [full story here](https://www.mskcc.org/news/msk-researchers-help-to-map-human-virome)!
+
+- date: '2025-02-20'
+  title: Caleb is awarded the Michelson Prize!
+  body: |-
+    Caleb is one of three winners of the [Michelson Prize in Systems Immunology](https://www.humanimmunomeproject.org/news/human-immunome-project-and-michelson-medical-research-foundation-award-150000-grants-to-three-early-career-scientists-advancing-immunology-and-vaccines/). This award directly funds our research on the evolving blood virome. [Read more about the awardees](https://www.eurekalert.org/news-releases/1074152).
+
+- date: '2025-03-25'
+  title: HHV-6 meeting in Japan!
+  body: |-
+    Caleb and Erin attend the 12th International Conference on HHV-6 and HHV-7 in [Himeji, Japan](https://conference.hhv-6foundation.org/). Congratulations to Erin for winning a best trainee abstract award!
+
+- date: '2025-04-24'
+  title: Caleb gives seminar at OMRF!
+  body: |-
+    Caleb had a scientific homecoming! After getting his start in science in 2011 as a [Fleming Scholar](https://omrf.org/findings/schools-out/) at Oklahoma Medical Research Foundation, he was invited back as part of the Presidential Seminar Series.
+
+- date: '2025-05-23'
+  title: High school STEM night!
+  body: |-
+    The lab attends the NYSCI Teen & STEM night! Located at the New York Hall of Science, the [STEM career night](https://nysci.org/stem-career-events) brought in over 500 local high school students. Thanks to Betty, Arthur, Benan, Zeyu, and Hoyin for spending their Friday night with a bunch of high schoolers!
+
+- date: '2025-06-11'
+  title: Cornell Protein Science Symposium!
+  body: |-
+    Many members of the lab travel to Cornell @ Ithaca for the [Protein Science Symposium](https://proteomics.cornell.edu/events/protein-science-symposium/)! Congratulations to Laura for being selected to give a talk on exciting new proteo-genomics work from the lab!
+
+- date: '2025-07-25'
+  title: New papers online!
+  body: |-
+    A flurry of papers this month! Out now in PNAS, our characterization of purifying selection in a [mtDNA synonymous allele](https://www.pnas.org/doi/10.1073/pnas.2505704122). Next, a preprint with the [Dhindsa Lab](https://www.dhindsalab.com/) studying Epstein-Barr virus is [out on bioRxiv](https://www.biorxiv.org/content/10.1101/2025.07.18.665549v1). Finally, a collaboration with the Satpathy lab is available [on bioRxiv](https://www.biorxiv.org/content/10.1101/2025.07.16.665245v1)! Congrats to Sherry, Erin, Jacob, Benan, Meghana, Thahmina, and Laura!
+
+- date: '2025-08-03'
+  title: 100 mile run!
+  body: |-
+    Paul, Cole, and Caleb conquer the [Badger 101.1 mile trail race](https://www.tenjunkmilesracing.com/badger-100-mile)! Check out these [exhausted but ecstatic finishers](https://bsky.app/profile/caleblareau.bsky.social/post/3lvnnedm77s2m).
+
+- date: '2025-08-21'
+  title: New grant support!
+  body: |-
+    The lab receives a Notice of Award from the National Cancer Institute's [IMAT Program](https://www.cancer.gov/about-nci/organization/cssi/research/imat) for advanced development of nucleic acid cytometry!
+
+- date: '2025-09-01'
+  title: Revised Logan preprint
+  body: |-
+    The lab collaborates on the latest generation of the [Logan Project](https://github.com/IndexThePlanet/Logan), including a [heavily revised preprint](https://www.biorxiv.org/content/10.1101/2024.07.30.605881v2). Try it yourself with the [LoganSearch webtool](https://logan-search.org/).
+
+- date: '2025-10-01'
+  title: National Academy of Medicine Catalyst
+  body: |-
+    The lab is awarded a [Catalyst prize from the National Academy of Medicine](https://nam.edu/news-and-insights/2025-catalyst-awards-announcement/) for our continued work defining the human virome. Thank you NAM for believing in our vision!
+
+- date: '2025-11-02'
+  title: NYC Marathon!
+  body: |-
+    Cole and Caleb complete the [New York City Marathon](https://www.nyrr.org/tcsnycmarathon)! [Thanks to the lab for coming out in support](https://bsky.app/profile/caleblareau.bsky.social/post/3m4qegjaqlc2q) and for the generous donations [to Fred's Team](https://secure2.convio.net/mskcc/site/TR?pg=personal&fr_id=4272&px=5441347).
+
+- date: '2025-11-07'
+  title: New papers online!
+  body: |-
+    Several collaborative projects are now online! Led by the Alex Gitlin lab, [new work](https://www.nature.com/articles/s41586-025-09815-0) characterizes VEXAS Syndrome. With Payam Gammage and Ed Reznik we help characterize hotspot mutations in [mitochondrial ribosomal RNA](https://www.nature.com/articles/s41588-025-02374-0). And with Robbie Majzner's group we defined how [SLP-76 can be engineered to improve T cell fitness](https://www.nature.com/articles/s43018-025-01056-4). Thanks to Benan and Hoyin!
+
+- date: '2025-12-13'
+  title: First protein design paper online!
+  body: |-
+    The lab's first paper on _de novo_ protein design is [out on bioRxiv](https://www.biorxiv.org/content/10.64898/2025.12.12.694033v1). We screened over 1,500 new proteins for binding and CAR T efficacy, discovering principles for effective CAR T cells against a variety of surface antigens. Congrats to Arthur, Hoyin, Betty, Benan, Abi, and Laura!
+
+- date: '2026-01-28'
+  title: EBV DNA persistence paper online!
+  body: |-
+    Our manuscript studying EBV persistence in population-scale biobanks is now [online at _Nature_](https://www.nature.com/articles/s41586-025-10020-2). This work establishes a new framework for why human responses vary so dramatically following infection by the same endemic agent. See the accompanying [News and Views](https://clareaulab.github.io/pdfs/Wade-Hollenbach-Nature-2026.pdf). Congrats to Sherry, Erin, Meghana, Laura, Hoyin, Jacob, and Thahmina!
+
+- date: '2026-03-02'
+  title: Best poster awards!
+  body: |-
+    Congratulations to Laura and Tsion for winning best poster prizes at the [3rd Probing Human Disease using Single-cell Technologies conference](https://fusion-conferences.com/conference/194)!
+
+- date: '2026-03-20'
+  title: Second annual human virome meeting
+  body: |-
+    Caleb, Sherry, Cole, Jacob, and Erin attend the [2nd annual Human Virome Program Meeting](https://commonfund.nih.gov/humanvirome) in Rockville, MD. The group discussed genomics technologies to map host-viral interactions, from single-cell profiling to population-scale data analysis.
+
+- date: '2026-04-30'
+  title: New preprints!
+  body: |-
+    The lab releases two new preprints! First, [GIFT, a scalable genotyping platform](https://www.biorxiv.org/content/10.64898/2026.04.11.717967v2) for single-cell lineage tracing. Second, a study of [HSV-1 reactivation in the brain](https://www.biorxiv.org/content/10.64898/2026.04.29.721769v1), implicating RORB+ neurons as a potential reservoir of herpesvirus latency that may trigger dementias, including Alzheimer's disease. Congrats to Austin, Jacob, Benan, and Laura!
+
+- date: '2026-05-04'
+  title: Pershing Square prize!
+  body: |-
+    Caleb is among the national winners of the 2026 Pershing Square [Sohn Prize for Cancer Research](https://www.mskcc.org/news/dr-caleb-lareau-awarded-2026-pershing-square-sohn-cancer-prize). This award supports new directions to engineer proteins for potential therapeutic use.
+
+- date: '2026-05-10'
+  title: Collaborative paper with David lab online!
+  body: |-
+    A collaborative paper with the [David Lab](https://www.davidlabmsk.com/) is online now at [JACS](https://pubs.acs.org/doi/10.1021/jacs.5c20726). [Abi](Team.dc.html) led the biophysical modeling of amino acid residues on SRSF2 that destabilize the native protein-RNA complex upon glycation. Congrats to Abi!
