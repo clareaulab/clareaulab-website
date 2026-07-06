@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: linear-gradient(180deg, #eafff5 0%, #e6f9ff 40%, #f4fbff 100%); font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #0f2a3f; -webkit-font-smoothing: antialiased; }
+  a { text-decoration: none; color: inherit; }
+</style>
+</helmet>
+
+<div style="min-height: 100vh;">
+
+  <!-- nav -->
+  <div style="position: sticky; top: 0; z-index: 20; backdrop-filter: blur(12px); background: rgba(244,251,255,.72); border-bottom: 1px solid rgba(57,99,175,.12);">
+    <div style="max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 20px 32px;">
+      <a href="Home.dc.html"><img src="assets/logo.svg" alt="Lareau Lab" style="height: 30px; width: auto;"></a>
+      <nav style="display: flex; gap: 8px; align-items: center;">
+        <sc-for list="{{ nav }}" as="item" hint-placeholder-count="6">
+          <a href="{{ item.href }}" style="{{ item.style }}">{{ item.label }}</a>
+        </sc-for>
+      </nav>
+    </div>
+  </div>
+
+  <!-- page header -->
+  <div style="max-width: 1120px; margin: 0 auto; padding: 76px 32px 32px;">
+    <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #0091c7;">The people</span>
+    <h1 style="font-family: 'Space Grotesk', sans-serif; font-weight: 400; font-size: 68px; line-height: 1.02; letter-spacing: -.02em; margin: 18px 0 16px;">Team</h1>
+    <p style="font-size: 19px; line-height: 1.55; color: #33566f; max-width: 640px; margin: 0;">A computational and experimental group in the Computational &amp; Systems Biology Program at Memorial Sloan Kettering — geneticists, engineers, physicians, and immunologists working side by side in New York City. <span style="color:#6a8296;">Click anyone to read their bio.</span></p>
+  </div>
+
+  <!-- role groups: Lab + Co-mentored only -->
+  <div style="max-width: 1120px; margin: 0 auto; padding: 24px 32px 12px;">
+    <sc-for list="{{ groups }}" as="g" hint-placeholder-count="2">
+      <div style="padding: 24px 0 8px;">
+        <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #0091c7;">{{ g.label }}</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; padding: 8px 0 20px;">
+        <sc-for list="{{ g.members }}" as="m" hint-placeholder-count="4">
+          <button onClick="{{ m.onClick }}" type="button" style="text-align: left; font: inherit; color: inherit; cursor: pointer; background: rgba(255,255,255,.6); border: 1px solid rgba(57,99,175,.14); border-radius: 20px; padding: 14px 14px 18px;" style-hover="border: 1px solid rgba(0,145,199,.55); box-shadow: 0 16px 34px -24px rgba(20,50,80,.7); transform: translateY(-2px);">
+            <img src="{{ m.img }}" alt="{{ m.name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 14px; display: block; margin-bottom: 14px;">
+            <div style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 18px; color: #16324a;">{{ m.name }}</div>
+            <div style="font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: .04em; color: #6a8296; margin-top: 4px;">{{ m.role }}</div>
+          </button>
+        </sc-for>
+      </div>
+    </sc-for>
+  </div>
+
+  <!-- Technical Support (pets) — smaller cards & font -->
+  <div style="max-width: 1120px; margin: 0 auto; padding: 20px 32px 12px;">
+    <div style="padding: 24px 0 4px;">
+      <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #0091c7;">Technical support</span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; padding: 10px 0 20px;">
+      <sc-for list="{{ pets }}" as="p" hint-placeholder-count="8">
+        <div style="background: rgba(255,255,255,.5); border: 1px solid rgba(57,99,175,.12); border-radius: 14px; padding: 8px 8px 10px;">
+          <img src="{{ p.img }}" alt="{{ p.name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; display: block; margin-bottom: 8px;">
+          <div style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 13px; color: #33566f;">{{ p.name }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- alumni -->
+  <div style="max-width: 1120px; margin: 0 auto; padding: 24px 32px 100px;">
+    <div style="padding: 24px 0 8px;">
+      <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #0091c7;">Alumni</span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; padding: 8px 0;">
+      <sc-for list="{{ alumni }}" as="m" hint-placeholder-count="7">
+        <button onClick="{{ m.onClick }}" type="button" style="text-align: left; font: inherit; color: inherit; cursor: pointer; background: rgba(255,255,255,.6); border: 1px solid rgba(57,99,175,.14); border-radius: 20px; padding: 14px 14px 18px;" style-hover="border: 1px solid rgba(0,145,199,.55); box-shadow: 0 16px 34px -24px rgba(20,50,80,.7); transform: translateY(-2px);">
+          <img src="{{ m.img }}" alt="{{ m.name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 14px; display: block; margin-bottom: 14px;">
+          <div style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 18px; color: #16324a;">{{ m.name }}</div>
+          <div style="font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: .04em; color: #6a8296; margin-top: 4px;">{{ m.role }}</div>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <div style="background: #0f2a3f; color: #cfe6f2; padding: 44px 0;">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 32px; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap;">
+      <div>
+        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 500; color: #eafff5;">Lareau Lab</div>
+        <div style="font-size: 14px; color: #8fb6cc; margin-top: 6px;">Memorial Sloan Kettering Cancer Center · Zuckerman Research Center, New York, NY</div>
+      </div>
+      <div style="font-family: 'Space Mono', monospace; font-size: 12px; color: #7fa7bf;">clareaulab.com</div>
+    </div>
+  </div>
+
+  <!-- bio modal -->
+  <sc-if value="{{ hasSel }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ close }}" style="position: fixed; inset: 0; z-index: 60; background: rgba(9,26,42,.55); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 24px;">
+      <div onClick="{{ stop }}" style="background: #fff; border-radius: 24px; max-width: 640px; width: 100%; max-height: 86vh; overflow: auto; box-shadow: 0 50px 100px -40px rgba(10,30,55,.6); padding: 30px;">
+        <div style="display: grid; grid-template-columns: 150px 1fr; gap: 24px; align-items: start;">
+          <img src="{{ sel.img }}" alt="{{ sel.name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 18px; display: block;">
+          <div>
+            <div style="display: flex; align-items: start; justify-content: space-between; gap: 12px;">
+              <div>
+                <span style="font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: #0091c7;">{{ sel.role }}</span>
+                <h2 style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 30px; margin: 8px 0 0; letter-spacing: -.01em;">{{ sel.name }}</h2>
+              </div>
+              <button onClick="{{ close }}" type="button" style="flex: 0 0 auto; cursor: pointer; background: #eef4f9; border: none; border-radius: 999px; width: 34px; height: 34px; font-size: 18px; color: #33566f; line-height: 1;">×</button>
+            </div>
+          </div>
+        </div>
+        <p style="font-size: 16px; line-height: 1.65; color: #43617a; margin: 22px 0 0;">{{ sel.bio }}</p>
+        <sc-if value="{{ selHasLinks }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px;">
+            <sc-for list="{{ sel.links }}" as="l" hint-placeholder-count="3">
+              <a href="{{ l.href }}" target="_blank" rel="noopener" style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: #16324a; padding: 9px 16px; border: 1px solid rgba(57,99,175,.24); border-radius: 999px;">{{ l.label }}</a>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { sel: null };
+
+  navStyle(active) {
+    return {
+      fontFamily: "'Space Mono', monospace", fontSize: '12px', letterSpacing: '.08em',
+      textTransform: 'uppercase', padding: '9px 15px', borderRadius: '999px',
+      color: active ? '#f4fbff' : '#24425c',
+      background: active ? '#0f2a3f' : 'transparent',
+      border: active ? '1px solid #0f2a3f' : '1px solid rgba(57,99,175,.16)',
+    };
+  }
+
+  renderVals() {
+    const nav = [
+      { label: 'Home', href: 'Home.dc.html', active: false },
+      { label: 'Research', href: '#', active: false },
+      { label: 'News', href: 'News.dc.html', active: false },
+      { label: 'Publications', href: 'Publications.dc.html', active: false },
+      { label: 'Team', href: 'Team.dc.html', active: true },
+      { label: 'Contact', href: '#', active: false },
+    ].map(n => ({ ...n, style: this.navStyle(n.active) }));
+
+    const EMO = { ':pizza:': '🍕', ':cookie:': '🍪', ':cake:': '🍰', ':bread:': '🍞', ':coffee:': '☕', ':book:': '📖', ':soccer:': '⚽', ':man_juggling:': '🤹\u200d♂️', ':dog:': '🐶', ':tennis:': '🎾', ':art:': '🎨', ':airplane:': '✈️', ':hibiscus:': '🌺', ':seedling:': '🌱', ':blossom:': '🌼', ':four_leaf_clover:': '🍀', ':cherry_blossom:': '🌸', ':palm_tree:': '🌴' };
+    const clean = (t) => {
+      let s = (t || '').replace(/\s+/g, ' ');
+      s = s.replace(/&nbsp;/g, ' ');
+      s = s.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+      Object.keys(EMO).forEach(k => { s = s.split(k).join(EMO[k]); });
+      s = s.replace(/_([^_\n]+)_/g, '$1');
+      s = s.replace(/ ([!.,?])/g, '$1');
+      return s.replace(/\s{2,}/g, ' ').trim();
+    };
+
+    const lab = [
+      { name: 'Caleb Lareau', role: 'Principal Investigator', img: 'assets/headshots/caleb-lareau.png',
+        bio: "Caleb is an Assistant Member in the Computational and Systems Biology Program at Sloan Kettering Institute. He joined MSK from Stanford University where he was a Stanford Science Fellow and Parker Scholar at the Parker Institute for Cancer Immunotherapy. Originally from Oklahoma, Caleb completed his undergraduate studies at the University of Tulsa before attending Harvard University for his graduate degrees. Outside of lab, Caleb continues his lifelong quest of finding the best slice of pizza &nbsp; :pizza: &nbsp; out there (in New York or otherwise).",
+        links: [
+          { label: 'CV', href: 'https://clareaulab.github.io/pdfs/cv/Lareau_CV.pdf' },
+          { label: 'Bluesky', href: 'https://bsky.app/profile/caleblareau.bsky.social' },
+          { label: 'GitHub', href: 'https://github.com/caleblareau' },
+        ] },
+      { name: 'Benan Nalbant', role: 'Sr. Research Technician', img: 'assets/headshots/benan-nalbant.png',
+        bio: "Benan is a Senior Research Technician in the Lareau lab. Prior to joining she was in the Vakoc lab at Cold Spring Harbor Laboratory investigating transcription factor dependencies in cancer. Benan completed her bachelors in Molecular, Cellular, and Developmental Biology with a minor in Physics from the University of Washington. In her free time she enjoys baking &nbsp; :cookie: :cake: :bread: &nbsp;!" },
+      { name: 'Arthur Chow', role: 'Postdoctoral Fellow', img: 'assets/headshots/arthur-chow.png',
+        bio: "Arthur Chow is a Research Fellow in the Lareau Lab at MSK. A California native, he completed his bachelor’s degree at the University of California, Merced before pursuing his Ph.D. in Biomedical Sciences at the Icahn School of Medicine at Mount Sinai. During his Ph.D., he developed chemical tools to dissect the oncogenic signaling network of critical kinase regulators. When he’s not in the lab, Arthur loves to ride his bike all over the tri-state area while stopping at any and all coffee shops &nbsp; :coffee: &nbsp; along the way." },
+      { name: 'Erin Cumming', role: 'Postdoctoral Fellow', img: 'assets/headshots/erin-cumming.png',
+        bio: "Erin Cumming is a Research Fellow in the Lareau Lab at MSK. Hailing from Scotland, she completed her bachelor’s degree in Molecular Genetics at the University of Dundee, with a brief period spent working at Charles River, where she engaged in in vitro toxicology assay development. During her Ph.D. in Cancer Research and Precision Oncology from the CRUK Scotland Institute (formerly Beatson Institute for Cancer Research, University of Glasgow), she investigated the role of the sialoglycoprotein Podocalyxin in colorectal cancer before transitioning to another lab within the same institute for a short post-doc focusing on GSK3β treatment resistance in pancreatic cancer. Beyond science, Erin finds comfort in the great outdoors. While still exploring her varied interests, she harbors a keen enthusiasm for new experiences and is constantly seeking to broaden her view of the world 🌎!" },
+      { name: 'Joseph Palmeri', role: 'Research Scholar', img: 'assets/headshots/joseph-palmeri.png',
+        bio: "Joseph Palmeri is a Research Scholar in the Lareau Lab at MSK. He completed his bachelor’s degree in Chemical Engineering at Case Western Reserve University in Cleveland, Ohio before pursuing his Ph.D. in Chemical Engineering at the Massachusetts Institute of Technology. During his Ph.D., he worked under K. Dane Wittrup to develop collagen anchoring agonist antibodies targeting T cell co-stimulatory receptors as a novel cancer immunotherapeutic strategy. In his free time, Joseph enjoys running around Roosevelt Island 🏃🏻 ➡️, cooking new recipes 🍝, pub trivia 🍻, and the Buffalo Bills 🏈." },
+      { name: 'Abi Dozic', role: 'Graduate Student', img: 'assets/headshots/abi-dozic.png',
+        bio: "Abi is a graduate student in the Lareau Lab who completed his undergraduate degree at the University of Florida. His undergraduate research experience included developing improved organ models for in-silico radiation dose delivery estimates and developing protein-based light-responsive biomaterials. When not in the lab, Abi enjoys hiking and reading &nbsp; :book: &nbsp; ." },
+      { name: 'Zeyu Tang', role: 'Graduate Student', img: 'assets/headshots/zeyu-tang.png',
+        bio: "Zeyu is a PhD student on the Tri-Institutional Programme in Computational Biology and Medicine. He previously earned a Bachelor’s and Master’s degree in Molecular Engineering from Imperial College London, where he did research in synthetic and systems biology, as well as AI for medical imaging. After graduating, he continued his research at Stanford University focusing on spatial omics analysis. Outside the lab, Zeyu enjoys football :soccer:️, bouldering, and seeking out the best afternoon teas in NYC." },
+      { name: 'Jacob Gutierrez', role: 'Graduate Student', img: 'assets/headshots/jacob-gutierrez.png',
+        bio: "Jacob Gutierrez is a PhD Student in the Gerstner Sloan Kettering Graduate School of Biomedical Sciences at Memorial Sloan Kettering. Prior to starting his PhD, he worked with Caleb in the Satpathy Lab at Stanford University School of Medicine as a computational biologist, focusing on the analyses of single-cell multi-omics and spatial datasets. Jacob completed his Bachelors degree from Lewis and Clark College in Biochemistry and Molecular Biology then a masters degree in Bioinformatics from Oregon Health and Science University. Outside of lab, catch Jacob enjoying NYC and/or showing off his juggling skills &nbsp; :man_juggling: &nbsp;." },
+      { name: 'Allison Vela', role: 'Graduate Student', img: 'assets/headshots/allison-vela.png',
+        bio: "Allie is a Cancer Biology PhD Student in the Gerstner Sloan Kettering Graduate School of Biomedical Sciences at Memorial Sloan Kettering. She earned a BS in Microbiology from the University of California - San Diego, where her undergraduate research focused on protein tyrosine phosphatases in rheumatoid arthritis. Following graduation, Allie continued her research at Cedars Sinai Medical Center. Outside of lab, Allie enjoys exploring NYC’s various bakeries, swimming, and petting as many dogs &nbsp; :dog: as she can!" },
+      { name: 'Hoyin Chu', role: 'Graduate Student', img: 'assets/headshots/hoyin-chu.png',
+        bio: "Hoyin Chu is a PhD student in the Tri-I Computational Biology and Medicine Program. After graduating from Northeastern University with a B.S. in Computer Science and Mathematics, Hoyin worked at Dana-Farber Cancer Institute as a computational biologist with research focusing on cancer genomics before joining the lab. When he is not in the lab, Hoyin enjoys rock climbing and playing rhythm games 🎼." },
+      { name: 'Cole Honeycutt', role: 'MD/PhD Student', img: 'assets/headshots/cole-honeycutt.png',
+        bio: "Cole is an MD-PhD student in the Weill Cornell/Rockefeller/MSK Tri-Institutional MD-PhD Program. Originally from North Carolina, he completed his bachelor’s degree at Duke University, where he studied G protein-coupled receptor signaling. After graduation, Cole moved to Washington, DC to work at the NIH Vaccine Research Center on COVID-19 vaccines. Outside of lab, you can find Cole running around Central Park and the streets of New York or playing tennis &nbsp; :tennis: !" },
+      { name: 'Laura Kida', role: 'MD Fellow', img: 'assets/headshots/laura-kida.png',
+        bio: "Laura is a Boehringer-Ingelheim MD Fellow in the Lareau Lab. She is completing her medical degree at Charité in Berlin, Germany, where she investigates immunological alterations in microglia after subarachnoid hemorrhage. When she’s not in the lab, you can find Laura either having quesadillas or drawing/painting &nbsp; :art: &nbsp; inspired by her latest walk through NYC." },
+    ];
+
+    const comentored = [
+      { name: 'Sherry Nyeo', role: 'Graduate Student', img: 'assets/headshots/sherry-nyeo.png',
+        bio: "Sherry is a PhD student in the Tri-Institutional Program in Computational Biology & Medicine Program. She completed her bachelor's degree at MIT, majoring in computer science & molecular biology, as well as minoring in management and German. As an undergraduate student researcher, Sherry studied post-transcriptional gene regulation, including RNA secondary structures and metabolism in SARS-CoV-2 at the Whitehead Institute. She also pursued a project within the MIT Bioengineering Department on optimizing a DNA data storage system. In her free time, Sherry reads (realistic fiction 📚), writes (doodles in her diary ✍🏼), watches TV/movies (always open to more recommendations! 🎬), and enjoys the ease of getting around NYC to explore everything the city has to offer (Broadway, NYPL, and discovering lovely new hangouts with friends 🍜). Sherry is currently co-advised by the [Victora Lab at Rockefeller University](https://www.germinal.center/)." },
+      { name: 'Austin Varela', role: 'Graduate Student', img: 'assets/headshots/austin-varela.png',
+        bio: "Austin Varela is a PhD student in the Tri-Institutional Computational Biology & Medicine program. He previously received a Biology BS and a Data Science BA from the University of Rochester where he did research on protein cooperation across mammalian evolution. Austin also received an MS in Computational Biology from Weill Cornell, where he studied cellular communication in the tumor microenvironment. Currently, Austin is interested in computational methods development with a focus on applications for understanding cancer heterogeneity. In his free time, Austin enjoys discovering new restaurants 🍴 and traveling &nbsp; :airplane: &nbsp; to explore cities. He is co-supervised with the [Laughney lab](https://laughneylab.com/) at Weill Cornell Medical School." },
+      { name: 'Paul Klauser', role: 'Postdoctoral Fellow', img: 'assets/headshots/paul-klauser.jpg',
+        bio: "Paul Klauser is a Research Fellow in the [Lewis Lab](https://www.mskcc.org/research-areas/labs/jason-lewis) and Lareau Lab at MSK. He earned his bachelor’s degree in chemistry from the University of Illinois Urbana-Champaign and a Ph.D. in chemical biology from the University of California, San Francisco. His doctoral research focused on developing bioreactive unnatural amino acids and designing covalent protein drugs for cancer therapy and diagnostics. Paul applies advanced protein engineering and computational strategies to improve radiopharmaceuticals for oncology. Outside the lab, he enjoys running, swimming, and cheering for Bay Area sports teams 🌉. Paul is co-advised with the [Jason Lewis Lab @ MSKCC](https://www.mskcc.org/research/ski/labs/jason-lewis)." },
+      { name: 'Erica Sun', role: 'Clinical Fellow', img: 'assets/headshots/erica-sun.png',
+        bio: "Erica Sun is a Hematology-Oncology Clinical Fellow at Memorial Sloan Kettering Cancer Center. Prior to embarking on a medical career, she studied epigenetic dysregulation in acute leukemias as a graduate student at University of Michigan. She then completed her medical school training at Johns Hopkins University and residency at Weill Cornell Medicine. Erica's basic-science research during her clinical training is co-supervised by [Dr. Katherine Hsu](https://www.mskcc.org/research-areas/labs/katharine-hsu). Outside of lab, you can find Erica jogging along the East River, listening to audible books, and enjoying being an amateur pianist." },
+    ];
+
+    const decorate = (arr) => arr.map(m => {
+      const full = { ...m, bio: clean(m.bio) };
+      full.onClick = () => this.setState({ sel: full });
+      return full;
+    });
+
+    const groups = [
+      { label: 'Lab', members: decorate(lab) },
+      { label: 'Co-mentored', members: decorate(comentored) },
+    ];
+
+    const petNames = ['Alpha', 'Boo', 'Brooks', 'Charlie', 'Choumao', 'Fiete', 'Ginny', 'Kinzo', 'Luna', 'Molle', 'Nacho', 'Nala', 'Ono', 'Pixel', 'Zuka'];
+    const pets = petNames.map(n => ({ name: n, img: `assets/pet-photos/${n.toLowerCase()}.png` }));
+
+    const alumni = decorate([
+      { name: 'Emma Tran', role: '2024', img: 'assets/headshots/emma-tran.png',
+        bio: "Emma was an undergraduate summer student in the Lareau Lab through the [Computational Biology Summer Program](https://www.mskcc.org/education-training/summer-scientific-undergraduate-programs/computational-biology-summer-program-cbsp) by the Tri-Institutional PhD Program in Computational Biology & Medicine. Her summer research focused on single-cell lineage tracing to evaluate and enhance adoptive cell therapy. As an international student from Vietnam, she completed her bachelor's degree at Luther College in Decorah, IA, majoring in statistics with a minor in biology. She is currently a PhD student in computational biology at [Iowa State University](https://www.bcb.iastate.edu/people/emma-tran). When she’s not doing science, Emma is an _accomplished_ fanfiction writer on Wattpad (✍🏼) and dedicated film reviewer on Letterboxd (🎬)." },
+      { name: 'Emma Yin', role: '2020–2023', img: 'assets/headshots/emma-yin.png',
+        bio: "Emma Yin is currently a Life Science Research Professional II in the Satpathy Lab at Stanford University. Caleb and Emma worked closely together in the Satpathy lab to develop and utilize single-cell genomics assays to study clonal heterogeneity in immune cell populations, including CAR T cells. Before her time at Stanford, Emma completed her Medical training at Weifang Medical College, a Masters degree in Translational Medicine from the University of California, Irvine, and was a research Scholar at the University of North Carolina, Chapel Hill. Outside of lab, you can find her trying to keep her good friend Alpha &nbsp; :dog: &nbsp; out of (too much) trouble." },
+      { name: 'Utsav Mesvani', role: '2025', img: 'assets/headshots/utsav-mesvani.png',
+        bio: "Utsav was a Senior Research Technician in the Lareau Lab in 2025. Prior to joining the Lareau Lab at MSK, Utsav earned his master’s degree in Biotechnology from New York University and is interested in research questions in virology. Outside of the lab, he enjoys playing football, watching movies, and indulging in desserts. He is currently a research technician at Mt. Sinai School of Medicine in the Microbiology Department." },
+      { name: 'Tsion Abay', role: '2022–2024', img: 'assets/headshots/tsion-abay.jpg',
+        bio: "Tsion is currently a PhD student in the Biological and Biomedical Sciences program at Harvard University. Before starting graduate school, she graduated from Rowan University and was a Research Associate at Twist Biosciences. She later worked as a Research Associate II with Caleb and Bob Stickels in the Satpathy Lab at the Gladstone Institutes. She then completed a brief internship during summer 2024 at Memorial Sloan Kettering in the Lareau Lab. During her time in the group, she lead the development of [PERFF-seq](https://clareaulab.com/perffseq/) to study rare cells via single-cell genomics. Ask her about her plants! &nbsp; :hibiscus: :seedling: :blossom: :four_leaf_clover: :cherry_blossom:" },
+      { name: 'Leonhard Pfänder', role: '2023', img: 'assets/headshots/leonhard-pfaender.png',
+        bio: "Leo is currently a Masters Student in Biochemistry at the Freie Universität Berlin. Leo and Caleb worked together in the Satpathy Lab at Stanford University where Leo has been writing his masters thesis on clonal heterogeneity of T lymphocytes in immunotherapies. Originally from Berlin, Leo completed his Bachelors Degree in Biochemistry at the Freie Universität Berlin. In his free time, you can find Leo enjoying the California sunshine! &nbsp; :palm_tree:" },
+      { name: 'Jonathan Levine', role: '2024', img: 'assets/headshots/jonathan-levine.png',
+        bio: "Jonathan Levine is a PhD Student in the Tri-Institutional PhD Program in Computational Biology & Medicine and is interested in T cells and immuno-oncology. Before joining the program, Jonathan worked as a software engineer at Flatiron Health creating clinical decision support software and conducting research in the “real-world evidence” space. Before Flatiron Health, Jonathan studied Computational Neuroscience & Math at the University of Pennsylvania in Philadelphia. Outside of lab, you can find Jonathan outdoors rock climbing 🧗 or backpacking 🏕, or indoors playing chess ♟ or doing the New York Times daily crossword 🧩. Jon rotated in the Lareau Lab in Winter 2024 before joining the Greenbaum and Victora Labs." },
+      { name: 'Josch Hsieh', role: '2023–2024', img: 'assets/headshots/josch-hsieh.png',
+        bio: "Yu-Hsin (Josch) was an exchange PhD student in the Lareau Lab. At his home institute, [Leif Ludwig Lab](https://www.mdc-berlin.de/ludwig) in the Berlin Institute of Health, he is involved in collaborative work with Caleb to investigate the immune landscape of patients with mitochondrial disease via single-cell multi-omics approaches. As a Taiwan native, he is on a personal mission to find the best Asian foods in the city 🍱🍜🍲. When he's not in the lab or satisfying his taste buds, you can spot Josch strolling on the street and enjoying the beautiful NYC skyline 🌉🌇." },
+    ]);
+
+    const sel = this.state.sel;
+    return {
+      nav, groups, pets, alumni,
+      sel: sel || {},
+      hasSel: !!sel,
+      selHasLinks: !!(sel && sel.links && sel.links.length),
+      close: () => this.setState({ sel: null }),
+      stop: (e) => e.stopPropagation(),
+    };
+  }
+}
+</script>
+</body>
+</html>

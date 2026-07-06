@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: linear-gradient(180deg, #eafff5 0%, #e6f9ff 40%, #f4fbff 100%); font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #0f2a3f; -webkit-font-smoothing: antialiased; }
+  a { text-decoration: none; color: inherit; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</helmet>
+
+<div style="min-height: 100vh;">
+
+  <!-- nav -->
+  <div style="position: sticky; top: 0; z-index: 20; backdrop-filter: blur(12px); background: rgba(244,251,255,.72); border-bottom: 1px solid rgba(57,99,175,.12);">
+    <div style="max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 20px 32px;">
+      <a href="Home.dc.html"><img src="assets/logo.svg" alt="Lareau Lab" style="height: 30px; width: auto;"></a>
+      <nav style="display: flex; gap: 8px; align-items: center;">
+        <sc-for list="{{ nav }}" as="item" hint-placeholder-count="6">
+          <a href="{{ item.href }}" style="{{ item.style }}">{{ item.label }}</a>
+        </sc-for>
+      </nav>
+    </div>
+  </div>
+
+  <!-- header -->
+  <div style="max-width: 1120px; margin: 0 auto; padding: 72px 32px 8px;">
+    <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #0091c7;">The work</span>
+    <h1 style="font-family: 'Space Grotesk', sans-serif; font-weight: 400; font-size: 68px; line-height: 1.02; letter-spacing: -.02em; margin: 18px 0 16px;">Publications</h1>
+    <p style="font-size: 18px; line-height: 1.55; color: #33566f; max-width: 640px; margin: 0;">Sourced from <code style="font-family: 'Space Mono', monospace; font-size: 15px; background: rgba(57,99,175,.08); padding: 2px 7px; border-radius: 6px;">sources.yaml</code> — citation details are resolved automatically from each DOI. Add a paper by adding its DOI to the file.</p>
+  </div>
+
+  <!-- controls (pinned bar) -->
+  <div style="position: sticky; top: 70px; z-index: 15; background: rgba(240,248,252,.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(57,99,175,.12); box-shadow: 0 12px 24px -22px rgba(20,50,80,.6);">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 18px 32px 16px;">
+      <div style="position: relative;">
+        <input value="{{ search }}" onInput="{{ onSearch }}" placeholder="Search by title, author, journal, year…" style="width: 100%; font-family: 'Hanken Grotesk', sans-serif; font-size: 16px; color: #0f2a3f; background: #fff; border: 1px solid rgba(57,99,175,.2); border-radius: 14px; padding: 15px 48px 15px 18px; box-shadow: 0 14px 30px -26px rgba(20,50,80,.7);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#6a8296" stroke-width="1.8" stroke-linecap="round" style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px;"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4-4"></path></svg>
+      </div>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; padding: 14px 0 0;">
+        <sc-for list="{{ chips }}" as="c" hint-placeholder-count="3">
+          <button onClick="{{ c.onClick }}" type="button" style="{{ c.style }}">
+            <span style="font-size: 14px;">{{ c.icon }}</span>{{ c.label }}
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <!-- status -->
+  <div style="max-width: 1120px; margin: 0 auto; padding: 6px 32px;">
+    <sc-if value="{{ loading }}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; align-items: center; gap: 10px; font-family: 'Space Mono', monospace; font-size: 12.5px; color: #6a8296;">
+        <span style="display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(0,145,199,.3); border-top-color: #0091c7; border-radius: 50%; animation: spin .8s linear infinite;"></span>
+        Resolving citations… {{ progress }}
+      </div>
+    </sc-if>
+    <sc-if value="{{ errored }}" hint-placeholder-val="{{ false }}">
+      <div style="font-family: 'Space Mono', monospace; font-size: 12.5px; color: #b5502f;">{{ errorMsg }}</div>
+    </sc-if>
+  </div>
+
+  <!-- results -->
+  <div style="max-width: 1120px; margin: 0 auto; padding: 12px 32px 100px;">
+    <sc-for list="{{ groups }}" as="g" hint-placeholder-count="3">
+      <div style="padding: 30px 0 6px; border-top: 1px solid rgba(57,99,175,.12); margin-top: 18px;">
+        <h2 style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 30px; margin: 0; color: #16324a;">{{ g.year }}</h2>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 14px; padding: 14px 0;">
+        <sc-for list="{{ g.pubs }}" as="p" hint-placeholder-count="4">
+          <div style="display: grid; grid-template-columns: 150px 1fr; gap: 22px; align-items: start; background: rgba(255,255,255,.62); border: 1px solid rgba(57,99,175,.14); border-radius: 18px; padding: 18px; box-shadow: 0 16px 34px -30px rgba(20,50,80,.7);">
+            <a href="{{ p.url }}" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid rgba(57,99,175,.1); border-radius: 12px; overflow: hidden; aspect-ratio: 1/1; padding: 8px;">
+              <img src="{{ p.image }}" alt="" loading="lazy" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block;">
+            </a>
+            <div>
+              <a href="{{ p.url }}" target="_blank" rel="noopener" style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 20px; line-height: 1.25; color: #0091c7; display: inline-block; margin-bottom: 8px;">{{ p.title }}</a>
+              <div style="font-size: 15px; line-height: 1.5; color: #33566f; margin-bottom: 8px;">{{ p.authors }}</div>
+              <div style="font-family: 'Space Mono', monospace; font-size: 12.5px; color: #6a8296; margin-bottom: 12px;">{{ p.meta }}</div>
+              <sc-if value="{{ p.hasButtons }}" hint-placeholder-val="{{ false }}">
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                  <sc-for list="{{ p.buttons }}" as="b" hint-placeholder-count="3">
+                    <a href="{{ b.href }}" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 6px; font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: .04em; text-transform: uppercase; color: #16324a; background: #fff; border: 1px solid rgba(57,99,175,.2); border-radius: 999px; padding: 6px 12px;">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#0091c7" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width: 13px; height: 13px;"><path d="{{ b.d }}"></path></svg>
+                      {{ b.text }}
+                    </a>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-for>
+
+    <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+      <div style="padding: 60px 0; text-align: center; font-family: 'Space Mono', monospace; font-size: 13px; color: #6a8296;">No publications match “{{ search }}”.</div>
+    </sc-if>
+  </div>
+
+  <!-- footer -->
+  <div style="background: #0f2a3f; color: #cfe6f2; padding: 44px 0;">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 0 32px; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap;">
+      <div>
+        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 500; color: #eafff5;">Lareau Lab</div>
+        <div style="font-size: 14px; color: #8fb6cc; margin-top: 6px;">Memorial Sloan Kettering Cancer Center · Zuckerman Research Center, New York, NY</div>
+      </div>
+      <div style="font-family: 'Space Mono', monospace; font-size: 12px; color: #7fa7bf;">clareaulab.com</div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { items: [], search: '', loading: true, done: 0, total: 0, errorMsg: '' };
+
+  navStyle(active) {
+    return {
+      fontFamily: "'Space Mono', monospace", fontSize: '12px', letterSpacing: '.08em',
+      textTransform: 'uppercase', padding: '9px 15px', borderRadius: '999px',
+      color: active ? '#f4fbff' : '#24425c',
+      background: active ? '#0f2a3f' : 'transparent',
+      border: active ? '1px solid #0f2a3f' : '1px solid rgba(57,99,175,.16)',
+    };
+  }
+
+  ICONS = {
+    paper: 'M7 3h8l4 4v14H7z M15 3v4h4',
+    github: 'M9 8l-4 4 4 4 M15 8l4 4-4 4',
+    twitter: 'M4 5h16v11H9l-4 4z',
+    pod: 'M12 4a3 3 0 0 1 3 3v4a3 3 0 0 1-6 0V7a3 3 0 0 1 3-3z M6 11a6 6 0 0 0 12 0 M12 17v3',
+    featured: 'M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z',
+    fire: 'M12 3c3 4 5 6 5 9a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5-1-8z',
+    website: 'M9 15l6-6 M8 12l-2 2a3 3 0 0 0 4 4l2-2 M16 12l2-2a3 3 0 0 0-4-4l-2 2',
+  };
+
+  normalizeLink(type, link) {
+    if (!link) return '#';
+    if (/^https?:\/\//i.test(link)) return link;
+    if (type === 'github') return 'https://github.com/' + link;
+    if (type === 'twitter') {
+      let l = link.replace(/^https?:\/\/(x|twitter)\.com\//i, '');
+      const idx = l.indexOf('https://');
+      if (idx > -1) return l.slice(idx);
+      return 'https://x.com/' + l;
+    }
+    return link;
+  }
+
+  sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  fmtAuthors(arr) {
+    if (!arr || !arr.length) return '';
+    if (arr.length <= 10) return arr.join(', ');
+    return arr.slice(0, 5).join(', ') + ', …, ' + arr.slice(-5).join(', ');
+  }
+
+  fromCrossref(m) {
+    if (!m) return null;
+    const dp = (m.issued && m.issued['date-parts'] && m.issued['date-parts'][0])
+      || (m.posted && m.posted['date-parts'] && m.posted['date-parts'][0])
+      || (m.created && m.created['date-parts'] && m.created['date-parts'][0]) || [];
+    return {
+      title: (m.title || [])[0] || '',
+      authors: (m.author || []).map(a => [a.given, a.family].filter(Boolean).join(' ')).filter(Boolean),
+      journal: (m['container-title'] || [])[0] || (m.institution && m.institution[0] && m.institution[0].name) || m.publisher || '',
+      y: dp[0] || null, mo: dp[1] || null, d: dp[2] || null,
+      preprint: /rxiv|preprint|research square|ssrn/i.test(((m['container-title'] || [])[0] || '') + ' ' + (m.publisher || '') + ' ' + (m.type || '')),
+    };
+  }
+
+  fromDatacite(a) {
+    if (!a) return null;
+    return {
+      title: (a.titles && a.titles[0] && a.titles[0].title) || '',
+      authors: (a.creators || []).map(c => {
+        if (c.givenName || c.familyName) return [c.givenName, c.familyName].filter(Boolean).join(' ');
+        if (c.name && c.name.includes(',')) { const p = c.name.split(','); return (p[1] + ' ' + p[0]).trim(); }
+        return c.name || '';
+      }).filter(Boolean),
+      journal: a.publisher || '',
+      y: a.publicationYear || null, mo: null, d: null,
+      preprint: /rxiv|preprint/i.test((a.publisher || '') + ' ' + ((a.types && a.types.resourceTypeGeneral) || '')),
+    };
+  }
+
+  async fetchMeta(doi) {
+    for (let a = 0; a < 3; a++) {
+      try {
+        const r = await fetch('https://api.crossref.org/works/' + encodeURIComponent(doi) + '?mailto=web@clareaulab.com');
+        if (r.status === 429 || !r.ok) { await this.sleep(600 * Math.pow(2, a) + Math.random() * 400); continue; }
+        return this.fromCrossref((await r.json()).message);
+      } catch (e) { await this.sleep(400 * (a + 1)); }
+    }
+    try {
+      const r = await fetch('https://api.datacite.org/dois/' + encodeURIComponent(doi));
+      if (r.ok) return this.fromDatacite((await r.json()).data.attributes);
+    } catch (e) {}
+    return null;
+  }
+
+  async componentDidMount() {
+    try {
+      // wait for js-yaml
+      let tries = 0;
+      while (!window.jsyaml && tries++ < 100) await new Promise(r => setTimeout(r, 50));
+      if (!window.jsyaml) throw new Error('YAML parser failed to load.');
+      const res = await fetch('sources.yaml', { cache: 'no-store' });
+      if (!res.ok) throw new Error('Could not load sources.yaml (' + res.status + ').');
+      const raw = window.jsyaml.load(await res.text()) || [];
+
+      const seen = new Set();
+      const items = [];
+      raw.forEach((s) => {
+        if (!s || !s.id) return;
+        const doi = String(s.id).replace(/^doi:/i, '').trim();
+        if (seen.has(doi)) return;
+        seen.add(doi);
+        const buttons = (s.buttons || []).map(b => ({
+          text: b.text || b.type, type: b.type,
+          d: this.ICONS[b.type] || this.ICONS.website,
+          href: this.normalizeLink(b.type, b.link),
+        }));
+        const featured = (s.buttons || []).some(b => b.type === 'featured');
+        const preprintFlag = (s.buttons || []).some(b => b.type === 'fire');
+        items.push({ doi, url: 'https://doi.org/' + doi, image: s.image, buttons, featured, preprintFlag, meta: null });
+      });
+
+      const cacheKey = 'clareau_pubmeta_v2';
+      let cache = {};
+      try { cache = JSON.parse(localStorage.getItem(cacheKey) || '{}'); } catch (e) {}
+      items.forEach(it => { if (cache[it.doi]) it.meta = cache[it.doi]; });
+
+      this.setState({ items, total: items.length, done: items.filter(i => i.meta).length });
+
+      const resolveOne = async (it) => {
+        const meta = await this.fetchMeta(it.doi);
+        if (meta) { it.meta = meta; cache[it.doi] = meta; return true; }
+        return false;
+      };
+
+      const missing = items.filter(it => !it.meta);
+      const batch = 4;
+      for (let i = 0; i < missing.length; i += batch) {
+        await Promise.all(missing.slice(i, i + batch).map(async (it) => {
+          await resolveOne(it);
+          this.setState(s => ({ done: s.done + 1 }));
+        }));
+        try { localStorage.setItem(cacheKey, JSON.stringify(cache)); } catch (e) {}
+        this.forceUpdate();
+        await this.sleep(300);
+      }
+
+      // retry any that got throttled, with backoff
+      let stragglers = items.filter(it => !it.meta);
+      for (let pass = 0; pass < 3 && stragglers.length; pass++) {
+        await this.sleep(1500 * (pass + 1));
+        for (const it of stragglers) { await resolveOne(it); await this.sleep(250); }
+        try { localStorage.setItem(cacheKey, JSON.stringify(cache)); } catch (e) {}
+        this.forceUpdate();
+        stragglers = items.filter(it => !it.meta);
+      }
+
+      items.forEach(it => { if (!it.meta) it.meta = { title: '', authors: [], journal: '', y: null, unresolved: true }; });
+      this.setState({ loading: false });
+      this.forceUpdate();
+    } catch (e) {
+      this.setState({ loading: false, errorMsg: e.message || String(e) });
+    }
+  }
+
+  fmtDate(m) {
+    const MO = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    if (!m || !m.y) return '';
+    if (m.mo && m.d) return m.d + ' ' + MO[m.mo - 1] + ' ' + m.y;
+    if (m.mo) return MO[m.mo - 1] + ' ' + m.y;
+    return String(m.y);
+  }
+
+  renderVals() {
+    const nav = [
+      { label: 'Home', href: 'Home.dc.html', active: false },
+      { label: 'Research', href: '#', active: false },
+      { label: 'News', href: 'News.dc.html', active: false },
+      { label: 'Publications', href: 'Publications.dc.html', active: true },
+      { label: 'Team', href: 'Team.dc.html', active: false },
+      { label: 'Contact', href: '#', active: false },
+    ].map(n => ({ ...n, style: this.navStyle(n.active) }));
+
+    const q = this.state.search.trim().toLowerCase();
+    const items = this.state.items;
+
+    const matches = (it) => {
+      if (!q) return true;
+      if (q === 'featured') return it.featured;
+      if (q === 'preprint') return it.preprintFlag || (it.meta && it.meta.preprint);
+      const m = it.meta || {};
+      const hay = [m.title, (m.authors || []).join(' '), m.journal, m.y, it.doi].join(' ').toLowerCase();
+      return hay.includes(q);
+    };
+
+    const filtered = items.filter(matches);
+
+    // sort by date desc; unknown dates last
+    const val = (it) => {
+      const m = it.meta || {};
+      if (!m.y) return -1;
+      return m.y * 10000 + (m.mo || 0) * 100 + (m.d || 0);
+    };
+    filtered.sort((a, b) => val(b) - val(a));
+
+    const byYear = new Map();
+    filtered.forEach(it => {
+      const y = (it.meta && it.meta.y) ? it.meta.y : (this.state.loading ? 'In progress' : 'Other');
+      if (!byYear.has(y)) byYear.set(y, []);
+      byYear.get(y).push(it);
+    });
+
+    const groups = [...byYear.entries()].map(([year, list]) => ({
+      year,
+      pubs: list.map(it => {
+        const m = it.meta || {};
+        const bits = [m.journal, this.fmtDate(m), 'doi:' + it.doi].filter(Boolean);
+        return {
+          title: m.title || (m.unresolved ? 'Citation unavailable — ' + it.doi : it.doi),
+          authors: this.fmtAuthors(m.authors),
+          meta: bits.join('  ·  '),
+          url: it.url, image: it.image,
+          buttons: it.buttons, hasButtons: it.buttons.length > 0,
+        };
+      }),
+    }));
+
+    const chipDef = [
+      { key: 'featured', label: 'Featured works', icon: '★' },
+      { key: 'preprint', label: 'Fresh preprints', icon: '🔥' },
+      { key: '', label: 'All work', icon: '≡' },
+    ];
+    const chips = chipDef.map(c => {
+      const active = q === c.key || (c.key === '' && q === '');
+      return {
+        label: c.label, icon: c.icon,
+        onClick: () => this.setState({ search: c.key }),
+        style: {
+          display: 'inline-flex', alignItems: 'center', gap: '8px', cursor: 'pointer',
+          fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500, fontSize: '14px',
+          padding: '10px 18px', borderRadius: '999px',
+          color: active ? '#f4fbff' : '#16324a',
+          background: active ? '#0091c7' : '#fff',
+          border: active ? '1px solid #0091c7' : '1px solid rgba(57,99,175,.2)',
+        },
+      };
+    });
+
+    return {
+      nav, chips, groups,
+      search: this.state.search,
+      onSearch: (e) => this.setState({ search: e.target.value }),
+      loading: this.state.loading,
+      progress: this.state.done + ' / ' + this.state.total,
+      errored: !!this.state.errorMsg,
+      errorMsg: this.state.errorMsg,
+      empty: !this.state.loading && groups.length === 0,
+    };
+  }
+}
+</script>
+</body>
+</html>
