@@ -12,6 +12,16 @@
 photos:
   - src: assets/team-photos/bigpizza.jpg
     cap: The hunt for NYC’s best slice
+  - src: assets/team-photos/marathon.jpg
+    cap: No misfolds, only miles — cheering at the NYC Marathon
+  - src: assets/team-photos/sailhalloween2025.jpg
+    cap: Minions take over the lab — Halloween 2025
+  - src: assets/team-photos/yankees.jpg
+    cap: Science outreach at Yankee Stadium
+  - src: assets/team-photos/banana.jpg
+    cap: Everything yellow — the banana lab meeting
+  - src: assets/team-photos/MSKoutreach2026.jpg
+    cap: Sharing our science at MSK outreach night
   - src: assets/team-photos/c4s2026.jpg
     cap: Longest pizza on the Lower East Side
   - src: assets/team-photos/rickmorty2024.jpg
