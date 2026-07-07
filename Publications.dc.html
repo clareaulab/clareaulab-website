@@ -102,7 +102,7 @@
               <sc-if value="{{ p.hasButtons }}" hint-placeholder-val="{{ false }}">
                 <div style="display: flex; flex-wrap: wrap; gap: 8px;">
                   <sc-for list="{{ p.buttons }}" as="b" hint-placeholder-count="3">
-                    <a href="{{ b.href }}" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 6px; font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: .04em; text-transform: uppercase; color: #16324a; background: #fff; border: 1px solid rgba(57,99,175,.2); border-radius: 999px; padding: 6px 12px;">
+                    <a href="{{ b.href }}" target="_blank" rel="noopener" onClick="{{ b.onClick }}" style="display: inline-flex; align-items: center; gap: 6px; font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: .04em; text-transform: uppercase; color: #16324a; background: #fff; border: 1px solid rgba(57,99,175,.2); border-radius: 999px; padding: 6px 12px; cursor: pointer;">
                       <svg viewBox="0 0 24 24" fill="none" stroke="#0091c7" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width: 13px; height: 13px;"><path d="{{ b.d }}"></path></svg>
                       {{ b.text }}
                     </a>
@@ -228,11 +228,18 @@ class Component extends DCLogic {
         const doi = String(s.id).replace(/^doi:/i, '').trim();
         if (seen.has(doi)) return;
         seen.add(doi);
-        const buttons = (s.buttons || []).map(b => ({
-          text: b.text || b.type, type: b.type,
-          d: this.ICONS[b.type] || this.ICONS.website,
-          href: this.normalizeLink(b.type, b.link),
-        }));
+        const buttons = (s.buttons || []).map(b => {
+          const href = this.normalizeLink(b.type, b.link);
+          // Buttons that link to this page's own ?search=… (e.g. Featured,
+          // bioRxiv) should filter in place instead of navigating away.
+          const sm = /[?&]search=([^&#]+)/.exec(href || '');
+          return {
+            text: b.text || b.type, type: b.type,
+            d: this.ICONS[b.type] || this.ICONS.website,
+            href,
+            filter: sm ? decodeURIComponent(sm[1]) : null,
+          };
+        });
         const featured = (s.buttons || []).some(b => b.type === 'featured');
         const preprintFlag = (s.buttons || []).some(b => b.type === 'fire');
         items.push({ doi, url: 'https://doi.org/' + doi, image: s.image, buttons, featured, preprintFlag, meta: null });
@@ -361,7 +368,10 @@ class Component extends DCLogic {
           authors: q ? this.el(this.hl(authorsText, q)) : authorsText,
           meta: q ? this.el(this.hl(metaText, q)) : metaText,
           url: it.url, image: it.image,
-          buttons: it.buttons, hasButtons: it.buttons.length > 0,
+          buttons: it.buttons.map(b => b.filter
+            ? { ...b, href: '#', onClick: (e) => { e.preventDefault(); this.setState({ search: b.filter }); if (typeof window !== 'undefined' && window.scrollTo) window.scrollTo({ top: 0, behavior: 'smooth' }); } }
+            : b),
+          hasButtons: it.buttons.length > 0,
         };
       }),
     }));
