@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lareau Lab | Contact</title>
+<link rel="icon" type="image/png" href="assets/icon.png">
 <script src="./support.js"></script>
 <script src="./site.js"></script>
 </head>
@@ -63,26 +65,26 @@
     <div style="padding: 28px 0 8px;">
       <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #0091c7;">Lab address</span>
     </div>
-    <div style="background: rgba(255,255,255,.62); border: 1px solid rgba(57,99,175,.14); border-radius: 20px; padding: 26px 28px; display: flex; justify-content: space-between; align-items: flex-start; gap: 28px; flex-wrap: wrap;">
-      <div style="font-size: 16px; line-height: 1.75; color: #33566f;">
-        <sc-for list="{{ address }}" as="line" hint-placeholder-count="5">
-          <div>{{ line }}</div>
-        </sc-for>
+    <div class="contact-grid" style="padding: 8px 0 0;">
+      <div style="background: rgba(255,255,255,.62); border: 1px solid rgba(57,99,175,.14); border-radius: 20px; padding: 26px 28px; display: flex; flex-direction: column; justify-content: space-between; gap: 22px;">
+        <div style="font-size: 16px; line-height: 1.75; color: #33566f;">
+          <sc-for list="{{ address }}" as="line" hint-placeholder-count="5">
+            <div>{{ line }}</div>
+          </sc-for>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+          <a href="{{ emailHref }}" style="display: inline-flex; align-items: center; gap: 8px; background: #0f2a3f; color: #f4fbff; font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: .04em; padding: 12px 20px; border-radius: 999px; border: 1px solid #0f2a3f;" style-hover="background: #16324a;">
+            <span style="font-size: 14px;">✉</span> Email Caleb
+          </a>
+          <sc-if value="{{ hasPhone }}" hint-placeholder-val="{{ false }}">
+            <div style="font-family: 'Space Mono', monospace; font-size: 13px; color: #6a8296;">T: {{ phone }}</div>
+          </sc-if>
+        </div>
       </div>
-      <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 10px;">
-        <a href="{{ emailHref }}" style="display: inline-flex; align-items: center; gap: 8px; background: #0f2a3f; color: #f4fbff; font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: .04em; padding: 12px 20px; border-radius: 999px; border: 1px solid #0f2a3f;" style-hover="background: #16324a;">
-          <span style="font-size: 14px;">✉</span> Email Caleb
-        </a>
-        <sc-if value="{{ hasPhone }}" hint-placeholder-val="{{ false }}">
-          <div style="font-family: 'Space Mono', monospace; font-size: 13px; color: #6a8296;">T: {{ phone }}</div>
-        </sc-if>
-      </div>
+      <sc-if value="{{ hasPhoto }}" hint-placeholder-val="{{ false }}">
+        <img src="{{ photo }}" alt="{{ photoAlt }}" onError="{{ hideImg }}" style="width: 100%; height: 100%; min-height: 260px; object-fit: cover; border-radius: 20px; display: block; border: 1px solid rgba(57,99,175,.14);">
+      </sc-if>
     </div>
-
-    <!-- building photo -->
-    <sc-if value="{{ hasPhoto }}" hint-placeholder-val="{{ false }}">
-      <img src="{{ photo }}" alt="{{ photoAlt }}" onError="{{ hideImg }}" style="width: 100%; border-radius: 20px; display: block; margin-top: 24px; border: 1px solid rgba(57,99,175,.14);">
-    </sc-if>
   </div>
 
   <!-- footer (shared component: site-footer.dc.html) -->

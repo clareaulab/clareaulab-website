@@ -30,6 +30,5 @@ address:
 email: lareauc@mskcc.org
 phone: 646-888-2069
 
-# TODO: add the building photo to this path (e.g. the Zuckerman Research Center).
-photo: assets/contact/zuckerman.jpg
+photo: assets/zuckerman.jpg
 photoAlt: Mortimer B. Zuckerman Research Center entrance
