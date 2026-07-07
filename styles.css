@@ -105,14 +105,18 @@ html { -webkit-text-size-adjust: 100%; }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: stretch; }
 @media (max-width: 760px) { .contact-grid { grid-template-columns: 1fr; } }
 
-/* --- Research: funder logo grid ------------------------------------------- */
-.funder-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+/* --- Research: funder logo wall ------------------------------------------- */
+/* Centered, wrapping cards of uniform height; each logo is capped to a common
+   height so the mismatched source logos read as a balanced wall. */
+.funder-grid { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
 .funder-cell {
-  background: #fff; border: 1px solid rgba(57,99,175,.14); border-radius: 16px;
-  height: 120px; display: flex; align-items: center; justify-content: center; padding: 22px;
+  flex: 1 1 190px; max-width: 250px;
+  background: #fff; border: 1px solid rgba(57,99,175,.12); border-radius: 16px;
+  height: 118px; display: flex; align-items: center; justify-content: center; padding: 20px 24px;
 }
-.funder-cell img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; }
+.funder-cell img { max-width: 100%; max-height: 62px; width: auto; height: auto; object-fit: contain; display: block; }
 @media (max-width: 640px) {
-  .funder-grid { grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: 12px; }
-  .funder-cell { height: 96px; padding: 16px; }
+  .funder-grid { gap: 12px; }
+  .funder-cell { flex-basis: 42%; height: 92px; padding: 14px 16px; }
+  .funder-cell img { max-height: 46px; }
 }

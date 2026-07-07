@@ -27,7 +27,7 @@
   <!-- nav -->
   <div style="position: sticky; top: 0; z-index: 20; backdrop-filter: blur(12px); background: rgba(244,251,255,.72); border-bottom: 1px solid rgba(57,99,175,.12);">
     <div class="nav-inner" style="max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 20px 32px;">
-      <a href="Home.dc.html"><img src="assets/logo.svg" alt="Lareau Lab" style="height: 30px; width: auto;"></a>
+      <a href="./"><img src="assets/logo.svg" alt="Lareau Lab" style="height: 30px; width: auto;"></a>
       <label class="nav-toggle" aria-label="Toggle menu"><input type="checkbox" class="nav-toggle-cb"></label>
       <nav class="nav-links">
         <sc-for list="{{ nav }}" as="item" hint-placeholder-count="6">
@@ -83,7 +83,7 @@ class Component extends DCLogic {
 
   renderVals() {
     return {
-      nav: window.SITE.navItems('Research.dc.html'),
+      nav: window.SITE.navItems('research.html'),
       intro: this.state.intro,
       funders: this.state.funders,
     };
