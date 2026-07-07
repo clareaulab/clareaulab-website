@@ -85,9 +85,10 @@
   <!-- results -->
   <div style="max-width: 1120px; margin: 0 auto; padding: 12px 32px 100px;">
     <sc-for list="{{ groups }}" as="g" hint-placeholder-count="3">
-      <div style="padding: 30px 0 6px; border-top: 1px solid rgba(57,99,175,.12); margin-top: 18px;">
-        <h2 style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 30px; margin: 0; color: #16324a;">{{ g.year }}</h2>
+      <div onClick="{{ g.toggle }}" style="padding: 30px 0 6px; border-top: 1px solid rgba(57,99,175,.12); margin-top: 18px; cursor: pointer; user-select: none;" title="Click to collapse / expand">
+        <h2 style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 30px; margin: 0; color: #16324a; display: flex; align-items: center; gap: 12px;">{{ g.year }} <span style="font-size: 18px; color: #6a8296; font-weight: 400;">{{ g.caret }}</span></h2>
       </div>
+      <sc-if value="{{ g.open }}" hint-placeholder-val="{{ true }}">
       <div style="display: flex; flex-direction: column; gap: 14px; padding: 14px 0;">
         <sc-for list="{{ g.pubs }}" as="p" hint-placeholder-count="4">
           <div class="pub-card" style="background: rgba(255,255,255,.62); border: 1px solid rgba(57,99,175,.14); border-radius: 18px; padding: 18px; box-shadow: 0 16px 34px -30px rgba(20,50,80,.7);">
@@ -101,7 +102,7 @@
               <sc-if value="{{ p.hasButtons }}" hint-placeholder-val="{{ false }}">
                 <div style="display: flex; flex-wrap: wrap; gap: 8px;">
                   <sc-for list="{{ p.buttons }}" as="b" hint-placeholder-count="3">
-                    <a href="{{ b.href }}" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 6px; font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: .04em; text-transform: uppercase; color: #16324a; background: #fff; border: 1px solid rgba(57,99,175,.2); border-radius: 999px; padding: 6px 12px;">
+                    <a href="{{ b.href }}" target="_blank" rel="noopener" onClick="{{ b.onClick }}" style="display: inline-flex; align-items: center; gap: 6px; font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: .04em; text-transform: uppercase; color: #16324a; background: #fff; border: 1px solid rgba(57,99,175,.2); border-radius: 999px; padding: 6px 12px; cursor: pointer;">
                       <svg viewBox="0 0 24 24" fill="none" stroke="#0091c7" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width: 13px; height: 13px;"><path d="{{ b.d }}"></path></svg>
                       {{ b.text }}
                     </a>
@@ -112,6 +113,7 @@
           </div>
         </sc-for>
       </div>
+      </sc-if>
     </sc-for>
 
     <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
@@ -126,7 +128,13 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { items: [], search: '', loading: true, done: 0, total: 0, errorMsg: '' };
+  state = { items: [], search: '', loading: true, done: 0, total: 0, errorMsg: '', collapsed: {} };
+
+  toggleYear(y) {
+    const c = { ...this.state.collapsed };
+    c[y] = !c[y];
+    this.setState({ collapsed: c });
+  }
 
   ICONS = {
     paper: 'M7 3h8l4 4v14H7z M15 3v4h4',
@@ -220,11 +228,18 @@ class Component extends DCLogic {
         const doi = String(s.id).replace(/^doi:/i, '').trim();
         if (seen.has(doi)) return;
         seen.add(doi);
-        const buttons = (s.buttons || []).map(b => ({
-          text: b.text || b.type, type: b.type,
-          d: this.ICONS[b.type] || this.ICONS.website,
-          href: this.normalizeLink(b.type, b.link),
-        }));
+        const buttons = (s.buttons || []).map(b => {
+          const href = this.normalizeLink(b.type, b.link);
+          // Buttons that link to this page's own ?search=… (e.g. Featured,
+          // bioRxiv) should filter in place instead of navigating away.
+          const sm = /[?&]search=([^&#]+)/.exec(href || '');
+          return {
+            text: b.text || b.type, type: b.type,
+            d: this.ICONS[b.type] || this.ICONS.website,
+            href,
+            filter: sm ? decodeURIComponent(sm[1]) : null,
+          };
+        });
         const featured = (s.buttons || []).some(b => b.type === 'featured');
         const preprintFlag = (s.buttons || []).some(b => b.type === 'fire');
         items.push({ doi, url: 'https://doi.org/' + doi, image: s.image, buttons, featured, preprintFlag, meta: null });
@@ -339,6 +354,9 @@ class Component extends DCLogic {
 
     const groups = [...byYear.entries()].map(([year, list]) => ({
       year,
+      open: !this.state.collapsed[year],
+      caret: this.state.collapsed[year] ? '▸' : '▾',
+      toggle: () => this.toggleYear(year),
       pubs: list.map(it => {
         const m = it.meta || {};
         const bits = [m.journal, this.fmtDate(m), 'doi:' + it.doi].filter(Boolean);
@@ -350,7 +368,10 @@ class Component extends DCLogic {
           authors: q ? this.el(this.hl(authorsText, q)) : authorsText,
           meta: q ? this.el(this.hl(metaText, q)) : metaText,
           url: it.url, image: it.image,
-          buttons: it.buttons, hasButtons: it.buttons.length > 0,
+          buttons: it.buttons.map(b => b.filter
+            ? { ...b, href: '#', onClick: (e) => { e.preventDefault(); this.setState({ search: b.filter }); if (typeof window !== 'undefined' && window.scrollTo) window.scrollTo({ top: 0, behavior: 'smooth' }); } }
+            : b),
+          hasButtons: it.buttons.length > 0,
         };
       }),
     }));

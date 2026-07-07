@@ -1,26 +1,18 @@
 # =============================================================================
 # Home page content.
 #
-# teasers — the three hand-picked items under "Recent news" on the home page.
-#           Each has a `date` label and a `title`. (These are curated, not
-#           auto-pulled from News, so you choose what to feature.)
+# photos — the scrolling "Life in the lab" reel. Each has an image `src`
+#          (in assets/team-photos/) and a caption `cap`.
 #
-# photos  — the scrolling "Life in the lab" reel. Each has an image `src`
-#           (in assets/team-photos/) and a caption `cap`.
+# NOTE: the "Recent news" teasers on the home page are now pulled automatically
+# from the 3 most recent entries in content/news.yaml — they are no longer
+# configured here.
 # =============================================================================
 
-teasers:
-  - date: May 2026
-    title: Caleb awarded the 2026 Pershing Square Sohn Cancer Prize
-  - date: Apr 2026
-    title: 'Two new preprints: GIFT lineage tracing & HSV-1 reactivation in the brain'
-  - date: Mar 2026
-    title: The lab joins the 2nd annual Human Virome Program Meeting
-
 photos:
-  - src: assets/team-photos/bigpizza.png
+  - src: assets/team-photos/bigpizza.jpg
     cap: The hunt for NYC’s best slice
-  - src: assets/team-photos/c4s2026.png
+  - src: assets/team-photos/c4s2026.jpg
     cap: Longest pizza on the Lower East Side
-  - src: assets/team-photos/rickmorty2024.png
+  - src: assets/team-photos/rickmorty2024.jpg
     cap: Funniest costume — MSK IGO open house

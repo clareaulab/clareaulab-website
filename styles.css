@@ -90,11 +90,11 @@ html { -webkit-text-size-adjust: 100%; }
 .teaser-row { display: grid; grid-template-columns: 130px 1fr; gap: 20px; align-items: baseline; }
 @media (max-width: 640px) { .teaser-row { grid-template-columns: 82px 1fr; gap: 12px; } }
 
-.reel-figure { width: 420px; }
-.reel-figure img { height: 250px; }
+.reel-figure { width: 320px; }
+.reel-figure img { height: 200px; }
 @media (max-width: 640px) {
-  .reel-figure { width: 76vw; max-width: 330px; }
-  .reel-figure img { height: 200px; }
+  .reel-figure { width: 66vw; max-width: 280px; }
+  .reel-figure img { height: 170px; }
 }
 
 /* side gutters on the Home content wrappers (vertical padding stays inline) */
@@ -104,3 +104,15 @@ html { -webkit-text-size-adjust: 100%; }
 /* --- Contact: address card beside the building photo ---------------------- */
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: stretch; }
 @media (max-width: 760px) { .contact-grid { grid-template-columns: 1fr; } }
+
+/* --- Research: funder logo grid ------------------------------------------- */
+.funder-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+.funder-cell {
+  background: #fff; border: 1px solid rgba(57,99,175,.14); border-radius: 16px;
+  height: 120px; display: flex; align-items: center; justify-content: center; padding: 22px;
+}
+.funder-cell img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; }
+@media (max-width: 640px) {
+  .funder-grid { grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: 12px; }
+  .funder-cell { height: 96px; padding: 16px; }
+}

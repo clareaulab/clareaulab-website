@@ -182,8 +182,21 @@ class Component extends DCLogic {
 
   async _loadContent() {
     try {
-      const home = await window.SITE.loadYaml('content/home.yaml');
-      this.setState({ teasers: home.teasers || [], photos: home.photos || [] });
+      const [home, news] = await Promise.all([
+        window.SITE.loadYaml('content/home.yaml'),
+        window.SITE.loadYaml('content/news.yaml'),
+      ]);
+      // "Recent news" = the 3 most recent entries from news.yaml.
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const teasers = (news || [])
+        .slice()
+        .sort((a, b) => String(b.date).localeCompare(String(a.date)))
+        .slice(0, 3)
+        .map(n => {
+          const [y, m] = String(n.date).split('-');
+          return { date: months[parseInt(m, 10) - 1] + ' ' + y, title: n.title };
+        });
+      this.setState({ teasers, photos: (home && home.photos) || [] });
     } catch (e) { console.error('Failed to load home content:', e); }
   }
 
