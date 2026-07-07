@@ -1,0 +1,45 @@
+<!--
+  site-footer.dc.html — the shared site footer, used by every page.
+
+  It is a Design Component: any page that writes <site-footer></site-footer>
+  causes the runtime to fetch this file and render it in place. Use
+  <site-footer variant="home"></site-footer> for the dark Home hero page.
+
+  The footer TEXT (lab name, org line, url) lives in site.js (window.SITE.footer)
+  so it stays edited in one place; this file only owns the footer's markup/style.
+-->
+<x-dc>
+<div class="{{ wrapClass }}" style="{{ wrapStyle }}">
+  <div style="{{ innerStyle }}">
+    <div>
+      <div style="{{ nameStyle }}">{{ name }}</div>
+      <div style="{{ orgStyle }}">{{ org }}</div>
+    </div>
+    <div style="{{ urlStyle }}">{{ url }}</div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const f = (window.SITE && window.SITE.footer) || {};
+    const home = this.props.variant === 'home';
+
+    // Home sits on a dark hero page; inner pages use a light background. The two
+    // footers differ only in background shade, name color, and content width.
+    return {
+      name: f.name, org: f.org, url: f.url,
+      wrapClass: home ? 'home-pad' : '',
+      wrapStyle: home
+        ? { position: 'relative', background: '#0a1830', color: '#cfe6f2', paddingTop: '48px', paddingBottom: '48px', overflow: 'hidden' }
+        : { background: '#0f2a3f', color: '#cfe6f2', padding: '44px 0' },
+      innerStyle: home
+        ? { maxWidth: '1200px', margin: '0 auto', position: 'relative', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: '24px', flexWrap: 'wrap' }
+        : { maxWidth: '1120px', margin: '0 auto', padding: '0 32px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: '24px', flexWrap: 'wrap' },
+      nameStyle: { fontFamily: "'Space Grotesk', sans-serif", fontSize: '22px', fontWeight: 500, color: home ? '#eef6ff' : '#eafff5' },
+      orgStyle: { fontSize: '14px', color: '#8fb6cc', marginTop: '6px' },
+      urlStyle: { fontFamily: "'Space Mono', monospace", fontSize: '12px', color: '#7fa7bf' },
+    };
+  }
+}
+</script>

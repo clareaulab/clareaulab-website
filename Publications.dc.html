@@ -111,16 +111,8 @@
     </sc-if>
   </div>
 
-  <!-- footer -->
-  <div style="background: #0f2a3f; color: #cfe6f2; padding: 44px 0;">
-    <div style="max-width: 1120px; margin: 0 auto; padding: 0 32px; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap;">
-      <div>
-        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 500; color: #eafff5;">{{ footer.name }}</div>
-        <div style="font-size: 14px; color: #8fb6cc; margin-top: 6px;">{{ footer.org }}</div>
-      </div>
-      <div style="font-family: 'Space Mono', monospace; font-size: 12px; color: #7fa7bf;">{{ footer.url }}</div>
-    </div>
-  </div>
+  <!-- footer (shared component: site-footer.dc.html) -->
+  <dc-import name="site-footer"></dc-import>
 
 </div>
 </x-dc>
@@ -351,7 +343,6 @@ class Component extends DCLogic {
 
     return {
       nav, chips, groups,
-      footer: window.SITE.footer,
       search: this.state.search,
       onSearch: (e) => this.setState({ search: e.target.value }),
       loading: this.state.loading,
