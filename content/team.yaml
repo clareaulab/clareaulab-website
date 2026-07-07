@@ -22,7 +22,7 @@
 lab:
   - name: Caleb Lareau
     role: Principal Investigator
-    img: assets/headshots/caleb-lareau.png
+    img: assets/headshots/caleb-lareau.jpg
     bio: |-
       Caleb is an Assistant Member in the Computational and Systems Biology Program at Sloan Kettering Institute. He joined MSK from Stanford University where he was a Stanford Science Fellow and Parker Scholar at the Parker Institute for Cancer Immunotherapy. Originally from Oklahoma, Caleb completed his undergraduate studies at the University of Tulsa before attending Harvard University for his graduate degrees. Outside of lab, Caleb continues his lifelong quest of finding the best slice of pizza &nbsp; :pizza: &nbsp; out there (in New York or otherwise).
     links:
@@ -35,80 +35,80 @@ lab:
 
   - name: Benan Nalbant
     role: Sr. Research Technician
-    img: assets/headshots/benan-nalbant.png
+    img: assets/headshots/benan-nalbant.jpg
     bio: |-
       Benan is a Senior Research Technician in the Lareau lab. Prior to joining she was in the Vakoc lab at Cold Spring Harbor Laboratory investigating transcription factor dependencies in cancer. Benan completed her bachelors in Molecular, Cellular, and Developmental Biology with a minor in Physics from the University of Washington. In her free time she enjoys baking &nbsp; :cookie: :cake: :bread: &nbsp;!
 
   - name: Arthur Chow
     role: Postdoctoral Fellow
-    img: assets/headshots/arthur-chow.png
+    img: assets/headshots/arthur-chow.jpg
     bio: |-
       Arthur Chow is a Research Fellow in the Lareau Lab at MSK. A California native, he completed his bachelor’s degree at the University of California, Merced before pursuing his Ph.D. in Biomedical Sciences at the Icahn School of Medicine at Mount Sinai. During his Ph.D., he developed chemical tools to dissect the oncogenic signaling network of critical kinase regulators. When he’s not in the lab, Arthur loves to ride his bike all over the tri-state area while stopping at any and all coffee shops &nbsp; :coffee: &nbsp; along the way.
 
   - name: Erin Cumming
     role: Postdoctoral Fellow
-    img: assets/headshots/erin-cumming.png
+    img: assets/headshots/erin-cumming.jpg
     bio: |-
       Erin Cumming is a Research Fellow in the Lareau Lab at MSK. Hailing from Scotland, she completed her bachelor’s degree in Molecular Genetics at the University of Dundee, with a brief period spent working at Charles River, where she engaged in in vitro toxicology assay development. During her Ph.D. in Cancer Research and Precision Oncology from the CRUK Scotland Institute (formerly Beatson Institute for Cancer Research, University of Glasgow), she investigated the role of the sialoglycoprotein Podocalyxin in colorectal cancer before transitioning to another lab within the same institute for a short post-doc focusing on GSK3β treatment resistance in pancreatic cancer. Beyond science, Erin finds comfort in the great outdoors. While still exploring her varied interests, she harbors a keen enthusiasm for new experiences and is constantly seeking to broaden her view of the world 🌎!
 
   - name: Joseph Palmeri
     role: Research Scholar
-    img: assets/headshots/joseph-palmeri.png
+    img: assets/headshots/joseph-palmeri.jpg
     bio: |-
       Joseph Palmeri is a Research Scholar in the Lareau Lab at MSK. He completed his bachelor’s degree in Chemical Engineering at Case Western Reserve University in Cleveland, Ohio before pursuing his Ph.D. in Chemical Engineering at the Massachusetts Institute of Technology. During his Ph.D., he worked under K. Dane Wittrup to develop collagen anchoring agonist antibodies targeting T cell co-stimulatory receptors as a novel cancer immunotherapeutic strategy. In his free time, Joseph enjoys running around Roosevelt Island 🏃🏻 ➡️, cooking new recipes 🍝, pub trivia 🍻, and the Buffalo Bills 🏈.
 
   - name: Abi Dozic
     role: Graduate Student
-    img: assets/headshots/abi-dozic.png
+    img: assets/headshots/abi-dozic.jpg
     bio: |-
       Abi is a graduate student in the Lareau Lab who completed his undergraduate degree at the University of Florida. His undergraduate research experience included developing improved organ models for in-silico radiation dose delivery estimates and developing protein-based light-responsive biomaterials. When not in the lab, Abi enjoys hiking and reading &nbsp; :book: &nbsp; .
 
   - name: Zeyu Tang
     role: Graduate Student
-    img: assets/headshots/zeyu-tang.png
+    img: assets/headshots/zeyu-tang.jpg
     bio: |-
       Zeyu is a PhD student on the Tri-Institutional Programme in Computational Biology and Medicine. He previously earned a Bachelor’s and Master’s degree in Molecular Engineering from Imperial College London, where he did research in synthetic and systems biology, as well as AI for medical imaging. After graduating, he continued his research at Stanford University focusing on spatial omics analysis. Outside the lab, Zeyu enjoys football :soccer:️, bouldering, and seeking out the best afternoon teas in NYC.
 
   - name: Jacob Gutierrez
     role: Graduate Student
-    img: assets/headshots/jacob-gutierrez.png
+    img: assets/headshots/jacob-gutierrez.jpg
     bio: |-
       Jacob Gutierrez is a PhD Student in the Gerstner Sloan Kettering Graduate School of Biomedical Sciences at Memorial Sloan Kettering. Prior to starting his PhD, he worked with Caleb in the Satpathy Lab at Stanford University School of Medicine as a computational biologist, focusing on the analyses of single-cell multi-omics and spatial datasets. Jacob completed his Bachelors degree from Lewis and Clark College in Biochemistry and Molecular Biology then a masters degree in Bioinformatics from Oregon Health and Science University. Outside of lab, catch Jacob enjoying NYC and/or showing off his juggling skills &nbsp; :man_juggling: &nbsp;.
 
   - name: Allison Vela
     role: Graduate Student
-    img: assets/headshots/allison-vela.png
+    img: assets/headshots/allison-vela.jpg
     bio: |-
       Allie is a Cancer Biology PhD Student in the Gerstner Sloan Kettering Graduate School of Biomedical Sciences at Memorial Sloan Kettering. She earned a BS in Microbiology from the University of California - San Diego, where her undergraduate research focused on protein tyrosine phosphatases in rheumatoid arthritis. Following graduation, Allie continued her research at Cedars Sinai Medical Center. Outside of lab, Allie enjoys exploring NYC’s various bakeries, swimming, and petting as many dogs &nbsp; :dog: as she can!
 
   - name: Hoyin Chu
     role: Graduate Student
-    img: assets/headshots/hoyin-chu.png
+    img: assets/headshots/hoyin-chu.jpg
     bio: |-
       Hoyin Chu is a PhD student in the Tri-I Computational Biology and Medicine Program. After graduating from Northeastern University with a B.S. in Computer Science and Mathematics, Hoyin worked at Dana-Farber Cancer Institute as a computational biologist with research focusing on cancer genomics before joining the lab. When he is not in the lab, Hoyin enjoys rock climbing and playing rhythm games 🎼.
 
   - name: Cole Honeycutt
     role: MD/PhD Student
-    img: assets/headshots/cole-honeycutt.png
+    img: assets/headshots/cole-honeycutt.jpg
     bio: |-
       Cole is an MD-PhD student in the Weill Cornell/Rockefeller/MSK Tri-Institutional MD-PhD Program. Originally from North Carolina, he completed his bachelor’s degree at Duke University, where he studied G protein-coupled receptor signaling. After graduation, Cole moved to Washington, DC to work at the NIH Vaccine Research Center on COVID-19 vaccines. Outside of lab, you can find Cole running around Central Park and the streets of New York or playing tennis &nbsp; :tennis: !
 
   - name: Laura Kida
     role: MD Fellow
-    img: assets/headshots/laura-kida.png
+    img: assets/headshots/laura-kida.jpg
     bio: |-
       Laura is a Boehringer-Ingelheim MD Fellow in the Lareau Lab. She is completing her medical degree at Charité in Berlin, Germany, where she investigates immunological alterations in microglia after subarachnoid hemorrhage. When she’s not in the lab, you can find Laura either having quesadillas or drawing/painting &nbsp; :art: &nbsp; inspired by her latest walk through NYC.
 
 comentored:
   - name: Sherry Nyeo
     role: Graduate Student
-    img: assets/headshots/sherry-nyeo.png
+    img: assets/headshots/sherry-nyeo.jpg
     bio: |-
       Sherry is a PhD student in the Tri-Institutional Program in Computational Biology & Medicine Program. She completed her bachelor's degree at MIT, majoring in computer science & molecular biology, as well as minoring in management and German. As an undergraduate student researcher, Sherry studied post-transcriptional gene regulation, including RNA secondary structures and metabolism in SARS-CoV-2 at the Whitehead Institute. She also pursued a project within the MIT Bioengineering Department on optimizing a DNA data storage system. In her free time, Sherry reads (realistic fiction 📚), writes (doodles in her diary ✍🏼), watches TV/movies (always open to more recommendations! 🎬), and enjoys the ease of getting around NYC to explore everything the city has to offer (Broadway, NYPL, and discovering lovely new hangouts with friends 🍜). Sherry is currently co-advised by the [Victora Lab at Rockefeller University](https://www.germinal.center/).
 
   - name: Austin Varela
     role: Graduate Student
-    img: assets/headshots/austin-varela.png
+    img: assets/headshots/austin-varela.jpg
     bio: |-
       Austin Varela is a PhD student in the Tri-Institutional Computational Biology & Medicine program. He previously received a Biology BS and a Data Science BA from the University of Rochester where he did research on protein cooperation across mammalian evolution. Austin also received an MS in Computational Biology from Weill Cornell, where he studied cellular communication in the tumor microenvironment. Currently, Austin is interested in computational methods development with a focus on applications for understanding cancer heterogeneity. In his free time, Austin enjoys discovering new restaurants 🍴 and traveling &nbsp; :airplane: &nbsp; to explore cities. He is co-supervised with the [Laughney lab](https://laughneylab.com/) at Weill Cornell Medical School.
 
@@ -120,26 +120,26 @@ comentored:
 
   - name: Erica Sun
     role: Clinical Fellow
-    img: assets/headshots/erica-sun.png
+    img: assets/headshots/erica-sun.jpg
     bio: |-
       Erica Sun is a Hematology-Oncology Clinical Fellow at Memorial Sloan Kettering Cancer Center. Prior to embarking on a medical career, she studied epigenetic dysregulation in acute leukemias as a graduate student at University of Michigan. She then completed her medical school training at Johns Hopkins University and residency at Weill Cornell Medicine. Erica's basic-science research during her clinical training is co-supervised by [Dr. Katherine Hsu](https://www.mskcc.org/research-areas/labs/katharine-hsu). Outside of lab, you can find Erica jogging along the East River, listening to audible books, and enjoying being an amateur pianist.
 
 alumni:
   - name: Emma Tran
     role: '2024'
-    img: assets/headshots/emma-tran.png
+    img: assets/headshots/emma-tran.jpg
     bio: |-
       Emma was an undergraduate summer student in the Lareau Lab through the [Computational Biology Summer Program](https://www.mskcc.org/education-training/summer-scientific-undergraduate-programs/computational-biology-summer-program-cbsp) by the Tri-Institutional PhD Program in Computational Biology & Medicine. Her summer research focused on single-cell lineage tracing to evaluate and enhance adoptive cell therapy. As an international student from Vietnam, she completed her bachelor's degree at Luther College in Decorah, IA, majoring in statistics with a minor in biology. She is currently a PhD student in computational biology at [Iowa State University](https://www.bcb.iastate.edu/people/emma-tran). When she’s not doing science, Emma is an _accomplished_ fanfiction writer on Wattpad (✍🏼) and dedicated film reviewer on Letterboxd (🎬).
 
   - name: Emma Yin
     role: 2020–2023
-    img: assets/headshots/emma-yin.png
+    img: assets/headshots/emma-yin.jpg
     bio: |-
       Emma Yin is currently a Life Science Research Professional II in the Satpathy Lab at Stanford University. Caleb and Emma worked closely together in the Satpathy lab to develop and utilize single-cell genomics assays to study clonal heterogeneity in immune cell populations, including CAR T cells. Before her time at Stanford, Emma completed her Medical training at Weifang Medical College, a Masters degree in Translational Medicine from the University of California, Irvine, and was a research Scholar at the University of North Carolina, Chapel Hill. Outside of lab, you can find her trying to keep her good friend Alpha &nbsp; :dog: &nbsp; out of (too much) trouble.
 
   - name: Utsav Mesvani
     role: '2025'
-    img: assets/headshots/utsav-mesvani.png
+    img: assets/headshots/utsav-mesvani.jpg
     bio: |-
       Utsav was a Senior Research Technician in the Lareau Lab in 2025. Prior to joining the Lareau Lab at MSK, Utsav earned his master’s degree in Biotechnology from New York University and is interested in research questions in virology. Outside of the lab, he enjoys playing football, watching movies, and indulging in desserts. He is currently a research technician at Mt. Sinai School of Medicine in the Microbiology Department.
 
@@ -151,19 +151,19 @@ alumni:
 
   - name: Leonhard Pfänder
     role: '2023'
-    img: assets/headshots/leonhard-pfaender.png
+    img: assets/headshots/leonhard-pfaender.jpg
     bio: |-
       Leo is currently a Masters Student in Biochemistry at the Freie Universität Berlin. Leo and Caleb worked together in the Satpathy Lab at Stanford University where Leo has been writing his masters thesis on clonal heterogeneity of T lymphocytes in immunotherapies. Originally from Berlin, Leo completed his Bachelors Degree in Biochemistry at the Freie Universität Berlin. In his free time, you can find Leo enjoying the California sunshine! &nbsp; :palm_tree:
 
   - name: Jonathan Levine
     role: '2024'
-    img: assets/headshots/jonathan-levine.png
+    img: assets/headshots/jonathan-levine.jpg
     bio: |-
       Jonathan Levine is a PhD Student in the Tri-Institutional PhD Program in Computational Biology & Medicine and is interested in T cells and immuno-oncology. Before joining the program, Jonathan worked as a software engineer at Flatiron Health creating clinical decision support software and conducting research in the “real-world evidence” space. Before Flatiron Health, Jonathan studied Computational Neuroscience & Math at the University of Pennsylvania in Philadelphia. Outside of lab, you can find Jonathan outdoors rock climbing 🧗 or backpacking 🏕, or indoors playing chess ♟ or doing the New York Times daily crossword 🧩. Jon rotated in the Lareau Lab in Winter 2024 before joining the Greenbaum and Victora Labs.
 
   - name: Josch Hsieh
     role: 2023–2024
-    img: assets/headshots/josch-hsieh.png
+    img: assets/headshots/josch-hsieh.jpg
     bio: |-
       Yu-Hsin (Josch) was an exchange PhD student in the Lareau Lab. At his home institute, [Leif Ludwig Lab](https://www.mdc-berlin.de/ludwig) in the Berlin Institute of Health, he is involved in collaborative work with Caleb to investigate the immune landscape of patients with mitochondrial disease via single-cell multi-omics approaches. As a Taiwan native, he is on a personal mission to find the best Asian foods in the city 🍱🍜🍲. When he's not in the lab or satisfying his taste buds, you can spot Josch strolling on the street and enjoying the beautiful NYC skyline 🌉🌇.
 
