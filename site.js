@@ -17,11 +17,11 @@
     // link that doesn't go anywhere yet.
     nav: [
       { label: 'Home', href: 'Home.dc.html' },
-      { label: 'Research', href: '#' },
       { label: 'News', href: 'News.dc.html' },
-      { label: 'Publications', href: 'Publications.dc.html' },
       { label: 'Team', href: 'Team.dc.html' },
-      { label: 'Contact', href: '#' },
+      { label: 'Research', href: '#' },
+      { label: 'Publications', href: 'Publications.dc.html' },
+      { label: 'Contact', href: 'Contact.dc.html' },
     ],
 
     // --- Footer text: edit once, shows on every page. ------------------------

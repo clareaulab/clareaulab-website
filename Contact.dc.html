@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<script src="./site.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: linear-gradient(180deg, #eafff5 0%, #e6f9ff 40%, #f4fbff 100%); font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #0f2a3f; -webkit-font-smoothing: antialiased; }
+  a { text-decoration: none; color: inherit; }
+</style>
+</helmet>
+
+<div style="min-height: 100vh;">
+
+  <!-- nav -->
+  <div style="position: sticky; top: 0; z-index: 20; backdrop-filter: blur(12px); background: rgba(244,251,255,.72); border-bottom: 1px solid rgba(57,99,175,.12);">
+    <div class="nav-inner" style="max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 20px 32px;">
+      <a href="Home.dc.html"><img src="assets/logo.svg" alt="Lareau Lab" style="height: 30px; width: auto;"></a>
+      <label class="nav-toggle" aria-label="Toggle menu"><input type="checkbox" class="nav-toggle-cb"></label>
+      <nav class="nav-links">
+        <sc-for list="{{ nav }}" as="item" hint-placeholder-count="6">
+          <a href="{{ item.href }}" style="{{ item.style }}">{{ item.label }}</a>
+        </sc-for>
+      </nav>
+    </div>
+  </div>
+
+  <!-- page header -->
+  <div class="page-head" style="max-width: 1120px; margin: 0 auto; padding-bottom: 24px;">
+    <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #0091c7;">Get in touch</span>
+    <h1 class="page-title" style="font-family: 'Space Grotesk', sans-serif; font-weight: 400; line-height: 1.02; letter-spacing: -.02em; margin: 18px 0 16px;">Contact</h1>
+    <p style="font-size: 19px; line-height: 1.55; color: #33566f; max-width: 620px; margin: 0;">Say hello, or come find us in person — the lab travels to a handful of meetings each year.</p>
+  </div>
+
+  <!-- content -->
+  <div style="max-width: 1120px; margin: 0 auto; padding: 8px 32px 100px;">
+
+    <!-- upcoming events -->
+    <div style="padding: 24px 0 8px;">
+      <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #0091c7;">Come find us at these upcoming events</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 14px; padding: 8px 0 20px;">
+      <sc-for list="{{ events }}" as="e" hint-placeholder-count="2">
+        <a href="{{ e.href }}" target="_blank" rel="noopener" style="display: block; background: rgba(255,255,255,.62); border: 1px solid rgba(57,99,175,.14); border-radius: 20px; padding: 20px 24px;" style-hover="border: 1px solid rgba(0,145,199,.55); box-shadow: 0 16px 34px -26px rgba(20,50,80,.7); transform: translateY(-2px);">
+          <div style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .06em; color: #0091c7; margin-bottom: 8px;">{{ e.date }}</div>
+          <div style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 22px; line-height: 1.2; color: #16324a;">{{ e.name }}</div>
+          <div style="font-size: 15px; color: #6a8296; margin-top: 6px;">{{ e.location }}</div>
+        </a>
+      </sc-for>
+    </div>
+
+    <!-- lab address + contact -->
+    <div style="padding: 28px 0 8px;">
+      <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #0091c7;">Lab address</span>
+    </div>
+    <div style="background: rgba(255,255,255,.62); border: 1px solid rgba(57,99,175,.14); border-radius: 20px; padding: 26px 28px; display: flex; justify-content: space-between; align-items: flex-start; gap: 28px; flex-wrap: wrap;">
+      <div style="font-size: 16px; line-height: 1.75; color: #33566f;">
+        <sc-for list="{{ address }}" as="line" hint-placeholder-count="5">
+          <div>{{ line }}</div>
+        </sc-for>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 10px;">
+        <a href="{{ emailHref }}" style="display: inline-flex; align-items: center; gap: 8px; background: #0f2a3f; color: #f4fbff; font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: .04em; padding: 12px 20px; border-radius: 999px; border: 1px solid #0f2a3f;" style-hover="background: #16324a;">
+          <span style="font-size: 14px;">✉</span> Email Caleb
+        </a>
+        <sc-if value="{{ hasPhone }}" hint-placeholder-val="{{ false }}">
+          <div style="font-family: 'Space Mono', monospace; font-size: 13px; color: #6a8296;">T: {{ phone }}</div>
+        </sc-if>
+      </div>
+    </div>
+
+    <!-- building photo -->
+    <sc-if value="{{ hasPhoto }}" hint-placeholder-val="{{ false }}">
+      <img src="{{ photo }}" alt="{{ photoAlt }}" onError="{{ hideImg }}" style="width: 100%; border-radius: 20px; display: block; margin-top: 24px; border: 1px solid rgba(57,99,175,.14);">
+    </sc-if>
+  </div>
+
+  <!-- footer (shared component: site-footer.dc.html) -->
+  <dc-import name="site-footer"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { events: [], address: [], email: '', phone: '', photo: '', photoAlt: '' };
+
+  async componentDidMount() {
+    try {
+      const d = await window.SITE.loadYaml('content/contact.yaml');
+      this.setState({
+        events: d.events || [],
+        address: d.address || [],
+        email: d.email || '',
+        phone: d.phone || '',
+        photo: d.photo || '',
+        photoAlt: d.photoAlt || '',
+      });
+    } catch (e) { console.error('Failed to load contact content:', e); }
+  }
+
+  renderVals() {
+    return {
+      nav: window.SITE.navItems('Contact.dc.html'),
+      events: this.state.events,
+      address: this.state.address,
+      emailHref: this.state.email ? ('mailto:' + this.state.email) : '#',
+      phone: this.state.phone,
+      hasPhone: !!this.state.phone,
+      photo: this.state.photo,
+      photoAlt: this.state.photoAlt,
+      hasPhoto: !!this.state.photo,
+      // Hide the image gracefully until the photo file is added to assets/.
+      hideImg: (e) => { e.target.style.display = 'none'; },
+    };
+  }
+}
+</script>
+</body>
+</html>
