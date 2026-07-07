@@ -91,16 +91,8 @@
     </div>
   </div>
 
-  <!-- footer -->
-  <div class="home-pad" style="position: relative; background: #0a1830; color: #cfe6f2; padding-top: 48px; padding-bottom: 48px; overflow: hidden;">
-    <div style="max-width: 1200px; margin: 0 auto; position: relative; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap;">
-      <div>
-        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 500; color: #eef6ff;">{{ footer.name }}</div>
-        <div style="font-size: 14px; color: #8fb6cc; margin-top: 6px;">{{ footer.org }}</div>
-      </div>
-      <div style="font-family: 'Space Mono', monospace; font-size: 12px; color: #7fa7bf;">{{ footer.url }}</div>
-    </div>
-  </div>
+  <!-- footer (shared component: site-footer.dc.html) -->
+  <dc-import name="site-footer" variant="home"></dc-import>
 
 </div>
 </x-dc>
@@ -122,7 +114,6 @@ class Component extends DCLogic {
       nav: window.SITE.nav,
       teasers: this.state.teasers,
       photos: this.state.photos,
-      footer: window.SITE.footer,
     };
   }
 
