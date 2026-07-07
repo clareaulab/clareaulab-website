@@ -1,0 +1,39 @@
+# =============================================================================
+# Research page content.
+#
+# intro   — paragraphs shown under the "Research" heading. PLACEHOLDER text for
+#           now — replace with the real description whenever you're ready.
+# funders — logos shown in the "Funding & support" grid. Each has an image
+#           (in assets/funding-photos/) and a name (used as alt text / hover).
+# =============================================================================
+
+intro:
+  - The Lareau Lab develops and applies single-cell genomic technologies to
+    understand how individual cells acquire, carry, and propagate genetic and
+    epigenetic variation. (Placeholder text — replace with the real overview.)
+  - A central theme is the human virome — mapping how viruses persist in and
+    interact with human cells across health and disease, from single cells to
+    population scale. (Placeholder text.)
+  - We build open, reproducible computational methods and pair them with new
+    experimental assays, working side by side across computational and wet-lab
+    approaches. (Placeholder text.)
+
+funders:
+  - img: assets/funding-photos/nci-cc.png
+    name: National Cancer Institute
+  - img: assets/funding-photos/commonfund.png
+    name: NIH Common Fund
+  - img: assets/funding-photos/hvp.png
+    name: NIH Human Virome Program
+  - img: assets/funding-photos/nhgri.png
+    name: National Human Genome Research Institute
+  - img: assets/funding-photos/imat.png
+    name: NCI IMAT Program
+  - img: assets/funding-photos/michelson.png
+    name: Michelson Medical Research Foundation
+  - img: assets/funding-photos/pershingsquare.png
+    name: Pershing Square Sohn Cancer Research Alliance
+  - img: assets/funding-photos/c4s.png
+    name: Cycle for Survival
+  - img: assets/funding-photos/abf.png
+    name: ABF

@@ -19,7 +19,7 @@
       { label: 'Home', href: 'Home.dc.html' },
       { label: 'Team', href: 'Team.dc.html' },
       { label: 'News', href: 'News.dc.html' },
-      { label: 'Research', href: '#' },
+      { label: 'Research', href: 'Research.dc.html' },
       { label: 'Publications', href: 'Publications.dc.html' },
       { label: 'Contact', href: 'Contact.dc.html' },
     ],
