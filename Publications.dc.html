@@ -74,6 +74,12 @@
     <sc-if value="{{ errored }}" hint-placeholder-val="{{ false }}">
       <div style="font-family: 'Space Mono', monospace; font-size: 12.5px; color: #b5502f;">{{ errorMsg }}</div>
     </sc-if>
+    <sc-if value="{{ showCount }}" hint-placeholder-val="{{ false }}">
+      <div style="text-align: center; padding: 6px 0;">
+        <div style="font-size: 16px; font-style: italic; color: #33566f;">Showing {{ filteredCount }} of {{ total }} results</div>
+        <a onClick="{{ clearSearch }}" style="display: inline-block; margin-top: 6px; font-family: 'Space Mono', monospace; font-size: 12.5px; color: #0091c7; border-bottom: 1px solid rgba(0,145,199,.35); cursor: pointer;">Clear search</a>
+      </div>
+    </sc-if>
   </div>
 
   <!-- results -->
@@ -275,6 +281,30 @@ class Component extends DCLogic {
     return String(m.y);
   }
 
+  // Wrap occurrences of the search term `q` in `text` with a colored highlight,
+  // HTML-escaping everything else. Returns an HTML string.
+  hl(text, q) {
+    const s = String(text == null ? '' : text);
+    const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    if (!q) return esc(s);
+    const qe = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const re = new RegExp('(' + qe + ')', 'ig');
+    let out = '', last = 0, m2;
+    while ((m2 = re.exec(s)) !== null) {
+      out += esc(s.slice(last, m2.index));
+      out += '<span style="color:#0091c7;font-weight:600;background:rgba(0,145,199,.12);border-radius:3px;padding:0 2px;">' + esc(m2[0]) + '</span>';
+      last = m2.index + m2[0].length;
+      if (m2.index === re.lastIndex) re.lastIndex++;
+    }
+    out += esc(s.slice(last));
+    return out;
+  }
+
+  // Render an HTML string as an inline element (used for highlighted fields).
+  el(html) {
+    return React.createElement('span', { dangerouslySetInnerHTML: { __html: html } });
+  }
+
   renderVals() {
     const nav = window.SITE.navItems('Publications.dc.html');
 
@@ -312,10 +342,13 @@ class Component extends DCLogic {
       pubs: list.map(it => {
         const m = it.meta || {};
         const bits = [m.journal, this.fmtDate(m), 'doi:' + it.doi].filter(Boolean);
+        const titleText = m.title || (m.unresolved ? 'Citation unavailable — ' + it.doi : it.doi);
+        const authorsText = this.fmtAuthors(m.authors);
+        const metaText = bits.join('  ·  ');
         return {
-          title: m.title || (m.unresolved ? 'Citation unavailable — ' + it.doi : it.doi),
-          authors: this.fmtAuthors(m.authors),
-          meta: bits.join('  ·  '),
+          title: q ? this.el(this.hl(titleText, q)) : titleText,
+          authors: q ? this.el(this.hl(authorsText, q)) : authorsText,
+          meta: q ? this.el(this.hl(metaText, q)) : metaText,
           url: it.url, image: it.image,
           buttons: it.buttons, hasButtons: it.buttons.length > 0,
         };
@@ -352,6 +385,10 @@ class Component extends DCLogic {
       errored: !!this.state.errorMsg,
       errorMsg: this.state.errorMsg,
       empty: !this.state.loading && groups.length === 0,
+      showCount: !this.state.loading && this.state.search.trim() !== '',
+      filteredCount: filtered.length,
+      total: items.length,
+      clearSearch: () => this.setState({ search: '' }),
     };
   }
 }
