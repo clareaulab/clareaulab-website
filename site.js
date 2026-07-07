@@ -16,12 +16,12 @@
     // Every page's nav is generated from this list. Use "#" for a placeholder
     // link that doesn't go anywhere yet.
     nav: [
-      { label: 'Home', href: 'Home.dc.html' },
-      { label: 'Team', href: 'Team.dc.html' },
-      { label: 'News', href: 'News.dc.html' },
-      { label: 'Research', href: 'Research.dc.html' },
-      { label: 'Publications', href: 'Publications.dc.html' },
-      { label: 'Contact', href: 'Contact.dc.html' },
+      { label: 'Home', href: './' },
+      { label: 'Team', href: 'team.html' },
+      { label: 'News', href: 'news.html' },
+      { label: 'Research', href: 'research.html' },
+      { label: 'Publications', href: 'publications.html' },
+      { label: 'Contact', href: 'contact.html' },
     ],
 
     // --- Footer text: edit once, shows on every page. ------------------------
@@ -44,7 +44,7 @@
     },
 
     // Returns the nav list with `active` + inline `style` computed for the
-    // given current page (e.g. 'Team.dc.html'). Used by the inner pages.
+    // given current page (e.g. 'team.html'). Used by the inner pages.
     navItems: function (currentHref) {
       return this.nav.map(function (n) {
         var active = n.href === currentHref;

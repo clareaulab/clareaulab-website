@@ -4,7 +4,7 @@
 #   title: The headline
 #   body:  The post text, on the indented lines under `body: |-`.
 #          Markdown links [text](https://url) and _italics_ work. Links to
-#          other pages (e.g. Team.dc.html) work too. :emoji: shortcodes are
+#          other pages (e.g. team.html) work too. :emoji: shortcodes are
 #          removed on the News page.
 #
 # Posts can be in any order — the page sorts them by date and groups by year.
@@ -44,7 +44,7 @@
 - date: '2023-09-11'
   title: Lab++
   body: |-
-    [Benan Nalbant](Team.dc.html) (Senior Research Technician) joins the lab as its first member! Benan joins after years at CSHL developing cell models to study transcription factor dependencies in cancer. Welcome Benan!
+    [Benan Nalbant](team.html) (Senior Research Technician) joins the lab as its first member! Benan joins after years at CSHL developing cell models to study transcription factor dependencies in cancer. Welcome Benan!
 
 - date: '2023-09-28'
   title: Sparkathon Emerging Leader, 2023
@@ -54,7 +54,7 @@
 - date: '2023-10-02'
   title: Arthur Chow, our first postdoc, joins!
   body: |-
-    [Arthur Chow, PhD](Team.dc.html), joins the group as the lab's first postdoctoral fellow! Arthur completed his PhD at Icahn School of Medicine at Mount Sinai and brings a wealth of experimental expertise. Welcome Arthur!
+    [Arthur Chow, PhD](team.html), joins the group as the lab's first postdoctoral fellow! Arthur completed his PhD at Icahn School of Medicine at Mount Sinai and brings a wealth of experimental expertise. Welcome Arthur!
 
 - date: '2023-11-08'
   title: New paper on HHV-6 reactivation out today!
@@ -64,12 +64,12 @@
 - date: '2023-12-04'
   title: Welcome Josch and Laura!
   body: |-
-    [Laura Kida](Team.dc.html) and [Josch Hsieh](Team.dc.html) join the group! Laura is studying for her MD in Berlin, and Josch is a PhD candidate in [Leif Ludwig's group](https://www.mdc-berlin.de/ludwig). Both will help establish new directions as they study for their theses. Welcome!
+    [Laura Kida](team.html) and [Josch Hsieh](team.html) join the group! Laura is studying for her MD in Berlin, and Josch is a PhD candidate in [Leif Ludwig's group](https://www.mdc-berlin.de/ludwig). Both will help establish new directions as they study for their theses. Welcome!
 
 - date: '2024-01-08'
   title: New rotation students!
   body: |-
-    The lab welcomes [Sherry Nyeo](Team.dc.html), [Jonathan Levine](Team.dc.html), and [Hoyin Chu](Team.dc.html) as its first rotation students from the Cornell Tri-I CBM program!
+    The lab welcomes [Sherry Nyeo](team.html), [Jonathan Levine](team.html), and [Hoyin Chu](team.html) as its first rotation students from the Cornell Tri-I CBM program!
 
 - date: '2024-02-14'
   title: 2nd Annual Probing Human Disease
@@ -84,7 +84,7 @@
 - date: '2024-04-02'
   title: Erin Cumming, our second postdoc, joins!
   body: |-
-    [Erin Cumming, PhD](Team.dc.html), joins the group as the second postdoctoral fellow. Erin completed her PhD at the Cancer Research Scotland Institute (formerly the CRUK Beatson Institute). Welcome Erin!
+    [Erin Cumming, PhD](team.html), joins the group as the second postdoctoral fellow. Erin completed her PhD at the Cancer Research Scotland Institute (formerly the CRUK Beatson Institute). Welcome Erin!
 
 - date: '2024-05-22'
   title: Tumor ecosystems symposium
@@ -229,4 +229,4 @@
 - date: '2026-05-10'
   title: Collaborative paper with David lab online!
   body: |-
-    A collaborative paper with the [David Lab](https://www.davidlabmsk.com/) is online now at [JACS](https://pubs.acs.org/doi/10.1021/jacs.5c20726). [Abi](Team.dc.html) led the biophysical modeling of amino acid residues on SRSF2 that destabilize the native protein-RNA complex upon glycation. Congrats to Abi!
+    A collaborative paper with the [David Lab](https://www.davidlabmsk.com/) is online now at [JACS](https://pubs.acs.org/doi/10.1021/jacs.5c20726). [Abi](team.html) led the biophysical modeling of amino acid residues on SRSF2 that destabilize the native protein-RNA complex upon glycation. Congrats to Abi!
