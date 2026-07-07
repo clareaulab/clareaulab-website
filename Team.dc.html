@@ -53,7 +53,7 @@
       <div class="people-grid" style="padding: 8px 0 20px;">
         <sc-for list="{{ g.members }}" as="m" hint-placeholder-count="4">
           <button onClick="{{ m.onClick }}" type="button" style="text-align: left; font: inherit; color: inherit; cursor: pointer; background: rgba(255,255,255,.6); border: 1px solid rgba(57,99,175,.14); border-radius: 20px; padding: 14px 14px 18px;" style-hover="border: 1px solid rgba(0,145,199,.55); box-shadow: 0 16px 34px -24px rgba(20,50,80,.7); transform: translateY(-2px);">
-            <img src="{{ m.img }}" alt="{{ m.name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 14px; display: block; margin-bottom: 14px;">
+            <img src="{{ m.img }}" alt="{{ m.name }}" loading="lazy" decoding="async" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 14px; display: block; margin-bottom: 14px;">
             <div style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 18px; color: #16324a;">{{ m.name }}</div>
             <div style="font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: .04em; color: #6a8296; margin-top: 4px;">{{ m.role }}</div>
           </button>
@@ -70,7 +70,7 @@
     <div class="pets-grid" style="padding: 10px 0 20px;">
       <sc-for list="{{ pets }}" as="p" hint-placeholder-count="8">
         <div style="background: rgba(255,255,255,.5); border: 1px solid rgba(57,99,175,.12); border-radius: 14px; padding: 8px 8px 10px;">
-          <img src="{{ p.img }}" alt="{{ p.name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; display: block; margin-bottom: 8px;">
+          <img src="{{ p.img }}" alt="{{ p.name }}" loading="lazy" decoding="async" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; display: block; margin-bottom: 8px;">
           <div style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 13px; color: #33566f;">{{ p.name }}</div>
         </div>
       </sc-for>
@@ -139,7 +139,7 @@ class Component extends DCLogic {
         full.onClick = () => this.setState({ sel: full });
         return full;
       });
-      const pets = (data.pets || []).map(n => ({ name: n, img: `assets/pet-photos/${n.toLowerCase()}.png` }));
+      const pets = (data.pets || []).map(n => ({ name: n, img: `assets/pet-photos/${n.toLowerCase()}.jpg` }));
       this.setState({
         lab: decorate(data.lab),
         comentored: decorate(data.comentored),
