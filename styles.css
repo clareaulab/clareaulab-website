@@ -100,3 +100,7 @@ html { -webkit-text-size-adjust: 100%; }
 /* side gutters on the Home content wrappers (vertical padding stays inline) */
 .home-pad { padding-left: 40px; padding-right: 40px; }
 @media (max-width: 640px) { .home-pad { padding-left: 20px; padding-right: 20px; } }
+
+/* --- Contact: address card beside the building photo ---------------------- */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: stretch; }
+@media (max-width: 760px) { .contact-grid { grid-template-columns: 1fr; } }
