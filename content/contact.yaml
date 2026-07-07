@@ -1,0 +1,36 @@
+# =============================================================================
+# Contact page content.
+#
+# events   — conferences / meetings the lab will attend. Each has a date label,
+#            a name, an optional href (link), and a location. Remove past events
+#            or add new ones here.
+# address  — the lab's mailing address, one line per list item.
+# email    — the address the "Email Caleb" button opens.  <-- please confirm!
+# phone    — shown as "T: <phone>".
+# photo    — building photo shown at the bottom (add the image file to assets/).
+# =============================================================================
+
+events:
+  - date: June 4–8, 2026
+    name: 2026 ASM Microbe
+    href: https://asm.org/events/asm-microbe/home   # TODO: confirm link
+    location: Washington, DC
+  - date: October 20–24, 2026
+    name: American Society of Human Genetics Meeting
+    href: https://www.ashg.org/meetings/             # TODO: confirm link
+    location: Montreal, Canada
+
+address:
+  - Memorial Sloan Kettering Cancer Center
+  - Lareau Lab
+  - 417 E 68th St
+  - Zuckerman - ZRC 1132
+  - New York, NY 10065
+
+# TODO: confirm the address the "Email Caleb" button should use.
+email: caleb.lareau@gmail.com
+phone: 646-888-2069
+
+# TODO: add the building photo to this path (e.g. the Zuckerman Research Center).
+photo: assets/contact/zuckerman.jpg
+photoAlt: Mortimer B. Zuckerman Research Center entrance
