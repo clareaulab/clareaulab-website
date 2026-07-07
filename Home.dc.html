@@ -20,7 +20,10 @@
   body { margin: 0; background: #eef4f9; font-family: 'Hanken Grotesk', system-ui, sans-serif; -webkit-font-smoothing: antialiased; color: #0f2a3f; }
   a { text-decoration: none; color: inherit; }
   .hero-cv { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  /* photo reel: draggable / scrollable, with the scrollbar hidden */
+  #reel { overscroll-behavior-x: contain; cursor: grab; user-select: none; scrollbar-width: none; -ms-overflow-style: none; }
+  #reel::-webkit-scrollbar { display: none; height: 0; }
+  #reel img { pointer-events: none; -webkit-user-drag: none; }
 </style>
 </helmet>
 
@@ -76,8 +79,8 @@
   <div class="home-pad" style="max-width: 1200px; margin: 0 auto; padding-top: 8px; padding-bottom: 14px;">
     <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #0091c7;">Life in the lab &middot; New York City</span>
   </div>
-  <div style="overflow: hidden; padding: 6px 0 64px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);">
-    <div style="display: flex; gap: 18px; width: max-content; animation: marquee 42s linear infinite; padding: 0 40px;">
+  <div id="reel" style="overflow-x: auto; overflow-y: hidden; padding: 6px 0 64px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);">
+    <div style="display: flex; gap: 18px; width: max-content;">
       <sc-for list="{{ photos }}" as="item" hint-placeholder-count="3">
         <figure class="reel-figure" style="margin: 0; flex: 0 0 auto;">
           <img src="{{ item.src }}" alt="{{ item.cap }}" style="width: 100%; object-fit: cover; border-radius: 18px; display: block;">
@@ -102,7 +105,77 @@
 class Component extends DCLogic {
   state = { teasers: [], photos: [] };
 
-  componentWillUnmount() { this._stop = true; if (this._ro) this._ro.disconnect(); }
+  componentWillUnmount() { this._stop = true; this._reelStop = true; if (this._ro) this._ro.disconnect(); }
+
+  // Photo reel: auto-scrolls when idle, but follows the user's drag (mouse),
+  // touch, trackpad, or wheel — and loops seamlessly.
+  _setupReel() {
+    const reel = document.getElementById('reel');
+    if (!reel || reel._wired) return;
+    reel._wired = true;
+    this._reelStop = false;
+
+    // one loop period = distance from a photo to its duplicate, so wrapping by
+    // it is invisible (the two photo sets are identical).
+    const period = () => {
+      const track = reel.firstElementChild;
+      const figs = track ? track.children : [];
+      const n = this.state.photos.length;
+      if (!n || figs.length < n * 2) return 0;
+      return figs[n].offsetLeft - figs[0].offsetLeft;
+    };
+    const wrap = () => {
+      const p = period();
+      if (p <= 0) return;
+      if (reel.scrollLeft >= p) reel.scrollLeft -= p;
+      else if (reel.scrollLeft <= 0) reel.scrollLeft += p;
+    };
+
+    let lastInteract = -1e9;
+    const bump = () => { lastInteract = performance.now(); };
+
+    // click-and-drag with a mouse (touch & trackpad use native scrolling)
+    let dragging = false, startX = 0, startScroll = 0;
+    reel.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      dragging = true; startX = e.clientX; startScroll = reel.scrollLeft;
+      reel.setPointerCapture(e.pointerId);
+      reel.style.cursor = 'grabbing';
+      bump();
+    });
+    reel.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      reel.scrollLeft = startScroll - (e.clientX - startX);
+      wrap(); bump();
+    });
+    const endDrag = (e) => {
+      if (!dragging) return;
+      dragging = false;
+      reel.style.cursor = 'grab';
+      try { reel.releasePointerCapture(e.pointerId); } catch (_) {}
+      bump();
+    };
+    reel.addEventListener('pointerup', endDrag);
+    reel.addEventListener('pointercancel', endDrag);
+
+    // yield to any native scroll / wheel / touch, and keep the loop seamless
+    reel.addEventListener('scroll', wrap, { passive: true });
+    reel.addEventListener('wheel', bump, { passive: true });
+    reel.addEventListener('touchstart', bump, { passive: true });
+    reel.addEventListener('touchmove', bump, { passive: true });
+
+    // gentle auto-scroll while the user isn't touching it
+    const speed = 0.5;
+    const tick = () => {
+      if (this._reelStop) return;
+      if (!dragging && performance.now() - lastInteract > 1400) {
+        reel.scrollLeft += speed;
+        wrap();
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
 
   async _loadContent() {
     try {
@@ -122,6 +195,7 @@ class Component extends DCLogic {
   componentDidMount() {
     this._stop = false;
     this._loadContent();
+    this._setupReel();
     const bases = ['A', 'C', 'G', 'T'];
     const baseColor = { A: '#45e6c4', C: '#33d1f0', G: '#5f9dff', T: '#5fd6d8' };
     const bitColor = '#8ff2ff';
