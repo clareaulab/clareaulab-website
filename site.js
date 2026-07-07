@@ -17,8 +17,8 @@
     // link that doesn't go anywhere yet.
     nav: [
       { label: 'Home', href: 'Home.dc.html' },
-      { label: 'News', href: 'News.dc.html' },
       { label: 'Team', href: 'Team.dc.html' },
+      { label: 'News', href: 'News.dc.html' },
       { label: 'Research', href: '#' },
       { label: 'Publications', href: 'Publications.dc.html' },
       { label: 'Contact', href: 'Contact.dc.html' },
@@ -27,7 +27,7 @@
     // --- Footer text: edit once, shows on every page. ------------------------
     footer: {
       name: 'Lareau Lab',
-      org: 'Memorial Sloan Kettering Cancer Center · Zuckerman Research Center, New York, NY',
+      org: 'Computational and Systems Biology Program · Memorial Sloan Kettering Cancer Center',
       url: 'clareaulab.com',
     },
 
