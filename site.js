@@ -79,6 +79,7 @@
       var h = (s || '').replace(/:[a-z0-9_+\-]+:/g, '').replace(/&nbsp;/g, ' ');
       h = h.replace(/!\[[^\]]*\]\([^)]*\)/g, '');
       h = h.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener" style="color:#0091c7;border-bottom:1px solid rgba(0,145,199,.35)">$1</a>');
+      h = h.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
       h = h.replace(/_([^_]+)_/g, '<em>$1</em>');
       h = h.replace(/\s+/g, ' ').trim();
       return h;
