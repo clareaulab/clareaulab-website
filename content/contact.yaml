@@ -11,14 +11,22 @@
 # =============================================================================
 
 events:
-  - date: June 4–8, 2026
-    name: 2026 ASM Microbe
-    href: https://asm.org/events/asm-microbe/home   # TODO: confirm link
-    location: Washington, DC
+  - date: August 6–7, 2026
+    name: Mammalian Synthetic Biology Workshop (mSBW)
+    href: https://www.aiche.org/sbe/conferences/mammalian-synthetic-biology-workshop/2026
+    location: Atlanta, GA
   - date: October 20–24, 2026
     name: American Society of Human Genetics Meeting
-    href: https://www.ashg.org/meetings/             # TODO: confirm link
+    href: https://www.ashg.org/meetings/
     location: Montreal, Canada
+  - date: March 17–19, 2027
+    name: Oz Single Cell
+    href: https://www.ozsinglecell.com/
+    location: Victoria, Australia
+  - date: September 2027
+    name: 2nd Annual EMBO Lineage Tracing and Dynamics Meeting
+    href: https://meetings.embo.org/event/25-lineage-tracing
+    location: Sant Feliu de Guíxols, Spain
 
 address:
   - Memorial Sloan Kettering Cancer Center
