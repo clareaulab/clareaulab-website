@@ -1,22 +1,20 @@
 # =============================================================================
 # Research page content.
-#
-# intro   — paragraphs shown under the "Research" heading. PLACEHOLDER text for
-#           now — replace with the real description whenever you're ready.
-# funders — logos shown in the "Funding & support" grid. Each has an image
-#           (in assets/funding-photos/) and a name (used as alt text / hover).
 # =============================================================================
 
 intro:
-  - The Lareau Lab develops and applies single-cell genomic technologies to
-    understand how individual cells acquire, carry, and propagate genetic and
-    epigenetic variation. (Placeholder text — replace with the real overview.)
-  - A central theme is the human virome — mapping how viruses persist in and
-    interact with human cells across health and disease, from single cells to
-    population scale. (Placeholder text.)
-  - We build open, reproducible computational methods and pair them with new
-    experimental assays, working side by side across computational and wet-lab
-    approaches. (Placeholder text.)
+  - |-
+    We are a team of interdisciplinary scientists that specializes in **computational and systems immunology**. Our lab is a hybrid “wet” (experimental) and “dry” (bioinformatics) team. We broadly focus on three themes:
+  - |-
+    **1. Computational systems virology**. Current estimates of the human virome indicate that for every one human cell, there are ~10 viral particles (or 380 trillion total) within the human body. Despite the ubiquity of these viruses, our knowledge about the commensal virome, tolerogenic mechanisms, and response to pathogenic infection is in its infancy. Rather than conventional virology approaches, we scour the totality of existing DNA sequencing libraries to uncover new biological associations hidden in large-scale data. In our previous work, we found unexpected signals in discarded data, including somatic mitochondrial DNA mutations that could be utilized for lineage tracing and reads from herpesviruses that could be used to uncover a potential mechanism for a toxicity during adoptive cell therapy.
+  - |-
+    For our future efforts, our lab was recently awarded a U01 grant as part of the [Human Virome Program](https://commonfund.nih.gov/humanvirome), a new NIH-funded initiative to map viral infection, pathogenesis, and clinical correlates using high-dimensional sequencing data.
+  - |-
+    **2. Genomics technology development**. Data-driven hypotheses can crystalize from reanalyses but often lack definitive evidence. Our prior work has taught us that new technologies are often required to test retrospective findings rigorously or scale up the number of measurements for proper inference. Thus, a major focus of the experimental component of our group is to establish new technologies that, once developed, explain phenomenon in high-dimensional data or enable foundational new directions.
+  - |-
+    Recently, and as the first paper from our lab, we described the Programmable Enrichment via RNA FlowFISH by sequencing (PERFF-seq) that enables studying rare populations using arbitrary nucleic acid cytometry to isolate and profile rare cell states. We continue innovative single-cell technology development in close collaboration with the Single-cell Analytics Innovation Lab (SAIL), our next-door neighbor.
+  - |-
+    **3. Computational protein design**. A new area that our lab is actively exploring is the computational design of proteins. Based on rapid advances in deep learning architectures like Alphafold and corresponding innovations in generative artificial intelligence (e.g., hallucination, diffusion), we anticipate that programmable protein design will be as commonplace as DNA primer design within the next 10-15 years. Accordingly, our lab has initiated high-risk, high-reward projects utilizing deep learning to create new proteins that may enable new therapies. These include developing protein binders for known and novel cancer antigens that may be utilized in clinical practice at MSKCC.
 
 funders:
   - img: assets/funding-photos/nci-cc.png
@@ -36,4 +34,4 @@ funders:
   - img: assets/funding-photos/c4s.png
     name: Cycle for Survival
   - img: assets/funding-photos/abf.png
-    name: ABF
+    name: American Brain Foundation

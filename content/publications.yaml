@@ -81,23 +81,6 @@
       text: Featured
       link: https://clareaulab.com/publications/?search=featured
 
-#DNCT
-- id: doi:10.64898/2025.12.12.694033
-  image: assets/researchpngs/denovocart1.png
-  buttons:
-    - type: paper
-      text: PDF
-      link: https://www.biorxiv.org/content/10.64898/2025.12.12.694033v1.full.pdf
-    - type: github
-      text: Code
-      link: clareaulab/CARPNN
-    - type: twitter
-      text: Tweetorial
-      link: CalebLareau/status/2000149846582493578
-    - type: featured
-      text: Featured
-      link: https://clareaulab.com/publications/?search=featured
-
 
 # PERFF
 - id: doi:10.1038/s41588-024-02036-7
@@ -293,7 +276,7 @@
   buttons:
     - type: paper
       text: PDF
-      link: https://raw.githubusercontent.com/clareaulab/clareau-lab-website/main/images/pdfs/LareauLudwig-NBT-2021.pdf
+      link: https://clareaulab.github.io/pdfs/LareauLudwig-NBT-2021.pdf
     - type: github
       text: Code
       link: caleblareau/mtscATACpaper_reproducibility
@@ -330,7 +313,7 @@
   buttons:
     - type: paper
       text: PDF
-      link: https://raw.githubusercontent.com/clareaulab/clareau-lab-website/main/images/pdfs/LareauDuarteChew-NBT-2019.pdf
+      link: https://clareaulab.github.io/pdfs/LareauDuarteChew-NBT-2019.pdf
     - type: github
       text: Code
       link: caleblareau/bap

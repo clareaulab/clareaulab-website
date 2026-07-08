@@ -3,26 +3,22 @@
 #
 # photos — the scrolling "Life in the lab" reel. Each has an image `src`
 #          (in assets/team-photos/) and a caption `cap`.
-#
-# NOTE: the "Recent news" teasers on the home page are now pulled automatically
-# from the 3 most recent entries in content/news.yaml — they are no longer
-# configured here.
 # =============================================================================
 
 photos:
+  - src: assets/team-photos/c4s2026.jpg
+    cap: Cycle for Survival 2026
   - src: assets/team-photos/bigpizza.jpg
-    cap: The hunt for NYC’s best slice
+    cap: Longest pizza on the Lower East Side, 2024
   - src: assets/team-photos/marathon.jpg
-    cap: No misfolds, only miles — cheering at the NYC Marathon
+    cap: NYC Marathon 2025
   - src: assets/team-photos/sailhalloween2025.jpg
     cap: Minions take over the lab — Halloween 2025
   - src: assets/team-photos/yankees.jpg
-    cap: Science outreach at Yankee Stadium
+    cap: Science career day at Yankee Stadium 2026
   - src: assets/team-photos/banana.jpg
-    cap: Everything yellow — the banana lab meeting
+    cap: BANANA!!!!
   - src: assets/team-photos/MSKoutreach2026.jpg
-    cap: Sharing our science at MSK outreach night
-  - src: assets/team-photos/c4s2026.jpg
-    cap: Longest pizza on the Lower East Side
+    cap: Queens science career night 2026
   - src: assets/team-photos/rickmorty2024.jpg
-    cap: Funniest costume — MSK IGO open house
+    cap: Funniest costume @ MSK IGO open house 2024

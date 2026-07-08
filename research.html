@@ -84,7 +84,9 @@ class Component extends DCLogic {
   renderVals() {
     return {
       nav: window.SITE.navItems('research.html'),
-      intro: this.state.intro,
+      // render markdown (bold + the one link) as HTML inside each paragraph
+      intro: (this.state.intro || []).map((s) =>
+        React.createElement('span', { dangerouslySetInnerHTML: { __html: window.SITE.md(s) } })),
       funders: this.state.funders,
     };
   }
