@@ -27,7 +27,9 @@
     // --- Footer text: edit once, shows on every page. ------------------------
     footer: {
       name: 'Lareau Lab',
-      org: 'Computational and Systems Biology Program · Memorial Sloan Kettering Cancer Center',
+      // Non-breaking spaces keep "Memorial Sloan Kettering Cancer Center" together,
+      // so on narrow screens it wraps as one unit instead of orphaning "Memorial".
+      org: 'Computational and Systems Biology Program · Memorial Sloan Kettering Cancer Center',
       url: 'clareaulab.com',
     },
 
