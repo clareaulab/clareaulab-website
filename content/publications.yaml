@@ -396,7 +396,7 @@
 # Preprints
 
 # Kushal
--id: 10.64898/2026.06.12.731989
+- id: doi:10.64898/2026.06.12.731989
   image: assets/researchpngs/kushaldish.png
   buttons:
     - type: fire
