@@ -39,6 +39,13 @@ lab:
     bio: |-
       Benan is a Senior Research Technician in the Lareau lab. Prior to joining she was in the Vakoc lab at Cold Spring Harbor Laboratory investigating transcription factor dependencies in cancer. Benan completed her bachelors in Molecular, Cellular, and Developmental Biology with a minor in Physics from the University of Washington. In her free time she enjoys baking &nbsp; :cookie: :cake: :bread: &nbsp;!
 
+  - name: Betty Li
+    role: Research Technician
+    img: assets/headshots/betty-li.jpg
+    bio: |-
+      Betty Li is a Research Technician in the Lareau Lab. Betty grew up in Beijing and completed her Bachelor's degree in Computer Science and Biology at New York University. She did her undergraduate research with Dr. Nathaniel Landau, studying engineered dendritic cell–based immunotherapies for cancer. Outside of lab, Betty enjoys playing table tennis:table_tennis_paddle_and_ball:, climbing :woman_climbing:, and food hunting in the city :shallow_pan_of_food:.
+
+
   - name: Arthur Chow
     role: Postdoctoral Fellow
     img: assets/headshots/arthur-chow.jpg
@@ -94,22 +101,17 @@ lab:
       Hoyin Chu is a PhD student in the Tri-I Computational Biology and Medicine Program. After graduating from Northeastern University with a B.S. in Computer Science and Mathematics, Hoyin worked at Dana-Farber Cancer Institute as a computational biologist with research focusing on cancer genomics before joining the lab. When he is not in the lab, Hoyin enjoys rock climbing and playing rhythm games 🎼.
 
   - name: Cole Honeycutt
-    role: MD/PhD Student
+    role: Graduate Student
     img: assets/headshots/cole-honeycutt.jpg
     bio: |-
       Cole is an MD-PhD student in the Weill Cornell/Rockefeller/MSK Tri-Institutional MD-PhD Program. Originally from North Carolina, he completed his bachelor’s degree at Duke University, where he studied G protein-coupled receptor signaling. After graduation, Cole moved to Washington, DC to work at the NIH Vaccine Research Center on COVID-19 vaccines. Outside of lab, you can find Cole running around Central Park and the streets of New York or playing tennis &nbsp; :tennis: !
 
   - name: Laura Kida
-    role: MD/PhD Student
+    role: Graduate Student
     img: assets/headshots/laura-kida.jpg
     bio: |-
       Laura is a Boehringer-Ingelheim MD/PhD Fellow in the Lareau Lab. She is completing her medical degree at Charité in Berlin, Germany, where she investigates immunological alterations in microglia after subarachnoid hemorrhage. When she’s not in the lab, you can find Laura either having quesadillas or drawing/painting &nbsp; :art: &nbsp; inspired by her latest walk through NYC.
 
-  - name: Betty Li
-    role: Research Technician
-    img: assets/headshots/betty-li.jpg
-    bio: |-
-      Betty Li is a Research Technician in the Lareau Lab. Betty grew up in Beijing and completed her Bachelor's degree in Computer Science and Biology at New York University. She did her undergraduate research with Dr. Nathaniel Landau, studying engineered dendritic cell–based immunotherapies for cancer. Outside of lab, Betty enjoys playing table tennis:table_tennis_paddle_and_ball:, climbing :woman_climbing:, and food hunting in the city :shallow_pan_of_food:.
 
 comentored:
   - name: Sherry Nyeo
@@ -128,7 +130,7 @@ comentored:
     role: Graduate Student
     img: assets/headshots/victory-yinka-banjo.jpeg
     bio: |-
-      Victory is a PhD student in the Tri-Institutional Program in Computational Biology & Medicine. She completed her bachelor's degree at MIT, majoring in Computer Science & Molecular Biology. As an undergraduate researcher, Victory worked on engineering an epigenetic CRISPR system and on imaging analysis for metabolic diseases. She is currently co-advised by the Lareau Lab and the Wilkinson Lab at MSK, and hopes to spend her PhD investigating systems that can power genomic medicines using a combination of computational, molecular, and structural biology techniques. Beyond science, you can likely find Victory on Beli ranking new foods, strength training, reading, running, dabbling in spoken word poetry, or exploring whatever NYC has to offer, especially Broadway!
+      Victory is a PhD student in the Tri-Institutional Program in Computational Biology & Medicine. She completed her bachelor's degree at MIT, majoring in Computer Science & Molecular Biology. As an undergraduate researcher, Victory worked on engineering an epigenetic CRISPR system and on imaging analysis for metabolic diseases. She is currently co-advised by the Lareau Lab and the [Wilkinson Lab](https://wilkinsonlab.bio/) at MSK, and hopes to spend her PhD investigating systems that can power genomic medicines using a combination of computational, molecular, and structural biology techniques. Beyond science, you can likely find Victory on Beli ranking new foods, strength training, reading, running, dabbling in spoken word poetry, or exploring whatever NYC has to offer, especially Broadway!
     links:
       - label: LinkedIn
         href:  https://www.linkedin.com/in/victory-yinka-banjo/
