@@ -6,6 +6,10 @@
 # =============================================================================
 
 photos:
+  - src: assets/team-photos/onaboat-group.jpeg
+    cap: Cruising the Hudson with the lab fun fund, 2026
+  - src: assets/team-photos/onaboat-liberty.jpeg
+    cap: NYC views!
   - src: assets/team-photos/c4s2026.jpg
     cap: Cycle for Survival 2026
   - src: assets/team-photos/bigpizza.jpg

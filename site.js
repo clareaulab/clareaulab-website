@@ -60,17 +60,23 @@
       ':book:': '📖', ':soccer:': '⚽', ':man_juggling:': '🤹‍♂️', ':dog:': '🐶',
       ':tennis:': '🎾', ':art:': '🎨', ':airplane:': '✈️', ':hibiscus:': '🌺', ':seedling:': '🌱',
       ':blossom:': '🌼', ':four_leaf_clover:': '🍀', ':cherry_blossom:': '🌸', ':palm_tree:': '🌴',
+      ':ping_pong:': '🏓', ':table_tennis_paddle_and_ball:': '🏓', ':woman_climbing:': '🧗‍♀️',
+      ':shallow_pan_of_food:': '🥘',
     },
 
-    // Team bios: plain text. Emoji shortcodes become emoji; markdown links and
-    // _italics_ are stripped to plain text (the Team modal shows bios as text).
+    // Team bios: light markdown -> HTML (the Team modal renders the result as
+    // HTML). Emoji shortcodes become emoji; markdown [links](url) become <a>
+    // tags and _italics_ become <em>. Plain text is HTML-escaped first so it
+    // renders safely.
     clean: function (t) {
       var s = (t || '').replace(/\s+/g, ' ');
       s = s.replace(/&nbsp;/g, ' ');
-      s = s.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+      s = s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
       var EMO = SITE.EMOJI;
       Object.keys(EMO).forEach(function (k) { s = s.split(k).join(EMO[k]); });
-      s = s.replace(/_([^_\n]+)_/g, '$1');
+      s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g,
+        '<a href="$2" target="_blank" rel="noopener" style="color:#0091c7;border-bottom:1px solid rgba(0,145,199,.35)">$1</a>');
+      s = s.replace(/_([^_\n]+)_/g, '<em>$1</em>');
       s = s.replace(/ ([!.,?])/g, '$1');
       return s.replace(/\s{2,}/g, ' ').trim();
     },
