@@ -1,0 +1,75 @@
+<!--
+  site-footer.dc.html — the shared site footer, used by every page.
+
+  It is a Design Component: any page that writes <site-footer></site-footer>
+  causes the runtime to fetch this file and render it in place. Use
+  <site-footer variant="home"></site-footer> for the wider Home content column.
+
+  The footer TEXT (lab name, org line, url) lives in site.js (window.SITE.footer)
+  so it stays edited in one place; this file only owns the footer's markup/style.
+
+  It also hosts the site's Light / Dark / Auto control. The control only sets
+  window.SITE.theme; every colour on the site resolves through the custom
+  properties at the top of styles.css.
+-->
+<x-dc>
+<div class="{{ wrapClass }}" style="{{ wrapStyle }}">
+  <div style="{{ innerStyle }}">
+    <div>
+      <div style="{{ nameStyle }}">{{ name }}</div>
+      <div style="{{ orgStyle }}">{{ org }}</div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
+      <div class="theme-switch" role="group" aria-label="Colour theme">
+        <sc-for list="{{ modes }}" as="m" hint-placeholder-count="3">
+          <button type="button" onClick="{{ m.onClick }}" aria-pressed="{{ m.active }}" title="{{ m.title }}">{{ m.label }}</button>
+        </sc-for>
+      </div>
+      <div style="{{ urlStyle }}">{{ url }}</div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { mode: 'auto' };
+
+  componentDidMount() {
+    if (!window.SITE || !window.SITE.theme) return;
+    this.setState({ mode: window.SITE.theme.mode });
+    this._off = window.SITE.onTheme((mode) => this.setState({ mode }));
+  }
+
+  componentWillUnmount() { if (this._off) this._off(); }
+
+  renderVals() {
+    const f = (window.SITE && window.SITE.footer) || {};
+    const home = this.props.variant === 'home';
+    const mode = this.state.mode;
+
+    return {
+      name: f.name, org: f.org, url: f.url,
+      modes: [
+        { key: 'light', label: 'Light', title: 'Always light' },
+        { key: 'dark', label: 'Dark', title: 'Always dark' },
+        { key: 'auto', label: 'Auto', title: 'Follow this device' },
+      ].map(m => ({
+        label: m.label,
+        title: m.title,
+        active: mode === m.key ? 'true' : 'false',
+        onClick: () => window.SITE.theme.set(m.key),
+      })),
+      wrapClass: home ? 'home-pad' : '',
+      wrapStyle: home
+        ? { position: 'relative', background: 'var(--footer-bg-home)', color: 'var(--footer-text)', paddingTop: '48px', paddingBottom: '48px', overflow: 'hidden' }
+        : { background: 'var(--footer-bg)', color: 'var(--footer-text)', padding: '44px 0' },
+      innerStyle: home
+        ? { maxWidth: '1200px', margin: '0 auto', position: 'relative', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: '24px', flexWrap: 'wrap' }
+        : { maxWidth: '1120px', margin: '0 auto', padding: '0 32px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: '24px', flexWrap: 'wrap' },
+      nameStyle: { fontFamily: "'Space Grotesk', sans-serif", fontSize: '22px', fontWeight: 500, color: home ? 'var(--footer-name-home)' : 'var(--footer-name)' },
+      orgStyle: { fontSize: '14px', color: 'var(--footer-org)', marginTop: '6px' },
+      urlStyle: { fontFamily: "'Space Mono', monospace", fontSize: '12px', color: 'var(--footer-url)' },
+    };
+  }
+}
+</script>

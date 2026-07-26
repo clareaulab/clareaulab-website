@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lareau Lab | Home</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=20260725">
+<link rel="icon" type="image/png" href="assets/icon.png">
+<link rel="apple-touch-icon" href="assets/icon.png">
+<script>(function(){try{var m=localStorage.getItem('lareau-theme')||'auto';var d=m==='dark'||(m==='auto'&&window.matchMedia('(prefers-color-scheme: dark)').matches);var r=document.documentElement;r.setAttribute('data-theme',d?'dark':'light');r.setAttribute('data-theme-mode',m);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
+<script src="./support.js"></script>
+<script src="./site.js?v=20260707"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css?v=20260707">
+<script src="./backsplash-engine.js?v=20260726"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--page-bg); font-family: 'Hanken Grotesk', system-ui, sans-serif; -webkit-font-smoothing: antialiased; color: var(--ink); }
+  a { text-decoration: none; color: inherit; }
+  /* photo reel: draggable / scrollable, with the scrollbar hidden */
+  #reel { overscroll-behavior-x: contain; cursor: grab; user-select: none; scrollbar-width: none; -ms-overflow-style: none; }
+  #reel::-webkit-scrollbar { display: none; height: 0; }
+  #reel img { pointer-events: none; -webkit-user-drag: none; }
+</style>
+</helmet>
+
+<div style="width: 100%; overflow-x: hidden;">
+
+  <!-- ============ TOOLBAR ============ -->
+  <div style="position: sticky; top: 0; z-index: 20; backdrop-filter: blur(12px); background: var(--nav-bg); border-bottom: 1px solid var(--line);">
+    <div class="nav-inner home-pad" style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding-top: 20px; padding-bottom: 20px;">
+      <img class="site-logo" src="assets/logo.svg" alt="Lareau Lab" style="height: 30px; width: auto;">
+      <label class="nav-toggle" aria-label="Toggle menu"><input type="checkbox" class="nav-toggle-cb"></label>
+      <nav class="nav-links">
+        <sc-for list="{{ nav }}" as="item" hint-placeholder-count="6">
+          <a href="{{ item.href }}" style="{{ item.style }}">{{ item.label }}</a>
+        </sc-for>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ============ HERO ============ -->
+  <section style="position: relative; width: 100%; overflow: hidden; background: var(--page-bg-flat);">
+    <canvas data-backsplash="home" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block;"></canvas>
+    <div class="home-pad" style="position: relative; z-index: 3; max-width: 1200px; margin: 0 auto; width: 100%; min-height: clamp(380px, 56vh, 540px); display: flex; flex-direction: column; justify-content: center;">
+      <h1 style="font-family: 'Space Grotesk', sans-serif; font-weight: 400; font-size: clamp(42px, 8.5vw, 96px); line-height: 1; letter-spacing: -.03em; color: var(--ink); margin: 0;">Lareau Lab @ MSKCC</h1>
+      <div style="font-family: 'Space Mono', monospace; font-size: clamp(12px, 1.5vw, 15px); letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin-top: 20px;">Computational and Systems Immunology</div>
+    </div>
+  </section>
+
+  <!-- ============ CONTENT ============ -->
+  <div class="home-pad" style="max-width: 1200px; margin: 0 auto;">
+
+    <!-- news teasers -->
+    <div style="padding: 64px 0 12px; display: flex; align-items: baseline; justify-content: space-between;">
+      <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent);">Recent news</span>
+      <a href="news.html" style="font-family: 'Space Mono', monospace; font-size: 12px; color: var(--pill-fg);">all news &rarr;</a>
+    </div>
+    <div style="padding: 6px 0 56px;">
+      <sc-for list="{{ teasers }}" as="item" hint-placeholder-count="3">
+        <a href="news.html" class="teaser-row" style="padding: 18px 0; border-top: 1px solid var(--line-2);">
+          <span style="font-family: 'Space Mono', monospace; font-size: 13px; color: var(--muted);">{{ item.date }}</span>
+          <span style="font-family: 'Space Grotesk', sans-serif; font-size: 19px; font-weight: 400; color: var(--ink-2);">{{ item.title }}</span>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- photo reel -->
+  <div class="home-pad" style="max-width: 1200px; margin: 0 auto; padding-top: 8px; padding-bottom: 14px;">
+    <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent);">Life in the lab &middot; New York City</span>
+  </div>
+  <div id="reel" style="overflow-x: auto; overflow-y: hidden; padding: 6px 0 64px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);">
+    <div style="display: flex; gap: 18px; width: max-content;">
+      <sc-for list="{{ photos }}" as="item" hint-placeholder-count="3">
+        <figure class="reel-figure" style="margin: 0; flex: 0 0 auto;">
+          <div class="reel-frame">
+            <img class="reel-bg" src="{{ item.src }}" alt="" aria-hidden="true">
+            <img class="reel-fg" src="{{ item.src }}" alt="{{ item.cap }}">
+          </div>
+          <figcaption style="font-family: 'Space Mono', monospace; font-size: 12px; color: var(--muted); margin-top: 10px;">{{ item.cap }}</figcaption>
+        </figure>
+      </sc-for>
+      <sc-for list="{{ photos }}" as="item" hint-placeholder-count="3">
+        <figure class="reel-figure" style="margin: 0; flex: 0 0 auto;">
+          <div class="reel-frame">
+            <img class="reel-bg" src="{{ item.src }}" alt="" aria-hidden="true">
+            <img class="reel-fg" src="{{ item.src }}" alt="{{ item.cap }}">
+          </div>
+          <figcaption style="font-family: 'Space Mono', monospace; font-size: 12px; color: var(--muted); margin-top: 10px;">{{ item.cap }}</figcaption>
+        </figure>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- footer (shared component: site-footer.dc.html) -->
+  <dc-import name="site-footer" variant="home"></dc-import>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { teasers: [], photos: [] };
+
+  componentWillUnmount() { this._reelStop = true; }
+
+  // Photo reel: auto-scrolls when idle, but follows the user's drag (mouse),
+  // touch, trackpad, or wheel — and loops seamlessly.
+  _setupReel() {
+    const reel = document.getElementById('reel');
+    if (!reel || reel._wired) return;
+    reel._wired = true;
+    this._reelStop = false;
+
+    // one loop period = distance from a photo to its duplicate, so wrapping by
+    // it is invisible (the two photo sets are identical).
+    const period = () => {
+      const track = reel.firstElementChild;
+      const figs = track ? track.children : [];
+      const n = this.state.photos.length;
+      if (!n || figs.length < n * 2) return 0;
+      return figs[n].offsetLeft - figs[0].offsetLeft;
+    };
+    const wrap = () => {
+      const p = period();
+      if (p <= 0) return;
+      if (reel.scrollLeft >= p) reel.scrollLeft -= p;
+      else if (reel.scrollLeft <= 0) reel.scrollLeft += p;
+    };
+
+    let lastInteract = -1e9;
+    const bump = () => { lastInteract = performance.now(); };
+
+    // click-and-drag with a mouse (touch & trackpad use native scrolling)
+    let dragging = false, startX = 0, startScroll = 0;
+    reel.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      dragging = true; startX = e.clientX; startScroll = reel.scrollLeft;
+      reel.setPointerCapture(e.pointerId);
+      reel.style.cursor = 'grabbing';
+      bump();
+    });
+    reel.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      reel.scrollLeft = startScroll - (e.clientX - startX);
+      wrap(); bump();
+    });
+    const endDrag = (e) => {
+      if (!dragging) return;
+      dragging = false;
+      reel.style.cursor = 'grab';
+      try { reel.releasePointerCapture(e.pointerId); } catch (_) {}
+      bump();
+    };
+    reel.addEventListener('pointerup', endDrag);
+    reel.addEventListener('pointercancel', endDrag);
+
+    // yield to any native scroll / wheel / touch, and keep the loop seamless
+    reel.addEventListener('scroll', wrap, { passive: true });
+    reel.addEventListener('wheel', bump, { passive: true });
+    reel.addEventListener('touchstart', bump, { passive: true });
+    reel.addEventListener('touchmove', bump, { passive: true });
+
+    // gentle auto-scroll while the user isn't touching it
+    const speed = 0.5;
+    const tick = () => {
+      if (this._reelStop) return;
+      if (!dragging && performance.now() - lastInteract > 1400) {
+        reel.scrollLeft += speed;
+        wrap();
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  async _loadContent() {
+    try {
+      const [home, news] = await Promise.all([
+        window.SITE.loadYaml('content/home.yaml'),
+        window.SITE.loadYaml('content/news.yaml'),
+      ]);
+      // "Recent news" = the 3 most recent entries from news.yaml.
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const teasers = (news || [])
+        .slice()
+        .sort((a, b) => String(b.date).localeCompare(String(a.date)))
+        .slice(0, 3)
+        .map(n => {
+          const [y, m] = String(n.date).split('-');
+          return { date: months[parseInt(m, 10) - 1] + ' ' + y, title: n.title };
+        });
+      this.setState({ teasers, photos: (home && home.photos) || [] });
+    } catch (e) { console.error('Failed to load home content:', e); }
+  }
+
+  renderVals() {
+    return {
+      nav: window.SITE.navItems('./'),
+      teasers: this.state.teasers,
+      photos: this.state.photos,
+    };
+  }
+
+  componentDidMount() {
+    this._loadContent();
+    this._setupReel();
+  }
+}
+</script>
+</body>
+</html>

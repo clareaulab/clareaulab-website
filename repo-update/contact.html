@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lareau Lab | Contact</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=20260725">
+<link rel="icon" type="image/png" href="assets/icon.png">
+<link rel="apple-touch-icon" href="assets/icon.png">
+<script>(function(){try{var m=localStorage.getItem('lareau-theme')||'auto';var d=m==='dark'||(m==='auto'&&window.matchMedia('(prefers-color-scheme: dark)').matches);var r=document.documentElement;r.setAttribute('data-theme',d?'dark':'light');r.setAttribute('data-theme-mode',m);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
+<script src="./support.js"></script>
+<script src="./site.js?v=20260707"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css?v=20260707">
+<script src="./backsplash-engine.js?v=20260726"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--page-bg); font-family: 'Hanken Grotesk', system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  a { text-decoration: none; color: inherit; }
+</style>
+</helmet>
+
+<div style="min-height: 100vh;">
+
+  <!-- nav -->
+  <div style="position: sticky; top: 0; z-index: 20; backdrop-filter: blur(12px); background: var(--nav-bg); border-bottom: 1px solid var(--line);">
+    <div class="nav-inner" style="max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 20px 32px;">
+      <a href="./"><img class="site-logo" src="assets/logo.svg" alt="Lareau Lab" style="height: 30px; width: auto;"></a>
+      <label class="nav-toggle" aria-label="Toggle menu"><input type="checkbox" class="nav-toggle-cb"></label>
+      <nav class="nav-links">
+        <sc-for list="{{ nav }}" as="item" hint-placeholder-count="6">
+          <a href="{{ item.href }}" style="{{ item.style }}">{{ item.label }}</a>
+        </sc-for>
+      </nav>
+    </div>
+  </div>
+
+  <!-- hero: full-bleed skyline splash with the page title overlaid -->
+  <section style="position: relative; width: 100%; overflow: hidden; background: var(--page-bg-flat);">
+    <canvas data-backsplash="contact" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block;"></canvas>
+    <div style="position: relative; max-width: 1120px; margin: 0 auto; min-height: clamp(380px, 56vh, 540px); display: flex; flex-direction: column; justify-content: center; padding: 32px;">
+      <h1 class="page-title" style="font-family: 'Space Grotesk', sans-serif; font-weight: 400; line-height: 1.02; letter-spacing: -.02em; margin: 0;">Contact</h1>
+    </div>
+  </section>
+
+  <!-- content -->
+  <div style="max-width: 1120px; margin: 0 auto; padding: 8px 32px 100px;">
+
+    <!-- upcoming events -->
+    <div style="padding: 24px 0 8px;">
+      <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent);">Come find us at these upcoming events</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 14px; padding: 8px 0 20px;">
+      <sc-for list="{{ events }}" as="e" hint-placeholder-count="2">
+        <a href="{{ e.href }}" target="_blank" rel="noopener" style="display: block; background: var(--card); border: 1px solid var(--line-2); border-radius: 20px; padding: 20px 24px;" style-hover="border: 1px solid var(--accent-strong); box-shadow: 0 16px 34px -26px var(--shadow); transform: translateY(-2px);">
+          <div style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .06em; color: var(--accent); margin-bottom: 8px;">{{ e.date }}</div>
+          <div style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 22px; line-height: 1.2; color: var(--ink-2);">{{ e.name }}</div>
+          <div style="font-size: 15px; color: var(--muted); margin-top: 6px;">{{ e.location }}</div>
+        </a>
+      </sc-for>
+    </div>
+
+    <!-- lab address + contact -->
+    <div style="padding: 28px 0 8px;">
+      <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent);">Lab address</span>
+    </div>
+    <div class="contact-grid" style="padding: 8px 0 0;">
+      <div style="background: var(--card); border: 1px solid var(--line-2); border-radius: 20px; padding: 26px 28px; display: flex; flex-direction: column; justify-content: space-between; gap: 22px;">
+        <div style="font-size: 16px; line-height: 1.75; color: var(--body);">
+          <sc-for list="{{ address }}" as="line" hint-placeholder-count="5">
+            <div>{{ line }}</div>
+          </sc-for>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+          <a href="{{ emailHref }}" style="display: inline-flex; align-items: center; gap: 8px; background: var(--btn-bg); color: var(--btn-fg); font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: .04em; padding: 12px 20px; border-radius: 999px; border: 1px solid var(--ink);" style-hover="background: var(--ink-2);">
+            <span style="font-size: 14px;">✉</span> Email Caleb
+          </a>
+          <sc-if value="{{ hasPhone }}" hint-placeholder-val="{{ false }}">
+            <div style="font-family: 'Space Mono', monospace; font-size: 13px; color: var(--muted);">T: {{ phone }}</div>
+          </sc-if>
+        </div>
+      </div>
+      <sc-if value="{{ hasPhoto }}" hint-placeholder-val="{{ false }}">
+        <img src="{{ photo }}" alt="{{ photoAlt }}" onError="{{ hideImg }}" style="width: 100%; height: 100%; min-height: 260px; object-fit: cover; border-radius: 20px; display: block; border: 1px solid var(--line-2);">
+      </sc-if>
+    </div>
+  </div>
+
+  <!-- footer (shared component: site-footer.dc.html) -->
+  <dc-import name="site-footer"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { events: [], address: [], email: '', phone: '', photo: '', photoAlt: '' };
+
+  async componentDidMount() {
+    try {
+      const d = await window.SITE.loadYaml('content/contact.yaml');
+      this.setState({
+        events: d.events || [],
+        address: d.address || [],
+        email: d.email || '',
+        phone: d.phone || '',
+        photo: d.photo || '',
+        photoAlt: d.photoAlt || '',
+      });
+    } catch (e) { console.error('Failed to load contact content:', e); }
+  }
+
+  renderVals() {
+    return {
+      nav: window.SITE.navItems('contact.html'),
+      events: this.state.events,
+      address: this.state.address,
+      emailHref: this.state.email ? ('mailto:' + this.state.email) : '#',
+      phone: this.state.phone,
+      hasPhone: !!this.state.phone,
+      photo: this.state.photo,
+      photoAlt: this.state.photoAlt,
+      hasPhoto: !!this.state.photo,
+      // Hide the image gracefully until the photo file is added to assets/.
+      hideImg: (e) => { e.target.style.display = 'none'; },
+    };
+  }
+}
+</script>
+</body>
+</html>
