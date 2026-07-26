@@ -59,7 +59,7 @@ lab:
 
   - name: Konstantin Helmsauer
     role: Postdoctoral Fellow
-    img: assets/headshots/konstantin-helmsauer.jpg
+    img: assets/headshots/konstantin-helmsauer.png
     bio: |-
       Konstantin is a Research Fellow at MSK, a computational biologist and a resident in Pediatric Oncology at Charité – Universitätsmedizin Berlin. He studied medicine at Charité after an undergraduate degree in cognitive science at Eberhard Karls University Tübingen. During his doctoral work with Anton Henssen, he explored the structure and chromatin landscape of extrachromosomal DNA in neuroblastoma.
 
@@ -107,7 +107,7 @@ lab:
 
   - name: Betty Li
     role: Research Technician
-    img: assets/headshots/erica-sun.jpg
+    img: assets/headshots/betty-li.jpg
     bio: |-
       Betty Li is a Research Technician in the Lareau Lab. Betty grew up in Beijing and completed her Bachelor's degree in Computer Science and Biology at New York University. She did her undergraduate research with Dr. Nathaniel Landau, studying engineered dendritic cell–based immunotherapies for cancer. Outside of lab, Betty enjoys playing table tennis:table_tennis_paddle_and_ball:, climbing :woman_climbing:, and food hunting in the city :shallow_pan_of_food:.
 

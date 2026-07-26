@@ -380,20 +380,29 @@
       link: https://clareaulab.com/publications/?search=featured
      
 
-####
-# Preprints
-
-#Vincent
 - id: doi:10.1101/2025.07.16.665245
   image: assets/researchpngs/vincentmyeloid.png
   buttons:
     - type: paper
       text: PDF
-      link: https://www.biorxiv.org/content/10.1101/2025.07.16.665245v1.full.pdf
+      link: https://clareaulab.github.io/pdfs/Liu-CancerCell-2026.pdf
+    - type: featured
+      text: Featured
+      link: https://clareaulab.com/publications/?search=featured
+
+
+
+####
+# Preprints
+
+# Kushal
+-id: 10.64898/2026.06.12.731989
+  image: assets/researchpngs/kushaldish.png
+  buttons:
     - type: fire
       text: Preprint
       link: https://clareaulab.com/publications/?search=preprint
-
+      
 
 # Logan
 - id: doi:10.1101/2024.07.30.605881
