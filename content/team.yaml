@@ -135,6 +135,12 @@ comentored:
       - label: LinkedIn
         href:  https://www.linkedin.com/in/victory-yinka-banjo/
 
+  - name: Ayush Deep
+    role: Graduate Student
+    img: assets/headshots/ayush-deep.jpg
+    bio: |-
+      Ayush is a PhD student in the Cancer Biology program at the GSK Graduate School of Biomedical Sciences. He completed his undergraduate degree in Pharmaceutical Sciences at Albany College of Pharmacy, then earned his Master's degree in Molecular and Structural Biology at ETH Zurich, where he studied ribosomal structural biology and the molecular dynamics of macrocycles. Ayush is co-mentored by the [Chodera Lab](https://www.choderalab.org/), and his current research focuses on using molecular dynamics to improve protein design methods. Outside of lab, Ayush enjoys playing guitar and bass 🎸, cooking 🍲, watching soccer ⚽, and eating his way through all five boroughs of NYC 🍴.
+
   - name: Paul Klauser
     role: Postdoctoral Fellow
     img: assets/headshots/paul-klauser.jpg
@@ -147,7 +153,7 @@ comentored:
     bio: |-
       Erica Sun is a Hematology-Oncology Clinical Fellow at Memorial Sloan Kettering Cancer Center. Prior to embarking on a medical career, she studied epigenetic dysregulation in acute leukemias as a graduate student at University of Michigan. She then completed her medical school training at Johns Hopkins University and residency at Weill Cornell Medicine. Erica's basic-science research during her clinical training is co-supervised by [Dr. Katherine Hsu](https://www.mskcc.org/research-areas/labs/katharine-hsu). Outside of lab, you can find Erica jogging along the East River, listening to audible books, and enjoying being an amateur pianist.
 
-        
+
 alumni:
   - name: Emma Tran
     role: '2024'
