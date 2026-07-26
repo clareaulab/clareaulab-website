@@ -21,6 +21,11 @@
   * { box-sizing: border-box; }
   body { margin: 0; background: linear-gradient(180deg, #eafff5 0%, #e6f9ff 40%, #f4fbff 100%); font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #0f2a3f; -webkit-font-smoothing: antialiased; }
   a { text-decoration: none; color: inherit; }
+  /* On phones the wide illustration crops too tightly — shorten the hero so
+     more of it shows (less zoomed in). */
+  @media (max-width: 640px) {
+    .hero-inner { min-height: 190px !important; }
+  }
 </style>
 </helmet>
 
@@ -44,7 +49,7 @@
     <img src="assets/banners/anniversary-1year.png" alt="Hand-drawn Happy 1st Anniversary Lareau Lab illustration with two cats" decoding="async"
          style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center;">
     <div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(238,255,245,.92) 0%, rgba(238,255,245,.62) 30%, rgba(238,255,245,.12) 60%, rgba(238,255,245,0) 84%);"></div>
-    <div style="position: relative; max-width: 1120px; margin: 0 auto; min-height: clamp(300px, 44vh, 460px); display: flex; flex-direction: column; justify-content: center; padding: 32px;">
+    <div class="hero-inner" style="position: relative; max-width: 1120px; margin: 0 auto; min-height: clamp(300px, 44vh, 460px); display: flex; flex-direction: column; justify-content: center; padding: 32px;">
       <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #0091c7;">Lab notebook</span>
       <h1 class="page-title" style="font-family: 'Space Grotesk', sans-serif; font-weight: 400; line-height: 1.02; letter-spacing: -.02em; margin: 16px 0 0;">News</h1>
     </div>
