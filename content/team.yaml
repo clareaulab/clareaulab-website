@@ -28,8 +28,8 @@ lab:
     links:
       - label: CV
         href: https://clareaulab.github.io/pdfs/cv/Lareau_CV.pdf
-      - label: Bluesky
-        href: https://bsky.app/profile/caleblareau.bsky.social
+      - label: Twitter
+        href: https://x.com/caleblareau
       - label: GitHub
         href: https://github.com/caleblareau
 
@@ -52,10 +52,16 @@ lab:
       Erin Cumming is a Research Fellow in the Lareau Lab at MSK. Hailing from Scotland, she completed her bachelor’s degree in Molecular Genetics at the University of Dundee, with a brief period spent working at Charles River, where she engaged in in vitro toxicology assay development. During her Ph.D. in Cancer Research and Precision Oncology from the CRUK Scotland Institute (formerly Beatson Institute for Cancer Research, University of Glasgow), she investigated the role of the sialoglycoprotein Podocalyxin in colorectal cancer before transitioning to another lab within the same institute for a short post-doc focusing on GSK3β treatment resistance in pancreatic cancer. Beyond science, Erin finds comfort in the great outdoors. While still exploring her varied interests, she harbors a keen enthusiasm for new experiences and is constantly seeking to broaden her view of the world 🌎!
 
   - name: Joseph Palmeri
-    role: Research Scholar
+    role: Postdoctoral Fellow
     img: assets/headshots/joseph-palmeri.jpg
     bio: |-
       Joseph Palmeri is a Research Scholar in the Lareau Lab at MSK. He completed his bachelor’s degree in Chemical Engineering at Case Western Reserve University in Cleveland, Ohio before pursuing his Ph.D. in Chemical Engineering at the Massachusetts Institute of Technology. During his Ph.D., he worked under K. Dane Wittrup to develop collagen anchoring agonist antibodies targeting T cell co-stimulatory receptors as a novel cancer immunotherapeutic strategy. In his free time, Joseph enjoys running around Roosevelt Island 🏃🏻 ➡️, cooking new recipes 🍝, pub trivia 🍻, and the Buffalo Bills 🏈.
+
+  - name: Konstantin Helmsauer
+    role: Postdoctoral Fellow
+    img: assets/headshots/konstantin-helmsauer.jpg
+    bio: |-
+      Konstantin is a Research Fellow at MSK, a computational biologist and a resident in Pediatric Oncology at Charité – Universitätsmedizin Berlin. He studied medicine at Charité after an undergraduate degree in cognitive science at Eberhard Karls University Tübingen. During his doctoral work with Anton Henssen, he explored the structure and chromatin landscape of extrachromosomal DNA in neuroblastoma.
 
   - name: Abi Dozic
     role: Graduate Student
@@ -94,10 +100,16 @@ lab:
       Cole is an MD-PhD student in the Weill Cornell/Rockefeller/MSK Tri-Institutional MD-PhD Program. Originally from North Carolina, he completed his bachelor’s degree at Duke University, where he studied G protein-coupled receptor signaling. After graduation, Cole moved to Washington, DC to work at the NIH Vaccine Research Center on COVID-19 vaccines. Outside of lab, you can find Cole running around Central Park and the streets of New York or playing tennis &nbsp; :tennis: !
 
   - name: Laura Kida
-    role: MD Fellow
+    role: MD/PhD Student
     img: assets/headshots/laura-kida.jpg
     bio: |-
-      Laura is a Boehringer-Ingelheim MD Fellow in the Lareau Lab. She is completing her medical degree at Charité in Berlin, Germany, where she investigates immunological alterations in microglia after subarachnoid hemorrhage. When she’s not in the lab, you can find Laura either having quesadillas or drawing/painting &nbsp; :art: &nbsp; inspired by her latest walk through NYC.
+      Laura is a Boehringer-Ingelheim MD/PhD Fellow in the Lareau Lab. She is completing her medical degree at Charité in Berlin, Germany, where she investigates immunological alterations in microglia after subarachnoid hemorrhage. When she’s not in the lab, you can find Laura either having quesadillas or drawing/painting &nbsp; :art: &nbsp; inspired by her latest walk through NYC.
+
+  - name: Betty Li
+    role: Research Technician
+    img: assets/headshots/erica-sun.jpg
+    bio: |-
+      Betty Li is a Research Technician in the Lareau Lab. Betty grew up in Beijing and completed her Bachelor's degree in Computer Science and Biology at New York University. She did her undergraduate research with Dr. Nathaniel Landau, studying engineered dendritic cell–based immunotherapies for cancer. Outside of lab, Betty enjoys playing table tennis:table_tennis_paddle_and_ball:, climbing :woman_climbing:, and food hunting in the city :shallow_pan_of_food:.
 
 comentored:
   - name: Sherry Nyeo
@@ -112,6 +124,15 @@ comentored:
     bio: |-
       Austin Varela is a PhD student in the Tri-Institutional Computational Biology & Medicine program. He previously received a Biology BS and a Data Science BA from the University of Rochester where he did research on protein cooperation across mammalian evolution. Austin also received an MS in Computational Biology from Weill Cornell, where he studied cellular communication in the tumor microenvironment. Currently, Austin is interested in computational methods development with a focus on applications for understanding cancer heterogeneity. In his free time, Austin enjoys discovering new restaurants 🍴 and traveling &nbsp; :airplane: &nbsp; to explore cities. He is co-supervised with the [Laughney lab](https://laughneylab.com/) at Weill Cornell Medical School.
 
+  - name: Victory Yinka-Banjo
+    role: Graduate Student
+    img: assets/headshots/victory-yinka-banjo.jpeg
+    bio: |-
+      Victory is a PhD student in the Tri-Institutional Program in Computational Biology & Medicine. She completed her bachelor's degree at MIT, majoring in Computer Science & Molecular Biology. As an undergraduate researcher, Victory worked on engineering an epigenetic CRISPR system and on imaging analysis for metabolic diseases. She is currently co-advised by the Lareau Lab and the Wilkinson Lab at MSK, and hopes to spend her PhD investigating systems that can power genomic medicines using a combination of computational, molecular, and structural biology techniques. Beyond science, you can likely find Victory on Beli ranking new foods, strength training, reading, running, dabbling in spoken word poetry, or exploring whatever NYC has to offer, especially Broadway!
+    links:
+      - label: LinkedIn
+        href:  https://www.linkedin.com/in/victory-yinka-banjo/
+
   - name: Paul Klauser
     role: Postdoctoral Fellow
     img: assets/headshots/paul-klauser.jpg
@@ -124,6 +145,7 @@ comentored:
     bio: |-
       Erica Sun is a Hematology-Oncology Clinical Fellow at Memorial Sloan Kettering Cancer Center. Prior to embarking on a medical career, she studied epigenetic dysregulation in acute leukemias as a graduate student at University of Michigan. She then completed her medical school training at Johns Hopkins University and residency at Weill Cornell Medicine. Erica's basic-science research during her clinical training is co-supervised by [Dr. Katherine Hsu](https://www.mskcc.org/research-areas/labs/katharine-hsu). Outside of lab, you can find Erica jogging along the East River, listening to audible books, and enjoying being an amateur pianist.
 
+        
 alumni:
   - name: Emma Tran
     role: '2024'
