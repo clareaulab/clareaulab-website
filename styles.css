@@ -1,4 +1,111 @@
 /* ===========================================================================
+   Theme tokens. Every colour on the site resolves through one of these.
+   <html data-theme="light|dark"> is set by the inline bootstrap in each page's
+   <head> (before first paint, so there is no flash) and by SITE.theme.set().
+   =========================================================================== */
+:root, :root[data-theme="light"] {
+  color-scheme: light;
+  --page-bg: linear-gradient(180deg, #eafff5 0%, #e6f9ff 40%, #f4fbff 100%);
+  --page-bg-flat: #f2f8fc;
+  --ink: #0f2a3f;
+  --ink-2: #16324a;
+  --body: #33566f;
+  --muted: #6a8296;
+  --accent: #0091c7;
+  --accent-strong: rgba(0,145,199,.55);
+  --accent-line: rgba(0,145,199,.35);
+  --accent-soft: rgba(0,145,199,.12);
+  --line: rgba(57,99,175,.12);
+  --line-soft: rgba(57,99,175,.1);
+  --line-2: rgba(57,99,175,.14);
+  --line-3: rgba(57,99,175,.16);
+  --line-4: rgba(57,99,175,.2);
+  --line-5: rgba(57,99,175,.24);
+  --nav-bg: rgba(244,251,255,.72);
+  --nav-panel: rgba(244,251,255,.98);
+  --bar-bg: rgba(240,248,252,.92);
+  --card: rgba(255,255,255,.62);
+  --card-soft: rgba(255,255,255,.5);
+  --card-solid: #fff;
+  --logo-card: #fff;              /* stays white in both themes: journal covers
+                                     and funder logos are dark-on-white art */
+  --modal-bg: #fff;
+  --overlay: rgba(9,26,42,.55);
+  --shadow: rgba(20,50,80,.7);
+  --shadow-lg: rgba(10,30,55,.6);
+  --btn-bg: #0f2a3f;
+  --btn-fg: #f4fbff;
+  --pill-fg: #24425c;
+  --pill-active-bg: #0f2a3f;
+  --pill-active-fg: #f4fbff;
+  --footer-bg: #0f2a3f;
+  --footer-bg-home: #0a1830;
+  --footer-name: #eafff5;
+  --footer-name-home: #eef6ff;
+  --footer-text: #cfe6f2;
+  --footer-org: #8fb6cc;
+  --footer-url: #7fa7bf;
+  --warn: #b5502f;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page-bg: linear-gradient(180deg, #060e1c 0%, #08131f 40%, #0b1728 100%);
+  --page-bg-flat: #08131f;
+  --ink: #eaf4ff;
+  --ink-2: #dceaf7;
+  --body: #b6cfe2;
+  --muted: #7ea3bd;
+  --accent: #4fd8ff;
+  --accent-strong: rgba(127,214,255,.6);
+  --accent-line: rgba(127,214,255,.45);
+  --accent-soft: rgba(127,214,255,.14);
+  --line: rgba(127,214,255,.12);
+  --line-soft: rgba(127,214,255,.1);
+  --line-2: rgba(127,214,255,.14);
+  --line-3: rgba(127,214,255,.18);
+  --line-4: rgba(127,214,255,.22);
+  --line-5: rgba(127,214,255,.26);
+  --nav-bg: rgba(10,21,38,.78);
+  --nav-panel: rgba(10,21,38,.98);
+  --bar-bg: rgba(8,19,31,.92);
+  --card: rgba(127,214,255,.05);
+  --card-soft: rgba(127,214,255,.04);
+  --card-solid: #12233a;
+  --logo-card: #fff;
+  --modal-bg: #12233a;
+  --overlay: rgba(0,0,0,.72);
+  --shadow: rgba(0,0,0,.8);
+  --shadow-lg: rgba(0,0,0,.85);
+  --btn-bg: #7fe0ff;
+  --btn-fg: #08131f;
+  --pill-fg: #bcd6ea;
+  --pill-active-bg: #7fe0ff;
+  --pill-active-fg: #08131f;
+  --footer-bg: #050c17;
+  --footer-bg-home: #050c17;
+  --footer-name: #eaf4ff;
+  --footer-name-home: #eaf4ff;
+  --footer-text: #a9c9e2;
+  --footer-org: #7ea3bd;
+  --footer-url: #6f96b0;
+  --warn: #ff9f7a;
+}
+html { background: var(--page-bg-flat); }
+:root[data-theme="dark"] .site-logo { filter: brightness(0) invert(1); opacity: .9; }
+
+/* the footer Light / Dark / Auto control */
+.theme-switch { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px;
+  border: 1px solid rgba(127,214,255,.22); background: rgba(127,214,255,.06); }
+.theme-switch button {
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .08em;
+  text-transform: uppercase; padding: 7px 14px; border-radius: 999px; cursor: pointer;
+  border: 0; background: transparent; color: var(--footer-org); line-height: 1;
+}
+.theme-switch button:hover { color: var(--footer-name); }
+.theme-switch button[aria-pressed="true"] { background: var(--footer-name); color: var(--footer-bg); }
+@media (max-width: 640px) { .theme-switch button { padding: 8px 12px; } }
+
+/* ===========================================================================
    styles.css — shared layout + responsive rules for every page.
    Linked from each page's <helmet>. This is the ONE place that controls how
    the site reflows on tablets and phones.
@@ -119,7 +226,7 @@ html { -webkit-text-size-adjust: 100%; }
 .funder-grid { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
 .funder-cell {
   flex: 1 1 190px; max-width: 250px;
-  background: #fff; border: 1px solid rgba(57,99,175,.12); border-radius: 16px;
+  background: var(--logo-card); border: 1px solid var(--line); border-radius: 16px;
   height: 118px; display: flex; align-items: center; justify-content: center; padding: 20px 24px;
 }
 .funder-cell img { max-width: 100%; max-height: 62px; width: auto; height: auto; object-fit: contain; display: block; }

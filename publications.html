@@ -7,6 +7,7 @@
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=20260725">
 <link rel="icon" type="image/png" href="assets/icon.png">
 <link rel="apple-touch-icon" href="assets/icon.png">
+<script>(function(){try{var m=localStorage.getItem('lareau-theme')||'auto';var d=m==='dark'||(m==='auto'&&window.matchMedia('(prefers-color-scheme: dark)').matches);var r=document.documentElement;r.setAttribute('data-theme',d?'dark':'light');r.setAttribute('data-theme-mode',m);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
 <script src="./support.js"></script>
 <script src="./site.js?v=20260707"></script>
 </head>
@@ -18,15 +19,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
 <link rel="stylesheet" href="./styles.css?v=20260707">
+<script src="./backsplash-engine.js?v=20260726"></script>
 <style>
   * { box-sizing: border-box; }
-  body { margin: 0; background: linear-gradient(180deg, #eafff5 0%, #e6f9ff 40%, #f4fbff 100%); font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #0f2a3f; -webkit-font-smoothing: antialiased; }
+  body { margin: 0; background: var(--page-bg); font-family: 'Hanken Grotesk', system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
   a { text-decoration: none; color: inherit; }
   @keyframes spin { to { transform: rotate(360deg); } }
   /* On phones the wide banner crops too tightly — shorten the hero so more of
      it shows (less zoomed in). */
   @media (max-width: 640px) {
-    .hero-inner { min-height: 200px !important; }
+    .hero-inner { min-height: 320px !important; }
   }
 </style>
 </helmet>
@@ -34,9 +36,9 @@
 <div style="min-height: 100vh;">
 
   <!-- nav -->
-  <div style="position: sticky; top: 0; z-index: 20; backdrop-filter: blur(12px); background: rgba(244,251,255,.72); border-bottom: 1px solid rgba(57,99,175,.12);">
+  <div style="position: sticky; top: 0; z-index: 20; backdrop-filter: blur(12px); background: var(--nav-bg); border-bottom: 1px solid var(--line);">
     <div class="nav-inner" style="max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 20px 32px;">
-      <a href="./"><img src="assets/logo.svg" alt="Lareau Lab" style="height: 30px; width: auto;"></a>
+      <a href="./"><img class="site-logo" src="assets/logo.svg" alt="Lareau Lab" style="height: 30px; width: auto;"></a>
       <label class="nav-toggle" aria-label="Toggle menu"><input type="checkbox" class="nav-toggle-cb"></label>
       <nav class="nav-links">
         <sc-for list="{{ nav }}" as="item" hint-placeholder-count="6">
@@ -47,22 +49,19 @@
   </div>
 
   <!-- hero: full-bleed banner with the page title overlaid -->
-  <section style="position: relative; width: 100%; overflow: hidden; background: #eafff5;">
-    <img src="assets/banners/publications-banner.jpg" alt="A fanned stack of first pages from the lab's published manuscripts" decoding="async"
-         style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top;">
-    <div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(238,255,245,.94) 0%, rgba(238,255,245,.7) 30%, rgba(238,255,245,.24) 60%, rgba(238,255,245,0) 88%);"></div>
-    <div class="hero-inner" style="position: relative; max-width: 1120px; margin: 0 auto; min-height: clamp(300px, 44vh, 460px); display: flex; flex-direction: column; justify-content: center; padding: 32px;">
-      <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #0091c7;">The work</span>
-      <h1 class="page-title" style="font-family: 'Space Grotesk', sans-serif; font-weight: 400; line-height: 1.02; letter-spacing: -.02em; margin: 16px 0 0;">Publications</h1>
+  <section style="position: relative; width: 100%; overflow: hidden; background: var(--page-bg-flat);">
+    <canvas data-backsplash="pubs" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block;"></canvas>
+    <div class="hero-inner" style="position: relative; max-width: 1120px; margin: 0 auto; min-height: clamp(380px, 56vh, 540px); display: flex; flex-direction: column; justify-content: center; padding: 32px;">
+      <h1 class="page-title" style="font-family: 'Space Grotesk', sans-serif; font-weight: 400; line-height: 1.02; letter-spacing: -.02em; margin: 0;">Publications</h1>
     </div>
   </section>
 
   <!-- controls (pinned bar) -->
-  <div style="position: sticky; top: 70px; z-index: 15; background: rgba(240,248,252,.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(57,99,175,.12); box-shadow: 0 12px 24px -22px rgba(20,50,80,.6);">
+  <div style="position: sticky; top: 70px; z-index: 15; background: var(--bar-bg); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); box-shadow: 0 12px 24px -22px var(--shadow);">
     <div style="max-width: 1120px; margin: 0 auto; padding: 18px 32px 16px;">
       <div style="position: relative;">
-        <input value="{{ search }}" onInput="{{ onSearch }}" placeholder="Search by title, author, journal, year…" style="width: 100%; font-family: 'Hanken Grotesk', sans-serif; font-size: 16px; color: #0f2a3f; background: #fff; border: 1px solid rgba(57,99,175,.2); border-radius: 14px; padding: 15px 48px 15px 18px; box-shadow: 0 14px 30px -26px rgba(20,50,80,.7);">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#6a8296" stroke-width="1.8" stroke-linecap="round" style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px;"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4-4"></path></svg>
+        <input value="{{ search }}" onInput="{{ onSearch }}" placeholder="Search by title, author, journal, year…" style="width: 100%; font-family: 'Hanken Grotesk', sans-serif; font-size: 16px; color: var(--ink); background: var(--card-solid); border: 1px solid var(--line-4); border-radius: 14px; padding: 15px 48px 15px 18px; box-shadow: 0 14px 30px -26px var(--shadow);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.8" stroke-linecap="round" style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px;"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4-4"></path></svg>
       </div>
       <div style="display: flex; gap: 10px; flex-wrap: wrap; padding: 14px 0 0;">
         <sc-for list="{{ chips }}" as="c" hint-placeholder-count="3">
@@ -77,18 +76,18 @@
   <!-- status -->
   <div style="max-width: 1120px; margin: 0 auto; padding: 6px 32px;">
     <sc-if value="{{ loading }}" hint-placeholder-val="{{ true }}">
-      <div style="display: flex; align-items: center; gap: 10px; font-family: 'Space Mono', monospace; font-size: 12.5px; color: #6a8296;">
-        <span style="display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(0,145,199,.3); border-top-color: #0091c7; border-radius: 50%; animation: spin .8s linear infinite;"></span>
+      <div style="display: flex; align-items: center; gap: 10px; font-family: 'Space Mono', monospace; font-size: 12.5px; color: var(--muted);">
+        <span style="display: inline-block; width: 14px; height: 14px; border: 2px solid var(--accent-line); border-top-color: var(--accent); border-radius: 50%; animation: spin .8s linear infinite;"></span>
         Resolving citations… {{ progress }}
       </div>
     </sc-if>
     <sc-if value="{{ errored }}" hint-placeholder-val="{{ false }}">
-      <div style="font-family: 'Space Mono', monospace; font-size: 12.5px; color: #b5502f;">{{ errorMsg }}</div>
+      <div style="font-family: 'Space Mono', monospace; font-size: 12.5px; color: var(--warn);">{{ errorMsg }}</div>
     </sc-if>
     <sc-if value="{{ showCount }}" hint-placeholder-val="{{ false }}">
       <div style="text-align: center; padding: 6px 0;">
-        <div style="font-size: 16px; font-style: italic; color: #33566f;">Showing {{ filteredCount }} of {{ total }} results</div>
-        <a onClick="{{ clearSearch }}" style="display: inline-block; margin-top: 6px; font-family: 'Space Mono', monospace; font-size: 12.5px; color: #0091c7; border-bottom: 1px solid rgba(0,145,199,.35); cursor: pointer;">Clear search</a>
+        <div style="font-size: 16px; font-style: italic; color: var(--body);">Showing {{ filteredCount }} of {{ total }} results</div>
+        <a onClick="{{ clearSearch }}" style="display: inline-block; margin-top: 6px; font-family: 'Space Mono', monospace; font-size: 12.5px; color: var(--accent); border-bottom: 1px solid var(--accent-line); cursor: pointer;">Clear search</a>
       </div>
     </sc-if>
   </div>
@@ -96,25 +95,25 @@
   <!-- results -->
   <div style="max-width: 1120px; margin: 0 auto; padding: 12px 32px 100px;">
     <sc-for list="{{ groups }}" as="g" hint-placeholder-count="3">
-      <div onClick="{{ g.toggle }}" style="padding: 30px 0 6px; border-top: 1px solid rgba(57,99,175,.12); margin-top: 18px; cursor: pointer; user-select: none;" title="Click to collapse / expand">
-        <h2 style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 30px; margin: 0; color: #16324a; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">{{ g.year }} <span style="font-size: 18px; color: #6a8296; font-weight: 400;">{{ g.caret }}</span> <span style="font-family: 'Space Mono', monospace; font-size: 13px; color: #6a8296; font-weight: 400; letter-spacing: 0;">{{ g.count }}</span></h2>
+      <div onClick="{{ g.toggle }}" style="padding: 30px 0 6px; border-top: 1px solid var(--line); margin-top: 18px; cursor: pointer; user-select: none;" title="Click to collapse / expand">
+        <h2 style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 30px; margin: 0; color: var(--ink-2); display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">{{ g.year }} <span style="font-size: 18px; color: var(--muted); font-weight: 400;">{{ g.caret }}</span> <span style="font-family: 'Space Mono', monospace; font-size: 13px; color: var(--muted); font-weight: 400; letter-spacing: 0;">{{ g.count }}</span></h2>
       </div>
       <sc-if value="{{ g.open }}" hint-placeholder-val="{{ true }}">
       <div style="display: flex; flex-direction: column; gap: 14px; padding: 14px 0;">
         <sc-for list="{{ g.pubs }}" as="p" hint-placeholder-count="4">
-          <div class="pub-card" style="background: rgba(255,255,255,.62); border: 1px solid rgba(57,99,175,.14); border-radius: 18px; padding: 18px; box-shadow: 0 16px 34px -30px rgba(20,50,80,.7);">
-            <a href="{{ p.url }}" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid rgba(57,99,175,.1); border-radius: 12px; overflow: hidden; aspect-ratio: 1/1; padding: 8px;">
-              <img src="{{ p.image }}" alt="" loading="lazy" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block;">
+          <div class="pub-card" style="background: var(--card); border: 1px solid var(--line-2); border-radius: 18px; padding: 18px; box-shadow: 0 16px 34px -30px var(--shadow);">
+            <a href="{{ p.url }}" target="_blank" rel="noopener" style="display: flex; align-items: center; justify-content: center; background: var(--logo-card); border: 1px solid var(--line-soft); border-radius: 12px; overflow: hidden; aspect-ratio: 1/1; padding: 8px;">
+              <img src="{{ p.image }}" alt="" loading="lazy" onError="{{ hideImg }}" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block;">
             </a>
             <div>
-              <a href="{{ p.url }}" target="_blank" rel="noopener" style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 20px; line-height: 1.25; color: #0091c7; display: inline-block; margin-bottom: 8px;">{{ p.title }}</a>
-              <div style="font-size: 15px; line-height: 1.5; color: #33566f; margin-bottom: 8px;">{{ p.authors }}</div>
-              <div style="font-family: 'Space Mono', monospace; font-size: 12.5px; color: #6a8296; margin-bottom: 12px;">{{ p.meta }}</div>
+              <a href="{{ p.url }}" target="_blank" rel="noopener" style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 20px; line-height: 1.25; color: var(--accent); display: inline-block; margin-bottom: 8px;">{{ p.title }}</a>
+              <div style="font-size: 15px; line-height: 1.5; color: var(--body); margin-bottom: 8px;">{{ p.authors }}</div>
+              <div style="font-family: 'Space Mono', monospace; font-size: 12.5px; color: var(--muted); margin-bottom: 12px;">{{ p.meta }}</div>
               <sc-if value="{{ p.hasButtons }}" hint-placeholder-val="{{ false }}">
                 <div style="display: flex; flex-wrap: wrap; gap: 8px;">
                   <sc-for list="{{ p.buttons }}" as="b" hint-placeholder-count="3">
-                    <a href="{{ b.href }}" target="_blank" rel="noopener" onClick="{{ b.onClick }}" style="display: inline-flex; align-items: center; gap: 6px; font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: .04em; text-transform: uppercase; color: #16324a; background: #fff; border: 1px solid rgba(57,99,175,.2); border-radius: 999px; padding: 6px 12px; cursor: pointer;">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="#0091c7" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width: 13px; height: 13px;"><path d="{{ b.d }}"></path></svg>
+                    <a href="{{ b.href }}" target="_blank" rel="noopener" onClick="{{ b.onClick }}" style="display: inline-flex; align-items: center; gap: 6px; font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-2); background: var(--card-solid); border: 1px solid var(--line-4); border-radius: 999px; padding: 6px 12px; cursor: pointer;">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width: 13px; height: 13px;"><path d="{{ b.d }}"></path></svg>
                       {{ b.text }}
                     </a>
                   </sc-for>
@@ -128,7 +127,7 @@
     </sc-for>
 
     <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
-      <div style="padding: 60px 0; text-align: center; font-family: 'Space Mono', monospace; font-size: 13px; color: #6a8296;">No publications match “{{ search }}”.</div>
+      <div style="padding: 60px 0; text-align: center; font-family: 'Space Mono', monospace; font-size: 13px; color: var(--muted);">No publications match “{{ search }}”.</div>
     </sc-if>
   </div>
 
@@ -318,7 +317,7 @@ class Component extends DCLogic {
     let out = '', last = 0, m2;
     while ((m2 = re.exec(s)) !== null) {
       out += esc(s.slice(last, m2.index));
-      out += '<span style="color:#0091c7;font-weight:600;background:rgba(0,145,199,.12);border-radius:3px;padding:0 2px;">' + esc(m2[0]) + '</span>';
+      out += '<span style="color:var(--accent);font-weight:600;background:var(--accent-soft);border-radius:3px;padding:0 2px;">' + esc(m2[0]) + '</span>';
       last = m2.index + m2[0].length;
       if (m2.index === re.lastIndex) re.lastIndex++;
     }
@@ -390,6 +389,8 @@ class Component extends DCLogic {
         const authorsText = this.fmtAuthors(m.authors);
         const metaText = bits.join('  ·  ');
         return {
+      // a thumbnail that 404s hides itself instead of showing a broken icon
+      hideImg: (e) => { e.target.style.display = 'none'; },
           title: this.el(this.richHtml(titleText, q)),
           authors: q ? this.el(this.hl(authorsText, q)) : authorsText,
           meta: q ? this.el(this.hl(metaText, q)) : metaText,
@@ -416,9 +417,9 @@ class Component extends DCLogic {
           display: 'inline-flex', alignItems: 'center', gap: '8px', cursor: 'pointer',
           fontFamily: "'Space Grotesk', sans-serif", fontWeight: 500, fontSize: '14px',
           padding: '10px 18px', borderRadius: '999px',
-          color: active ? '#f4fbff' : '#16324a',
-          background: active ? '#0091c7' : '#fff',
-          border: active ? '1px solid #0091c7' : '1px solid rgba(57,99,175,.2)',
+          color: active ? 'var(--pill-active-fg)' : 'var(--ink-2)',
+          background: active ? 'var(--accent)' : 'var(--card-solid)',
+          border: active ? '1px solid var(--accent)' : '1px solid var(--line-4)',
         },
       };
     });

@@ -7,6 +7,7 @@
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=20260725">
 <link rel="icon" type="image/png" href="assets/icon.png">
 <link rel="apple-touch-icon" href="assets/icon.png">
+<script>(function(){try{var m=localStorage.getItem('lareau-theme')||'auto';var d=m==='dark'||(m==='auto'&&window.matchMedia('(prefers-color-scheme: dark)').matches);var r=document.documentElement;r.setAttribute('data-theme',d?'dark':'light');r.setAttribute('data-theme-mode',m);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
 <script src="./support.js"></script>
 <script src="./site.js?v=20260707"></script>
 </head>
@@ -17,14 +18,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./styles.css?v=20260707">
+<script src="./backsplash-engine.js?v=20260726"></script>
 <style>
   * { box-sizing: border-box; }
-  body { margin: 0; background: linear-gradient(180deg, #eafff5 0%, #e6f9ff 40%, #f4fbff 100%); font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #0f2a3f; -webkit-font-smoothing: antialiased; }
+  body { margin: 0; background: var(--page-bg); font-family: 'Hanken Grotesk', system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
   a { text-decoration: none; color: inherit; }
   /* On phones the wide illustration crops too tightly — shorten the hero so
      more of it shows (less zoomed in). */
   @media (max-width: 640px) {
-    .hero-inner { min-height: 200px !important; }
+    .hero-inner { min-height: 320px !important; }
   }
 </style>
 </helmet>
@@ -32,9 +34,9 @@
 <div style="min-height: 100vh;">
 
   <!-- nav -->
-  <div style="position: sticky; top: 0; z-index: 20; backdrop-filter: blur(12px); background: rgba(244,251,255,.72); border-bottom: 1px solid rgba(57,99,175,.12);">
+  <div style="position: sticky; top: 0; z-index: 20; backdrop-filter: blur(12px); background: var(--nav-bg); border-bottom: 1px solid var(--line);">
     <div class="nav-inner" style="max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 20px 32px;">
-      <a href="./"><img src="assets/logo.svg" alt="Lareau Lab" style="height: 30px; width: auto;"></a>
+      <a href="./"><img class="site-logo" src="assets/logo.svg" alt="Lareau Lab" style="height: 30px; width: auto;"></a>
       <label class="nav-toggle" aria-label="Toggle menu"><input type="checkbox" class="nav-toggle-cb"></label>
       <nav class="nav-links">
         <sc-for list="{{ nav }}" as="item" hint-placeholder-count="6">
@@ -45,13 +47,10 @@
   </div>
 
   <!-- hero: full-bleed splash (hand-drawn lab illustration) with the title overlaid -->
-  <section style="position: relative; width: 100%; overflow: hidden; background: linear-gradient(180deg, #eafff5 0%, #e6f9ff 100%);">
-    <img src="assets/banners/team-splash.png" alt="Hand-drawn illustration of the Lareau Lab members waving" decoding="async"
-         style="position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; object-fit: cover; object-position: left top;">
-    <div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(234,255,245,.95) 0%, rgba(234,255,245,.72) 30%, rgba(234,255,245,.25) 58%, rgba(234,255,245,0) 82%);"></div>
-    <div class="hero-inner" style="position: relative; max-width: 1120px; margin: 0 auto; min-height: clamp(320px, 46vh, 480px); display: flex; flex-direction: column; justify-content: center; padding: 32px;">
-      <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #0091c7;">The people</span>
-      <h1 class="page-title" style="font-family: 'Space Grotesk', sans-serif; font-weight: 400; line-height: 1.02; letter-spacing: -.02em; margin: 16px 0 0;">Team</h1>
+  <section style="position: relative; width: 100%; overflow: hidden; background: var(--page-bg);">
+    <canvas data-backsplash="team" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block;"></canvas>
+    <div class="hero-inner" style="position: relative; max-width: 1120px; margin: 0 auto; min-height: clamp(380px, 56vh, 540px); display: flex; flex-direction: column; justify-content: center; padding: 32px;">
+      <h1 class="page-title" style="font-family: 'Space Grotesk', sans-serif; font-weight: 400; line-height: 1.02; letter-spacing: -.02em; margin: 0;">Team</h1>
     </div>
   </section>
 
@@ -59,16 +58,16 @@
   <div style="max-width: 1120px; margin: 0 auto; padding: 24px 32px 12px;">
     <sc-for list="{{ groups }}" as="g" hint-placeholder-count="2">
       <div onClick="{{ g.toggle }}" style="padding: 24px 0 8px; cursor: pointer; user-select: none; display: flex; align-items: center; gap: 10px;" title="Click to collapse / expand">
-        <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #0091c7;">{{ g.label }}</span>
-        <span style="font-size: 12px; color: #6a8296;">{{ g.caret }}</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent);">{{ g.label }}</span>
+        <span style="font-size: 12px; color: var(--muted);">{{ g.caret }}</span>
       </div>
       <sc-if value="{{ g.open }}" hint-placeholder-val="{{ true }}">
       <div class="people-grid" style="padding: 8px 0 20px;">
         <sc-for list="{{ g.members }}" as="m" hint-placeholder-count="4">
-          <button onClick="{{ m.onClick }}" type="button" style="text-align: left; font: inherit; color: inherit; cursor: pointer; background: rgba(255,255,255,.6); border: 1px solid rgba(57,99,175,.14); border-radius: 20px; padding: 14px 14px 18px;" style-hover="border: 1px solid rgba(0,145,199,.55); box-shadow: 0 16px 34px -24px rgba(20,50,80,.7); transform: translateY(-2px);">
+          <button onClick="{{ m.onClick }}" type="button" style="text-align: left; font: inherit; color: inherit; cursor: pointer; background: var(--card); border: 1px solid var(--line-2); border-radius: 20px; padding: 14px 14px 18px;" style-hover="border: 1px solid var(--accent-strong); box-shadow: 0 16px 34px -24px var(--shadow); transform: translateY(-2px);">
             <img src="{{ m.img }}" alt="{{ m.name }}" loading="lazy" decoding="async" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 14px; display: block; margin-bottom: 14px;">
-            <div style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 18px; color: #16324a;">{{ m.name }}</div>
-            <div style="font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: .04em; color: #6a8296; margin-top: 4px;">{{ m.role }}</div>
+            <div style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 18px; color: var(--ink-2);">{{ m.name }}</div>
+            <div style="font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: .04em; color: var(--muted); margin-top: 4px;">{{ m.role }}</div>
           </button>
         </sc-for>
       </div>
@@ -79,15 +78,15 @@
   <!-- Technical Support (pets) — smaller cards & font -->
   <div style="max-width: 1120px; margin: 0 auto; padding: 20px 32px 12px;">
     <div onClick="{{ petsToggle }}" style="padding: 24px 0 4px; cursor: pointer; user-select: none; display: flex; align-items: center; gap: 10px;" title="Click to collapse / expand">
-      <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #0091c7;">Technical support</span>
-      <span style="font-size: 12px; color: #6a8296;">{{ petsCaret }}</span>
+      <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent);">Technical support</span>
+      <span style="font-size: 12px; color: var(--muted);">{{ petsCaret }}</span>
     </div>
     <sc-if value="{{ petsOpen }}" hint-placeholder-val="{{ false }}">
     <div class="pets-grid" style="padding: 10px 0 20px;">
       <sc-for list="{{ pets }}" as="p" hint-placeholder-count="8">
-        <div style="background: rgba(255,255,255,.5); border: 1px solid rgba(57,99,175,.12); border-radius: 14px; padding: 8px 8px 10px;">
+        <div style="background: var(--card-soft); border: 1px solid var(--line); border-radius: 14px; padding: 8px 8px 10px;">
           <img src="{{ p.img }}" alt="{{ p.name }}" loading="lazy" decoding="async" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; display: block; margin-bottom: 8px;">
-          <div style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 13px; color: #33566f;">{{ p.name }}</div>
+          <div style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 13px; color: var(--body);">{{ p.name }}</div>
         </div>
       </sc-for>
     </div>
@@ -97,16 +96,16 @@
   <!-- alumni -->
   <div style="max-width: 1120px; margin: 0 auto; padding: 24px 32px 100px;">
     <div onClick="{{ alumniToggle }}" style="padding: 24px 0 8px; cursor: pointer; user-select: none; display: flex; align-items: center; gap: 10px;" title="Click to collapse / expand">
-      <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #0091c7;">Alumni</span>
-      <span style="font-size: 12px; color: #6a8296;">{{ alumniCaret }}</span>
+      <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent);">Alumni</span>
+      <span style="font-size: 12px; color: var(--muted);">{{ alumniCaret }}</span>
     </div>
     <sc-if value="{{ alumniOpen }}" hint-placeholder-val="{{ false }}">
     <div class="people-grid" style="padding: 8px 0;">
       <sc-for list="{{ alumni }}" as="m" hint-placeholder-count="7">
-        <button onClick="{{ m.onClick }}" type="button" style="text-align: left; font: inherit; color: inherit; cursor: pointer; background: rgba(255,255,255,.6); border: 1px solid rgba(57,99,175,.14); border-radius: 20px; padding: 14px 14px 18px;" style-hover="border: 1px solid rgba(0,145,199,.55); box-shadow: 0 16px 34px -24px rgba(20,50,80,.7); transform: translateY(-2px);">
+        <button onClick="{{ m.onClick }}" type="button" style="text-align: left; font: inherit; color: inherit; cursor: pointer; background: var(--card); border: 1px solid var(--line-2); border-radius: 20px; padding: 14px 14px 18px;" style-hover="border: 1px solid var(--accent-strong); box-shadow: 0 16px 34px -24px var(--shadow); transform: translateY(-2px);">
           <img src="{{ m.img }}" alt="{{ m.name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 14px; display: block; margin-bottom: 14px;">
-          <div style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 18px; color: #16324a;">{{ m.name }}</div>
-          <div style="font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: .04em; color: #6a8296; margin-top: 4px;">{{ m.role }}</div>
+          <div style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 18px; color: var(--ink-2);">{{ m.name }}</div>
+          <div style="font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: .04em; color: var(--muted); margin-top: 4px;">{{ m.role }}</div>
         </button>
       </sc-for>
     </div>
@@ -118,17 +117,17 @@
 
   <!-- bio modal -->
   <sc-if value="{{ hasSel }}" hint-placeholder-val="{{ false }}">
-    <div onClick="{{ close }}" class="modal-overlay" style="position: fixed; inset: 0; z-index: 60; background: rgba(9,26,42,.55); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center;">
-      <div onClick="{{ stop }}" class="modal-card" style="background: #fff; border-radius: 24px; max-width: 640px; width: 100%; max-height: 86vh; overflow: auto; box-shadow: 0 50px 100px -40px rgba(10,30,55,.6);">
+    <div onClick="{{ close }}" class="modal-overlay" style="position: fixed; inset: 0; z-index: 60; background: var(--overlay); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center;">
+      <div onClick="{{ stop }}" class="modal-card" style="background: var(--card-solid); border-radius: 24px; max-width: 640px; width: 100%; max-height: 86vh; overflow: auto; box-shadow: 0 50px 100px -40px var(--shadow-lg);">
         <div class="modal-grid" style="align-items: start;">
           <img src="{{ sel.img }}" alt="{{ sel.name }}" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 18px; display: block;">
           <div>
             <div style="display: flex; align-items: start; justify-content: space-between; gap: 12px;">
               <div>
-                <span style="font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: #0091c7;">{{ sel.role }}</span>
+                <span style="font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent);">{{ sel.role }}</span>
                 <h2 style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 30px; margin: 8px 0 0; letter-spacing: -.01em;">{{ sel.name }}</h2>
               </div>
-              <button onClick="{{ close }}" type="button" style="flex: 0 0 auto; cursor: pointer; background: #eef4f9; border: none; border-radius: 999px; width: 34px; height: 34px; font-size: 18px; color: #33566f; line-height: 1;">×</button>
+              <button onClick="{{ close }}" type="button" style="flex: 0 0 auto; cursor: pointer; background: var(--card-solid); border: 1px solid var(--line-2); border-radius: 999px; width: 34px; height: 34px; font-size: 18px; color: var(--body); line-height: 1;">×</button>
             </div>
           </div>
         </div>
@@ -136,7 +135,7 @@
         <sc-if value="{{ selHasLinks }}" hint-placeholder-val="{{ false }}">
           <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px;">
             <sc-for list="{{ sel.links }}" as="l" hint-placeholder-count="3">
-              <a href="{{ l.href }}" target="_blank" rel="noopener" style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: #16324a; padding: 9px 16px; border: 1px solid rgba(57,99,175,.24); border-radius: 999px;">{{ l.label }}</a>
+              <a href="{{ l.href }}" target="_blank" rel="noopener" style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); padding: 9px 16px; border: 1px solid var(--line-5); border-radius: 999px;">{{ l.label }}</a>
             </sc-for>
           </div>
         </sc-if>
@@ -192,7 +191,7 @@ class Component extends DCLogic {
     ];
     const sel = this.state.sel;
     const bioNode = sel ? React.createElement('p', {
-      style: { fontSize: '16px', lineHeight: '1.65', color: '#43617a', margin: '22px 0 0' },
+      style: { fontSize: '16px', lineHeight: '1.65', color: 'var(--body)', margin: '22px 0 0' },
       dangerouslySetInnerHTML: { __html: sel.bio },
     }) : null;
     return {

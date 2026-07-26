@@ -7,6 +7,7 @@
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=20260725">
 <link rel="icon" type="image/png" href="assets/icon.png">
 <link rel="apple-touch-icon" href="assets/icon.png">
+<script>(function(){try{var m=localStorage.getItem('lareau-theme')||'auto';var d=m==='dark'||(m==='auto'&&window.matchMedia('(prefers-color-scheme: dark)').matches);var r=document.documentElement;r.setAttribute('data-theme',d?'dark':'light');r.setAttribute('data-theme-mode',m);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
 <script src="./support.js"></script>
 <script src="./site.js?v=20260707"></script>
 </head>
@@ -17,9 +18,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./styles.css?v=20260707">
+<script src="./backsplash-engine.js?v=20260726"></script>
 <style>
   * { box-sizing: border-box; }
-  body { margin: 0; background: linear-gradient(180deg, #eafff5 0%, #e6f9ff 40%, #f4fbff 100%); font-family: 'Hanken Grotesk', system-ui, sans-serif; color: #0f2a3f; -webkit-font-smoothing: antialiased; }
+  body { margin: 0; background: var(--page-bg); font-family: 'Hanken Grotesk', system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
   a { text-decoration: none; color: inherit; }
   /* On phones the wide illustration crops too tightly — shorten the hero so
      more of it shows (less zoomed in). */
@@ -32,9 +34,9 @@
 <div style="min-height: 100vh;">
 
   <!-- nav -->
-  <div style="position: sticky; top: 0; z-index: 20; backdrop-filter: blur(12px); background: rgba(244,251,255,.72); border-bottom: 1px solid rgba(57,99,175,.12);">
+  <div style="position: sticky; top: 0; z-index: 20; backdrop-filter: blur(12px); background: var(--nav-bg); border-bottom: 1px solid var(--line);">
     <div class="nav-inner" style="max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 20px 32px;">
-      <a href="./"><img src="assets/logo.svg" alt="Lareau Lab" style="height: 30px; width: auto;"></a>
+      <a href="./"><img class="site-logo" src="assets/logo.svg" alt="Lareau Lab" style="height: 30px; width: auto;"></a>
       <label class="nav-toggle" aria-label="Toggle menu"><input type="checkbox" class="nav-toggle-cb"></label>
       <nav class="nav-links">
         <sc-for list="{{ nav }}" as="item" hint-placeholder-count="6">
@@ -45,30 +47,27 @@
   </div>
 
   <!-- hero: full-bleed banner with the page title overlaid -->
-  <section style="position: relative; width: 100%; overflow: hidden; background: #eafff5;">
-    <img src="assets/banners/anniversary-1year.png" alt="Hand-drawn Happy 1st Anniversary Lareau Lab illustration with two cats" decoding="async"
-         style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center;">
-    <div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(238,255,245,.92) 0%, rgba(238,255,245,.62) 30%, rgba(238,255,245,.12) 60%, rgba(238,255,245,0) 84%);"></div>
-    <div class="hero-inner" style="position: relative; max-width: 1120px; margin: 0 auto; min-height: clamp(300px, 44vh, 460px); display: flex; flex-direction: column; justify-content: center; padding: 32px;">
-      <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #0091c7;">Lab notebook</span>
-      <h1 class="page-title" style="font-family: 'Space Grotesk', sans-serif; font-weight: 400; line-height: 1.02; letter-spacing: -.02em; margin: 16px 0 0;">News</h1>
+  <section style="position: relative; width: 100%; overflow: hidden; background: var(--page-bg-flat);">
+    <canvas data-backsplash="news" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block;"></canvas>
+    <div class="hero-inner" style="position: relative; max-width: 1120px; margin: 0 auto; min-height: clamp(380px, 56vh, 540px); display: flex; flex-direction: column; justify-content: center; padding: 32px;">
+      <h1 class="page-title" style="font-family: 'Space Grotesk', sans-serif; font-weight: 400; line-height: 1.02; letter-spacing: -.02em; margin: 0;">News</h1>
     </div>
   </section>
 
   <!-- years -->
   <div style="max-width: 1120px; margin: 0 auto; padding: 8px 32px 120px;">
     <sc-for list="{{ years }}" as="yr" hint-placeholder-count="4">
-      <section class="news-grid" style="padding: 40px 0; border-top: 1px solid rgba(57,99,175,.16);">
+      <section class="news-grid" style="padding: 40px 0; border-top: 1px solid var(--line-3);">
         <div class="news-year" onClick="{{ yr.toggle }}" style="cursor: pointer; user-select: none;" title="Click to collapse / expand">
-          <div style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 42px; color: #0f2a3f; line-height: 1; display: flex; align-items: center; gap: 12px;">{{ yr.year }} <span style="font-size: 20px; color: #6a8296; font-weight: 400;">{{ yr.caret }}</span></div>
-          <div style="font-family: 'Space Mono', monospace; font-size: 12px; color: #6a8296; margin-top: 8px;">{{ yr.count }}</div>
+          <div style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 42px; color: var(--ink); line-height: 1; display: flex; align-items: center; gap: 12px;">{{ yr.year }} <span style="font-size: 20px; color: var(--muted); font-weight: 400;">{{ yr.caret }}</span></div>
+          <div style="font-family: 'Space Mono', monospace; font-size: 12px; color: var(--muted); margin-top: 8px;">{{ yr.count }}</div>
         </div>
         <sc-if value="{{ yr.open }}" hint-placeholder-val="{{ true }}">
         <div style="display: flex; flex-direction: column; gap: 14px;">
           <sc-for list="{{ yr.posts }}" as="p" hint-placeholder-count="6">
-            <article style="background: rgba(255,255,255,.62); border: 1px solid rgba(57,99,175,.14); border-radius: 20px; padding: 24px 26px;">
-              <div style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .06em; color: #0091c7; margin-bottom: 10px;">{{ p.date }}</div>
-              <h2 style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 23px; line-height: 1.2; margin: 0 0 12px; color: #16324a;">{{ p.title }}</h2>
+            <article style="background: var(--card); border: 1px solid var(--line-2); border-radius: 20px; padding: 24px 26px;">
+              <div style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .06em; color: var(--accent); margin-bottom: 10px;">{{ p.date }}</div>
+              <h2 style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 23px; line-height: 1.2; margin: 0 0 12px; color: var(--ink-2);">{{ p.title }}</h2>
               {{ p.body }}
             </article>
           </sc-for>
@@ -112,7 +111,7 @@ class Component extends DCLogic {
         date: months[parseInt(m, 10) - 1] + ' ' + y,
         title: item.title,
         body: React.createElement('div', {
-          style: { fontSize: '16px', lineHeight: '1.6', color: '#43617a' },
+          style: { fontSize: '16px', lineHeight: '1.6', color: 'var(--body)' },
           dangerouslySetInnerHTML: { __html: window.SITE.md(item.body) },
         }),
       };
