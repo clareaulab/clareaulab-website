@@ -39,11 +39,17 @@
     </div>
   </div>
 
-  <!-- page header -->
-  <div class="page-head" style="max-width: 1120px; margin: 0 auto; padding-bottom: 8px;">
-    <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #0091c7;">What we do</span>
-    <h1 class="page-title" style="font-family: 'Space Grotesk', sans-serif; font-weight: 400; line-height: 1.02; letter-spacing: -.02em; margin: 18px 0 16px;">Research</h1>
-  </div>
+  <!-- hero: full-bleed banner with the page title overlaid -->
+  <section style="position: relative; width: 100%; overflow: hidden; background: #eef4f9;">
+    <img src="assets/banners/scistories-banner.jpg" alt="Illustration of diverse immune and blood cells, from pale to vivid" decoding="async"
+         style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; transform: scale(1.18);">
+    <!-- light scrim, stronger on the left, so the dark title stays legible -->
+    <div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(242,248,252,.94) 0%, rgba(242,248,252,.72) 32%, rgba(242,248,252,.22) 64%, rgba(242,248,252,0) 100%);"></div>
+    <div class="research-hero-inner" style="position: relative; max-width: 1120px; margin: 0 auto; min-height: clamp(320px, 46vh, 480px); display: flex; flex-direction: column; justify-content: center; padding: 32px;">
+      <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #0091c7;">What we do</span>
+      <h1 class="page-title" style="font-family: 'Space Grotesk', sans-serif; font-weight: 400; line-height: 1.02; letter-spacing: -.02em; margin: 16px 0 0;">Research</h1>
+    </div>
+  </section>
 
   <!-- intro paragraphs -->
   <div style="max-width: 760px; margin: 0 auto; padding: 8px 32px 8px;">
