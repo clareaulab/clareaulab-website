@@ -50,7 +50,10 @@
   </section>
 
   <!-- intro paragraphs -->
-  <div style="max-width: 760px; margin: 0 auto; padding: 8px 32px 8px;">
+  <div style="max-width: 760px; margin: 0 auto; padding: 48px 32px 8px;">
+    <div style="padding: 0 0 12px;">
+      <span style="font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent);">Overview</span>
+    </div>
     <sc-for list="{{ intro }}" as="para" hint-placeholder-count="3">
       <p style="font-size: 19px; line-height: 1.65; color: var(--body); margin: 0 0 20px;">{{ para }}</p>
     </sc-for>
