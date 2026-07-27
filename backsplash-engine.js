@@ -57,6 +57,22 @@
     for (var i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
     if (closed) ctx.closePath();
   }
+  function line(ctx, pts, w, color, alpha, halo) {
+    if (pts.length < 2) return;
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    if (halo) {
+      ctx.strokeStyle = PAPER_TOP; ctx.globalAlpha = 1; ctx.lineWidth = w * 3.1;
+      smooth(ctx, pts, false); ctx.stroke();
+    }
+    ctx.strokeStyle = color;
+    ctx.globalAlpha = alpha; ctx.lineWidth = w;
+    smooth(ctx, pts, false); ctx.stroke();
+    ctx.save(); ctx.translate(0.6, 0.45);
+    ctx.globalAlpha = alpha * 0.4; ctx.lineWidth = w * 0.7;
+    smooth(ctx, pts, false); ctx.stroke();
+    ctx.restore();
+    ctx.globalAlpha = 1;
+  }
   function smooth(ctx, pts, closed) {
     var n = pts.length; if (n < 2) return;
     ctx.beginPath();
@@ -101,44 +117,70 @@
     return it;
   };
 
-  M.helix = function (x, y, len, g, amp) {
-    var rng = g.rng, it = [], steps = Math.max(24, len / 6 | 0);
+  // A short duplex that turns slowly about its own axis. The base pairs stay
+  // put and only the twist advances, so the crossings slide along the axis and
+  // the segment reads as spinning. Pen wobble is baked in per base pair at
+  // build time, so it stays attached to the DNA instead of crawling.
+  M.helix = function (x, y, len, g, amp, spin) {
+    var rng = g.rng, BPT = 10.5;
     amp = amp || len * 0.11;
-    var a = [], b = [], ph = [];
-    for (var i = 0; i <= steps; i++) {
-      var u = i / steps, px = x + u * len, p = u * TAU * 2.1;
-      ph.push(p);
-      a.push([px, y + Math.sin(p) * amp]);
-      b.push([px, y + Math.sin(p + Math.PI) * amp]);
-    }
-    // rungs first, so the front strand sits over them
-    for (var k = 2; k < steps - 1; k += 3) {
-      var acc = rng() < 0.34;
-      it.push(S([a[k], b[k]], { w: g.w * 0.7, passes: 1, color: acc ? g.accent : INK, alpha: acc ? 0.85 : 0.5 }));
-    }
-    // screen y grows downward, so a strand rising to the right has cos(ph) < 0
-    // — those runs are the near side of a right-handed helix.
-    function runs(pts, front) {
-      var out = [], cur = null;
-      for (var i = 0; i <= steps; i++) {
-        var isFront = Math.cos(ph[i]) < 0;
-        if (isFront === front) { if (!cur) { cur = []; if (i > 0) cur.push(pts[i - 1]); } cur.push(pts[i]); }
-        else if (cur) { cur.push(pts[i]); out.push(cur); cur = null; }
+    var SP = Math.max(3.5, amp * 0.343);          // B-DNA: one turn ~1.8x the width
+    var N = Math.max(6, Math.round(len / SP));
+    var sub = 3, jx = [], jy = [], acc = [];
+    for (var i = 0; i <= (N + 1) * sub; i++) { jx.push((rng() - 0.5) * 2); jy.push((rng() - 0.5) * 2); }
+    for (var k = 0; k <= N; k++) acc.push(rng() < 0.34);
+    spin = spin == null ? -0.028 : spin;
+    var wgt = g.w, accent = g.accent;
+
+    return { live: function (ctx, t) {
+      var ph0 = t * spin, s1 = [], s2 = [];
+      for (var m = 0; m <= N; m += 1 / sub) {
+        var q = Math.round(m * sub);
+        var px = x + m * SP + jx[q], sn = Math.sin(m / BPT * TAU + ph0) * amp;
+        s1.push([px, y + sn + jy[q], m]);
+        s2.push([px, y - sn + jy[q], m]);
       }
-      if (cur) out.push(cur);
-      return out;
+      // base pairs first, so a strand passing in front breaks them
+      for (var b = 0; b <= N; b += 3) {
+        var q2 = b * sub, sn2 = Math.sin(b / BPT * TAU + ph0) * amp, a2 = acc[b];
+        var bx = x + b * SP + jx[q2];
+        ctx.strokeStyle = a2 ? accent : INK;
+        ctx.globalAlpha = a2 ? 0.8 : 0.42;
+        ctx.lineWidth = wgt * 0.65; ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(bx, y + sn2 + jy[q2]); ctx.lineTo(bx, y - sn2 + jy[q2]); ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+      // each strand is one unbroken line...
+      line(ctx, s1, wgt, INK, 0.95, false);
+      line(ctx, s2, wgt, INK, 0.95, false);
+      // ...then at every half turn the strand in FRONT is re-inked over a paper
+      // halo. Breaking a strand at its own peak instead would leave a notch;
+      // breaking it at the crossing is what makes the twist read right-handed.
+      var halfTurn = BPT / 2, win = BPT * 0.15, off = ph0 * BPT / TAU;
+      for (var kk = Math.ceil(off / halfTurn); ; kk++) {
+        var mc = kk * halfTurn - off;
+        if (mc > N) break;
+        if (mc < 0) continue;
+        var front = (((kk % 2) + 2) % 2 === 1) ? s1 : s2, seg = [];
+        for (var i2 = 0; i2 < front.length; i2++) if (Math.abs(front[i2][2] - mc) <= win) seg.push(front[i2]);
+        if (seg.length > 1) line(ctx, seg, wgt, INK, 0.95, true);
+      }
+    } };
+  };
+
+  // static helix, for the variants that composite flat item lists
+  M.helixFlat = function (x, y, len, g, amp) {
+    var rng = g.rng, it = [], steps = Math.max(18, len / 7 | 0), a = [], b = [];
+    amp = amp || len * 0.11;
+    for (var i = 0; i <= steps; i++) {
+      var u = i / steps, px = x + u * len, ph = u * TAU * 2.1;
+      a.push([px, y + Math.sin(ph) * amp]);
+      b.push([px, y - Math.sin(ph) * amp]);
     }
-    [a, b].forEach(function (strand) {
-      runs(strand, false).forEach(function (r) { if (r.length > 1) it.push(S(jitter(r, rng, 0.6), { w: g.w * 1.05 })); });
-    });
-    [a, b].forEach(function (strand) {
-      runs(strand, true).forEach(function (r) {
-        if (r.length < 2) return;
-        var j = jitter(r, rng, 0.6);
-        it.push(S(j, { w: g.w * 3.4, color: PAPER_TOP, alpha: 1, passes: 1 }));
-        it.push(S(j, { w: g.w * 1.05 }));
-      });
-    });
+    for (var k = 2; k < steps - 1; k += 3) it.push(S([a[k], b[k]], { w: g.w * 0.7, passes: 1, alpha: 0.5 }));
+    it.push(S(jitter(a, rng, 0.6), { w: g.w }));
+    it.push(S(jitter(b, rng, 0.6), { w: g.w }));
     return it;
   };
 
@@ -482,12 +524,16 @@
 
     // ---- per-page subject motifs, hung off the thread
     function at(u, dy) { var p = ptAt(tp, u); return [p[0], p[1] + (dy || 0)]; }
-    function add(items, bobA, phase) { units.push({ items: items, bob: { a: bobA == null ? 3 : bobA, f: 0.09 + rng() * 0.06, ph: phase == null ? rng() * TAU : phase } }); }
+    function add(items, bobA, phase) {
+      var u = { bob: { a: bobA == null ? 3 : bobA, f: 0.09 + rng() * 0.06, ph: phase == null ? rng() * TAU : phase } };
+      if (items && items.live) u.live = items.live; else u.items = items;
+      units.push(u);
+    }
 
     var s = Math.min(W, H * 1.9);
     var subj = {
       home: function () {
-        add(M.helix(W * 0.33, H * 0.2, s * 0.26, g, H * 0.062), 2.8);
+        add(M.helix(W * 0.42, H * 0.2, s * 0.23, g, H * 0.058), 2.8);
         add(M.virus(W * 0.76, H * 0.26, s * 0.052, g), 3.4);
         for (var i = 0; i < 3; i++) {
           add(M.foldChain(W * (0.52 + i * 0.17), H * 0.72, s * 0.05, g, i / 2), 2.6);
@@ -518,25 +564,23 @@
         add(M.bird(W * 0.9, H * 0.19, s * 0.013, g), 3.4);
       },
       research: function () {
-        add(M.speck(W * 0.42, W * 0.99, H * 0.1, H * 0.92, Math.round(150 * dens), g, 0.4), 1.4);
-        add(M.helix(W * 0.44, H * 0.2, s * 0.19, g, H * 0.05), 2.6);
-        add(M.trna(W * 0.72, H * 0.24, s * 0.055, g), 3);
-        add(M.virus(W * 0.92, H * 0.22, s * 0.046, g), 3.4);
+        add(M.speck(W * 0.42, W * 0.99, H * 0.06, H * 0.4, Math.round(120 * dens), g, 0.4), 1.4);
         for (var i = 0; i < 4; i++) {
-          var u = i / 3, cx = W * (0.48 + u * 0.4), cy = H * 0.72, cr = s * 0.052;
+          var u = i / 3, cx = W * (0.48 + u * 0.4), cy = H * 0.24, cr = s * 0.05;
           var gd = { rng: rng, accent: accent, washA: g.washA, w: g.w * (0.72 + u * 0.42), style: style };
           var mm = M.foldChain(cx, cy, cr, gd, u);
           mm.forEach(function (it) { it.alpha = (it.alpha == null ? 0.92 : it.alpha) * (0.42 + u * 0.58); });
           if (u < 0.99) mm = mm.concat(M.speck(cx - cr * 2, cx + cr * 2, cy - cr * 2, cy + cr * 2, Math.round(40 * (1 - u)), gd, 0.5));
           add(mm, 2.6);
         }
+        add(M.helix(W * 0.44, H * 0.87, s * 0.2, g, H * 0.05), 2.6);
+        add(M.trna(W * 0.75, H * 0.78, s * 0.048, g), 2.8);
+        add(M.virus(W * 0.93, H * 0.81, s * 0.042, g), 3.2);
       },
       pubs: function () {
         add(M.paper(W * 0.5, H * 0.26, s * 0.14, s * 0.19, g, -0.13), 2.4);
         add(M.paper(W * 0.65, H * 0.4, s * 0.14, s * 0.19, g, 0.05), 2.6);
         add(M.paper(W * 0.81, H * 0.2, s * 0.14, s * 0.19, g, -0.06), 2.2);
-        add(M.helix(W * 0.46, H * 0.86, s * 0.2, g, H * 0.042), 2.8);
-        add(M.letters(W * 0.75, H * 0.9, s * 0.028, g), 2.4);
       },
       contact: function () {
         add(M.cable(W * 0.22, W * 0.8, H * 0.3, H * 0.11, g), 1.2);
@@ -569,7 +613,7 @@
         var fr = s * (0.016 + rng() * 0.014);
         var gg = { rng: rng, accent: accent, washA: g.washA * ramp * 1.6, w: g.w * 0.8, style: style };
         var pickN = rng();
-        var m = pickN < 0.45 ? M.virus(fx, fy, fr, gg) : pickN < 0.8 ? M.protein(fx, fy, fr * 0.9, gg) : M.helix(fx - fr * 2, fy, fr * 4, gg, fr * 0.7);
+        var m = pickN < 0.45 ? M.virus(fx, fy, fr, gg) : pickN < 0.8 ? M.protein(fx, fy, fr * 0.9, gg) : M.helixFlat(fx - fr * 2, fy, fr * 4, gg, fr * 0.7);
         var al = 0.1 + ramp * 0.7;
         m.forEach(function (i) { i.alpha = (i.alpha == null ? 0.8 : i.alpha) * al; });
         field.push({ items: m, bob: { a: 1.6 + rng() * 1.6, f: 0.06 + rng() * 0.07, ph: rng() * TAU } });
@@ -583,7 +627,7 @@
       for (var st = 0; st < 4; st++) {
         var u2 = st / 3, dx = W * (0.34 + u2 * 0.54), dy = H * 0.5, dr = s * (0.028 + u2 * 0.034);
         var gd = { rng: rng, accent: accent, washA: g.washA * u2, w: g.w * (0.55 + u2 * 0.65), style: style };
-        var mm = page === 'pubs' ? M.paper(dx - dr, dy - dr, dr * 2, dr * 2.6, gd, -0.06) : page === 'contact' ? M.tower(dx - dr * 0.7, dy + dr * 1.4, dr * 1.4, dr * 2.6, gd) : page === 'news' ? M.cat(dx, dy + dr, dr * 0.9, gd) : page === 'team' ? M.flask(dx, dy + dr, dr * 1.1, gd) : page === 'home' ? M.helix(dx - dr * 1.6, dy, dr * 3.2, gd, dr * 0.7) : st % 2 ? M.protein(dx, dy, dr, gd) : M.virus(dx, dy, dr, gd);
+        var mm = page === 'pubs' ? M.paper(dx - dr, dy - dr, dr * 2, dr * 2.6, gd, -0.06) : page === 'contact' ? M.tower(dx - dr * 0.7, dy + dr * 1.4, dr * 1.4, dr * 2.6, gd) : page === 'news' ? M.cat(dx, dy + dr, dr * 0.9, gd) : page === 'team' ? M.flask(dx, dy + dr, dr * 1.1, gd) : page === 'home' ? M.helixFlat(dx - dr * 1.6, dy, dr * 3.2, gd, dr * 0.7) : st % 2 ? M.protein(dx, dy, dr, gd) : M.virus(dx, dy, dr, gd);
         mm.forEach(function (i) { i.alpha = (i.alpha == null ? 0.85 : i.alpha) * (0.1 + u2 * 0.9); });
         if (u2 < 0.99) mm = mm.concat(M.speck(dx - dr * 1.7, dx + dr * 1.7, dy - dr * 1.7, dy + dr * 1.7, Math.round(60 * (1 - u2)), gd, 0.6));
         dif.push({ items: mm, bob: { a: 2 + (1 - u2) * 3, f: 0.08, ph: st * 1.3 } });
@@ -641,7 +685,9 @@
       for (var i = 0; i < list.length; i++) {
         var u = list[i], b = u.bob, dy = 0, dx = 0;
         if (motion && b && b.a) { dy = Math.sin(t * b.f + b.ph) * b.a; dx = Math.cos(t * b.f * 0.7 + b.ph) * b.a * 0.45; }
-        ctx.save(); ctx.translate(dx, dy); drawItems(ctx, u.items); ctx.restore();
+        ctx.save(); ctx.translate(dx, dy);
+        if (u.live) u.live(ctx, motion ? t : 0); else drawItems(ctx, u.items);
+        ctx.restore();
       }
     }
     pass(scene.bg);

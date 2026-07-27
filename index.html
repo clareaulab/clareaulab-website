@@ -127,23 +127,15 @@ class Component extends DCLogic {
       if (!n || figs.length < n * 2) return 0;
       return figs[n].offsetLeft - figs[0].offsetLeft;
     };
-    // `pos` is a float accumulator for the auto-scroll. Mobile browsers round
-    // element.scrollLeft to whole pixels, so adding 0.5 straight to scrollLeft
-    // rounds back to the same integer every frame and never moves. Tracking the
-    // position as a float here (and writing it out) keeps it advancing smoothly.
-    let pos = reel.scrollLeft;
-    let selfScroll = false;
-    const setScroll = (x) => { selfScroll = true; reel.scrollLeft = x; selfScroll = false; };
-    const wrapPos = () => {
+    const wrap = () => {
       const p = period();
       if (p <= 0) return;
-      if (pos >= p) pos -= p;
-      else if (pos < 0) pos += p;
+      if (reel.scrollLeft >= p) reel.scrollLeft -= p;
+      else if (reel.scrollLeft <= 0) reel.scrollLeft += p;
     };
 
     let lastInteract = -1e9;
     const bump = () => { lastInteract = performance.now(); };
-    const idle = () => performance.now() - lastInteract > 1400;
 
     // click-and-drag with a mouse (touch & trackpad use native scrolling)
     let dragging = false, startX = 0, startScroll = 0;
@@ -157,7 +149,7 @@ class Component extends DCLogic {
     reel.addEventListener('pointermove', (e) => {
       if (!dragging) return;
       reel.scrollLeft = startScroll - (e.clientX - startX);
-      bump();
+      wrap(); bump();
     });
     const endDrag = (e) => {
       if (!dragging) return;
@@ -169,18 +161,8 @@ class Component extends DCLogic {
     reel.addEventListener('pointerup', endDrag);
     reel.addEventListener('pointercancel', endDrag);
 
-    // While the user drives it (drag / touch / trackpad / wheel), follow their
-    // scroll: keep the float accumulator in sync and loop seamlessly. Ignore the
-    // auto-scroll's own scroll events (selfScroll / idle).
-    reel.addEventListener('scroll', () => {
-      if (selfScroll || idle()) return;
-      pos = reel.scrollLeft;
-      const p = period();
-      if (p > 0) {
-        if (reel.scrollLeft >= p) { setScroll(reel.scrollLeft - p); pos = reel.scrollLeft; }
-        else if (reel.scrollLeft <= 0) { setScroll(reel.scrollLeft + p); pos = reel.scrollLeft; }
-      }
-    }, { passive: true });
+    // yield to any native scroll / wheel / touch, and keep the loop seamless
+    reel.addEventListener('scroll', wrap, { passive: true });
     reel.addEventListener('wheel', bump, { passive: true });
     reel.addEventListener('touchstart', bump, { passive: true });
     reel.addEventListener('touchmove', bump, { passive: true });
@@ -189,10 +171,9 @@ class Component extends DCLogic {
     const speed = 0.5;
     const tick = () => {
       if (this._reelStop) return;
-      if (!dragging && idle()) {
-        pos += speed;
-        wrapPos();
-        setScroll(pos);
+      if (!dragging && performance.now() - lastInteract > 1400) {
+        reel.scrollLeft += speed;
+        wrap();
       }
       requestAnimationFrame(tick);
     };
