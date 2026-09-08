@@ -33,24 +33,11 @@ lab:
       - label: GitHub
         href: https://github.com/caleblareau
 
-  - name: Benan Nalbant
-    role: Sr. Research Technician
-    img: assets/headshots/benan-nalbant.jpg
-    bio: |-
-      Benan is a Senior Research Technician in the Lareau lab. Prior to joining she was in the Vakoc lab at Cold Spring Harbor Laboratory investigating transcription factor dependencies in cancer. Benan completed her bachelors in Molecular, Cellular, and Developmental Biology with a minor in Physics from the University of Washington. In her free time she enjoys baking &nbsp; :cookie: :cake: :bread: &nbsp;!
-
   - name: Betty Li
     role: Research Technician
     img: assets/headshots/betty-li.jpg
     bio: |-
       Betty Li is a Research Technician in the Lareau Lab. Betty grew up in Beijing and completed her Bachelor's degree in Computer Science and Biology at New York University. She did her undergraduate research with Dr. Nathaniel Landau, studying engineered dendritic cell–based immunotherapies for cancer. Outside of lab, Betty enjoys playing table tennis :ping_pong:, climbing :woman_climbing:, and food hunting in the city :shallow_pan_of_food:.
-
-
-  - name: Arthur Chow
-    role: Postdoctoral Fellow
-    img: assets/headshots/arthur-chow.jpg
-    bio: |-
-      Arthur Chow is a Research Fellow in the Lareau Lab at MSK. A California native, he completed his bachelor’s degree at the University of California, Merced before pursuing his Ph.D. in Biomedical Sciences at the Icahn School of Medicine at Mount Sinai. During his Ph.D., he developed chemical tools to dissect the oncogenic signaling network of critical kinase regulators. When he’s not in the lab, Arthur loves to ride his bike all over the tri-state area while stopping at any and all coffee shops &nbsp; :coffee: &nbsp; along the way.
 
   - name: Erin Cumming
     role: Postdoctoral Fellow
@@ -161,6 +148,19 @@ comentored:
 
 
 alumni:
+
+  - name: Arthur Chow
+    role: '2023-2026'
+    img: assets/headshots/arthur-chow.jpg
+    bio: |-
+      Arthur Chow was a Research Fellow in the Lareau Lab at MSK until 2026. A California native, he completed his bachelor’s degree at the University of California, Merced before pursuing his Ph.D. in Biomedical Sciences at the Icahn School of Medicine at Mount Sinai. During his Ph.D., he developed chemical tools to dissect the oncogenic signaling network of critical kinase regulators. He led the lab's first work on de novo protein design and is now a Scientist at the CZI Biohub in NYC. 
+
+  - name: Benan Nalbant
+    role: '2023-2026'
+    img: assets/headshots/benan-nalbant.jpg
+    bio: |-
+      Benan was the founding Lab  Lareau lab. Prior to joining she was in the Vakoc lab at Cold Spring Harbor Laboratory investigating transcription factor dependencies in cancer. Benan completed her bachelors in Molecular, Cellular, and Developmental Biology with a minor in Physics from the University of Washington. She is now a PhD student in the Department of Genome Sciences at the University of Washington.
+
   - name: Emma Tran
     role: '2024'
     img: assets/headshots/emma-tran.jpg
