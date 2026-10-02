@@ -65,18 +65,21 @@
       link: https://clareaulab.github.io/pdfs/Wade-Hollenbach-Nature-2026.pdf
 
 #DNCT
-- id: doi:10.64898/2025.12.12.694033
+- id: doi:10.1038/s41551-026-01790-9
   image: assets/researchpngs/denovocart1.png
   buttons:
     - type: paper
       text: PDF
-      link: https://www.biorxiv.org/content/10.64898/2025.12.12.694033v1.full.pdf
+      link: https://clareaulab.github.io/pdfs/ChowChuLi-NBME-2026.pdf
     - type: github
       text: Code
       link: clareaulab/CARPNN
+    - type: website
+      text: MSK Media Coverage
+      link: https://www.mskcc.org/news/using-ai-to-design-better-cancer-therapies
     - type: twitter
       text: Tweetorial
-      link: CalebLareau/status/2000149846582493578
+      link: CalebLareau/status/2097734826283409423
     - type: featured
       text: Featured
       link: https://clareaulab.com/publications/?search=featured
@@ -126,9 +129,9 @@
     - type: twitter
       text: Tweetorial
       link: CalebLareau/status/1818257172779901221
-    - type: fire
-      text: bioRxiv
-      link: https://clareaulab.com/publications/?search=preprint
+    - type: featured
+      text: Featured
+      link: https://clareaulab.com/publications/?search=featured
      
 
 
@@ -412,18 +415,15 @@
       text: Preprint
       link: https://clareaulab.com/publications/?search=preprint
       
-# Bdaniel
-- id: doi:10.1101/2024.02.29.582872
-  image: assets/researchpngs/bdanielmac.png
-  buttons:
-    - type: fire
-      text: bioRxiv
-      link: https://clareaulab.com/publications/?search=preprint
+
 
 
 ############
 
 # everything else
+
+- id: doi:10.1073/pnas.2600693123
+  image: assets/researchpngs/bdanielmac.png
 
 - id: doi:10.1021/jacs.5c20726
   image: assets/researchpngs/davidsplice.png
