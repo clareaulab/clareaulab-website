@@ -416,7 +416,21 @@
       link: https://clareaulab.com/publications/?search=preprint
       
 
+- id: doi:10.64898/2026.09.16.26363192
+  image: assets/researchpngs/alphagenomeatlas.png
+  buttons:
+    - type: fire
+      text: Preprint
+      link: https://clareaulab.com/publications/?search=preprint
 
+
+- id: doi:10.64898/2026.09.22.752323
+  image: assets/researchpngs/hbvleon.png
+  buttons:
+    - type: fire
+      text: Preprint
+      link: https://clareaulab.com/publications/?search=preprint
+      
 
 ############
 
