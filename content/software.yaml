@@ -24,8 +24,8 @@
 # =============================================================================
 
 intro:
-  - We build open-source tools for single-cell genomics, mitochondrial lineage tracing, and protein design, and we release the code behind every paper so others can reproduce and extend our analyses.
-  - Questions and bug reports are best raised as an issue on the relevant GitHub repository. Most lab code lives under [github.com/clareaulab](https://github.com/clareaulab); earlier tools are under [github.com/caleblareau](https://github.com/caleblareau).
+  - Our lab has a long-standing commitment to developing and maintaining open-source tools that supports our work. Further, we organize and release all custom code underlying key analyses in our major works to enable others reproducing and extending our analyses. 
+  - Please raise any questions and/or  bug reports as issue on the relevant GitHub repository.
 
 tools:
   - name: mgatk
@@ -38,7 +38,7 @@ tools:
     docs: https://caleblareau.github.io/mgatk
     doi: 10.1038/s41587-020-0645-6
 
-  - name: GIFT-wrap
+  - name: giftwrap
     tagline: Genotyping in fixed transcriptomes
     about: The all-in-one pipeline for GIFT-seq data, genotyping targeted variants alongside gene expression in fixed single-cell libraries, without prior genotype information.
     lang: Python
@@ -48,21 +48,13 @@ tools:
     docs: https://clareaulab.github.io/giftwrap
     doi: 10.64898/2026.04.11.717967
 
-  - name: CAR-PNN
+  - name: CARPNN
     tagline: Chimeric antigen receptor ProteinMPNN
     about: An HPC-ready protein design workflow for large-scale folding with Boltz, BindCraft-style binder filtering, and lead optimization of de novo binders for use in CARs.
     lang: Python
     tags: [protein design, CAR T]
     repo: clareaulab/CARPNN
     doi: 10.1038/s41551-026-01790-9
-
-  - name: maegatk
-    tagline: mtDNA variants from single-cell RNA-seq
-    about: The companion to mgatk for MAESTER data, calling mitochondrial variants from single-cell RNA-seq libraries enriched for mitochondrial transcripts.
-    lang: Python
-    tags: [mtDNA, scRNA-seq]
-    repo: caleblareau/maegatk
-    doi: 10.1038/s41587-022-01210-8
 
   - name: bap
     tagline: Bead-based single-cell ATAC processing
@@ -73,26 +65,11 @@ tools:
     docs: https://caleblareau.github.io/bap
     doi: 10.1038/s41587-019-0147-6
 
-  - name: gchromVAR
-    tagline: Variant enrichment in single cells
-    about: Scores cell-type-specific enrichment of fine-mapped GWAS variants using quantitative chromatin accessibility data.
-    lang: R
-    tags: [GWAS, chromatin]
-    install: devtools::install_github("caleblareau/gchromVAR")
-    repo: caleblareau/gchromVAR
-    docs: https://caleblareau.github.io/gchromVAR/
-    doi: 10.1038/s41588-019-0362-6
-
 resources:
   - name: Human anellovirus pangenome
     about: A curated, non-redundant reference of 2,023 human anellovirus genomes, masked for low-complexity repeats and paired with kallisto for quantification.
     lang: Reference
     repo: clareaulab/human_anellovirus_pangenome
-
-  - name: Pathogen reference
-    about: Indexed reference genomes for 18 human pathogens, including the herpesviruses and a corrected Toxoplasma gondii assembly.
-    lang: Reference
-    repo: clareaulab/pathogen_reference
 
   - name: GIFT probe design
     about: Designs custom gap-filling probes for 10x Genomics Flex and Visium HD, with optional BLAST off-target filtering.
@@ -121,7 +98,7 @@ reproducibility:
     year: 2026
     repo: clareaulab/ad-hsv-mapping
     doi: 10.64898/2026.04.29.721769
-  - paper: Artifacts in mtDNA lineage tracing (ReDeeM reanalysis)
+  - paper: Artifacts in mtDNA lineage tracing
     year: 2026
     repo: caleblareau/redeem-reanalysis-reproducibility
     doi: 10.1038/s41586-026-10777-0
