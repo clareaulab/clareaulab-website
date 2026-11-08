@@ -117,12 +117,12 @@
       link: https://clareaulab.com/publications/?search=featured
 
 #artifacts
-- id: doi:10.1101/2024.07.28.605517
+- id: doi:10.1038/s41586-026-10777-0
   image: assets/researchpngs/mitoartifact.png
   buttons:
     - type: paper
       text: PDF
-      link: https://www.biorxiv.org/content/10.1101/2024.07.28.605517v1.full.pdf
+      link: https://clareaulab.github.io/pdfs/Lareau-Nature-2026.pdf
     - type: github
       text: Code
       link: caleblareau/redeem-reanalysis-reproducibility
@@ -430,14 +430,31 @@
     - type: fire
       text: Preprint
       link: https://clareaulab.com/publications/?search=preprint
+
+# Cryo-mtscATAC-seq
+- id: doi:10.1101/2025.09.17.675534
+  image: assets/researchpngs/cryomtscatac.png
+  buttons:
+    - type: fire
+      text: Preprint
+      link: https://clareaulab.com/publications/?search=preprint
       
 
 ############
 
 # everything else
 
+- id: doi:10.1038/s44320-026-00249-y
+  image: assets/researchpngs/abibindcrowd.png
+
+- id: doi:10.1038/s41467-026-77934-x
+  image: assets/researchpngs/fewingsCHinfect.png
+
 - id: doi:10.1073/pnas.2600693123
   image: assets/researchpngs/bdanielmac.png
+
+- id: doi:10.1038/s41467-026-75810-2
+  image: assets/researchpngs/hoyinangio.png
 
 - id: doi:10.1021/jacs.5c20726
   image: assets/researchpngs/davidsplice.png

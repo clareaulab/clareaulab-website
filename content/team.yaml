@@ -39,6 +39,12 @@ lab:
     bio: |-
       Betty Li is a Research Technician in the Lareau Lab. Betty grew up in Beijing and completed her Bachelor's degree in Computer Science and Biology at New York University. She did her undergraduate research with Dr. Nathaniel Landau, studying engineered dendritic cell–based immunotherapies for cancer. Outside of lab, Betty enjoys playing table tennis :ping_pong:, climbing :woman_climbing:, and food hunting in the city :shallow_pan_of_food:.
 
+  - name: Lane Theander
+    role: Senior Research Technician
+    img: assets/headshots/lane-theander.jpg
+    bio: |-
+      Lane Theander is a Senior Research Technician in the Lareau Lab. Originally from Colorado, Lane completed a Bachelor’s degree in Integrative Biology at Harvard. His undergraduate senior thesis focused on developing a computational pipeline to understand odorant receptor variation in deer mice in a predator-avoidance context. After graduation, Lane worked in the Chemical and Structural Biology Core at Dana-Farber Cancer Institute before transferring to the Zhang Lab at Columbia where he researched the role of macrophage-driven lipid metabolism in Atherosclerosis. Outside of lab, Lane is an avid birdwatcher and wildlife photographer.
+
   - name: Erin Cumming
     role: Postdoctoral Fellow
     img: assets/headshots/erin-cumming.jpg
@@ -206,6 +212,7 @@ alumni:
 # "Technical support" — one name per photo file in assets/pet-photos/ (lowercased).
 pets:
   - Alpha
+  - Basha
   - Boo
   - Brooks
   - Charlie
