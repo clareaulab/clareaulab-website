@@ -17,7 +17,11 @@
 #   comentored — members co-advised with another lab
 #   alumni     — past members (role is the years they were here)
 #   pets       — "Technical support": a name per file in assets/pet-photos/
+#   intro      — the short paragraph shown above the team (markdown works)
 # =============================================================================
+
+intro: |-
+  We are a team of interdisciplinary scientists learning from one another across biology, medicine, engineering, and computer science. Our work is guided by curiosity, open science, and the belief that good ideas can come from anyone. We value the different experiences people bring and strive to make mentorship, resources, and opportunities accessible to every member of the lab.
 
 lab:
   - name: Caleb Lareau

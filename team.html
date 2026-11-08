@@ -54,6 +54,13 @@
     </div>
   </section>
 
+  <!-- preamble: mentoring / training philosophy (content/team.yaml → intro) -->
+  <sc-if value="{{ hasIntro }}" hint-placeholder-val="{{ true }}">
+    <div style="max-width: 760px; margin: 0 auto; padding: 8px 32px 4px;">
+      <p style="font-size: 19px; line-height: 1.65; color: var(--body); margin: 0;">{{ intro }}</p>
+    </div>
+  </sc-if>
+
   <!-- role groups: Lab + Co-mentored only -->
   <div style="max-width: 1120px; margin: 0 auto; padding: 24px 32px 12px;">
     <sc-for list="{{ groups }}" as="g" hint-placeholder-count="2">
@@ -148,7 +155,7 @@
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   // Start "Technical support" and "Alumni" collapsed so the page renders faster.
-  state = { sel: null, lab: [], comentored: [], alumni: [], pets: [], collapsed: { 'Technical support': true, 'Alumni': true } };
+  state = { sel: null, intro: '', lab: [], comentored: [], alumni: [], pets: [], collapsed: { 'Technical support': true, 'Alumni': true } };
 
   toggleGroup(label) {
     const c = { ...this.state.collapsed };
@@ -167,6 +174,7 @@ class Component extends DCLogic {
       });
       const pets = (data.pets || []).map(n => ({ name: n, img: `assets/pet-photos/${n.toLowerCase()}.jpg` }));
       this.setState({
+        intro: data.intro || '',
         lab: decorate(data.lab),
         comentored: decorate(data.comentored),
         alumni: decorate(data.alumni),
@@ -196,6 +204,8 @@ class Component extends DCLogic {
     }) : null;
     return {
       nav, groups, pets: this.state.pets, alumni: this.state.alumni,
+      hasIntro: !!this.state.intro,
+      intro: React.createElement('span', { dangerouslySetInnerHTML: { __html: window.SITE.md(this.state.intro) } }),
       petsOpen: !collapsed['Technical support'],
       petsCaret: caret('Technical support'),
       petsToggle: () => this.toggleGroup('Technical support'),
