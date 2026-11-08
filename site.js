@@ -21,6 +21,7 @@
       { label: 'News', href: 'news.html' },
       { label: 'Research', href: 'research.html' },
       { label: 'Publications', href: 'publications.html' },
+      { label: 'Software', href: 'software.html' },
       { label: 'Contact', href: 'contact.html' },
     ],
 

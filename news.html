@@ -9,7 +9,7 @@
 <link rel="apple-touch-icon" href="assets/icon.png">
 <script>(function(){try{try{localStorage.removeItem('lareau-theme');}catch(e){}var m=sessionStorage.getItem('lareau-theme')||'auto';var d=m==='dark'||(m==='auto'&&window.matchMedia('(prefers-color-scheme: dark)').matches);var r=document.documentElement;r.setAttribute('data-theme',d?'dark':'light');r.setAttribute('data-theme-mode',m);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
 <script src="./support.js"></script>
-<script src="./site.js?v=20260707"></script>
+<script src="./site.js?v=20261108"></script>
 </head>
 <body>
 <x-dc>
@@ -17,8 +17,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./styles.css?v=20260707">
-<script src="./backsplash-engine.js?v=20260726"></script>
+<link rel="stylesheet" href="./styles.css?v=20261108">
+<script src="./backsplash-engine.js?v=20261108"></script>
 <style>
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--page-bg); font-family: 'Hanken Grotesk', system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
@@ -39,7 +39,7 @@
       <a href="./"><img class="site-logo" src="assets/logo.svg" alt="Lareau Lab" style="height: 30px; width: auto;"></a>
       <label class="nav-toggle" aria-label="Toggle menu"><input type="checkbox" class="nav-toggle-cb"></label>
       <nav class="nav-links">
-        <sc-for list="{{ nav }}" as="item" hint-placeholder-count="6">
+        <sc-for list="{{ nav }}" as="item" hint-placeholder-count="7">
           <a href="{{ item.href }}" style="{{ item.style }}">{{ item.label }}</a>
         </sc-for>
       </nav>

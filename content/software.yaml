@@ -1,0 +1,151 @@
+# =============================================================================
+# Software page content.  Edit this file to add / remove / update tools.
+#
+# intro    — one or two short paragraphs at the top. Markdown links and
+#            **bold** work.
+#
+# tools    — the main tool cards. Each has:
+#   name:     Tool name as people type it (e.g. mgatk)
+#   tagline:  A few words saying what it is
+#   about:    One or two sentences (markdown links work)
+#   lang:     Language label shown on the card (Python, R, Shell, ...)
+#   tags:     (optional) short topic chips
+#   install:  (optional) a one-line install command, shown in monospace
+#   repo:     GitHub "owner/name" — becomes the Code button
+#   docs:     (optional) documentation / website URL
+#   doi:      (optional) the paper to cite — becomes the Paper button
+#
+# resources — reference data and probe-design utilities (same fields, all
+#             optional except name/about/repo).
+#
+# reproducibility — repositories that reproduce a specific paper. Each has
+#   paper: a short label, year: the year, repo: GitHub "owner/name",
+#   doi: (optional) the paper.
+# =============================================================================
+
+intro:
+  - We build open-source tools for single-cell genomics, mitochondrial lineage tracing, and protein design, and we release the code behind every paper so others can reproduce and extend our analyses.
+  - Questions and bug reports are best raised as an issue on the relevant GitHub repository. Most lab code lives under [github.com/clareaulab](https://github.com/clareaulab); earlier tools are under [github.com/caleblareau](https://github.com/caleblareau).
+
+tools:
+  - name: mgatk
+    tagline: Mitochondrial genome analysis toolkit
+    about: Calls mtDNA variants and heteroplasmy from single-cell and bulk sequencing, including mtscATAC-seq, ASAP-seq, and DOGMA-seq, for clonal and lineage tracing in human cells.
+    lang: Python
+    tags: [mtDNA, lineage tracing]
+    install: pip install mgatk
+    repo: caleblareau/mgatk
+    docs: https://caleblareau.github.io/mgatk
+    doi: 10.1038/s41587-020-0645-6
+
+  - name: GIFT-wrap
+    tagline: Genotyping in fixed transcriptomes
+    about: The all-in-one pipeline for GIFT-seq data, genotyping targeted variants alongside gene expression in fixed single-cell libraries, without prior genotype information.
+    lang: Python
+    tags: [genotyping, single-cell]
+    install: pip install giftwrap-sc
+    repo: clareaulab/giftwrap
+    docs: https://clareaulab.github.io/giftwrap
+    doi: 10.64898/2026.04.11.717967
+
+  - name: CAR-PNN
+    tagline: Chimeric antigen receptor ProteinMPNN
+    about: An HPC-ready protein design workflow for large-scale folding with Boltz, BindCraft-style binder filtering, and lead optimization of de novo binders for use in CARs.
+    lang: Python
+    tags: [protein design, CAR T]
+    repo: clareaulab/CARPNN
+    doi: 10.1038/s41551-026-01790-9
+
+  - name: maegatk
+    tagline: mtDNA variants from single-cell RNA-seq
+    about: The companion to mgatk for MAESTER data, calling mitochondrial variants from single-cell RNA-seq libraries enriched for mitochondrial transcripts.
+    lang: Python
+    tags: [mtDNA, scRNA-seq]
+    repo: caleblareau/maegatk
+    doi: 10.1038/s41587-022-01210-8
+
+  - name: bap
+    tagline: Bead-based single-cell ATAC processing
+    about: Identifies and merges barcodes from beads that share a droplet in dscATAC-seq and related bead-based single-cell assays.
+    lang: Python
+    tags: [scATAC-seq, barcodes]
+    repo: caleblareau/bap
+    docs: https://caleblareau.github.io/bap
+    doi: 10.1038/s41587-019-0147-6
+
+  - name: gchromVAR
+    tagline: Variant enrichment in single cells
+    about: Scores cell-type-specific enrichment of fine-mapped GWAS variants using quantitative chromatin accessibility data.
+    lang: R
+    tags: [GWAS, chromatin]
+    install: devtools::install_github("caleblareau/gchromVAR")
+    repo: caleblareau/gchromVAR
+    docs: https://caleblareau.github.io/gchromVAR/
+    doi: 10.1038/s41588-019-0362-6
+
+resources:
+  - name: Human anellovirus pangenome
+    about: A curated, non-redundant reference of 2,023 human anellovirus genomes, masked for low-complexity repeats and paired with kallisto for quantification.
+    lang: Reference
+    repo: clareaulab/human_anellovirus_pangenome
+
+  - name: Pathogen reference
+    about: Indexed reference genomes for 18 human pathogens, including the herpesviruses and a corrected Toxoplasma gondii assembly.
+    lang: Reference
+    repo: clareaulab/pathogen_reference
+
+  - name: GIFT probe design
+    about: Designs custom gap-filling probes for 10x Genomics Flex and Visium HD, with optional BLAST off-target filtering.
+    lang: Python
+    repo: clareaulab/probeset_design_pipeline
+
+  - name: mitoblacklist
+    about: Masks nuclear regions with high homology to mtDNA, so that mtDNA-enriched assays don't produce spurious nuclear reads.
+    lang: Shell
+    repo: caleblareau/mitoblacklist
+
+reproducibility:
+  - paper: De novo chimeric antigen receptors
+    year: 2026
+    repo: clareaulab/denovo-cart-reproducibility
+    doi: 10.1038/s41551-026-01790-9
+  - paper: Persistent EBV DNA biobank GWAS
+    year: 2026
+    repo: clareaulab/ebv_biobank_gwas
+    doi: 10.1038/s41586-025-10020-2
+  - paper: GIFT-seq figures
+    year: 2026
+    repo: clareaulab/gift_figures_reproducibility
+    doi: 10.64898/2026.04.11.717967
+  - paper: HSV-1 reactivation in the brain
+    year: 2026
+    repo: clareaulab/ad-hsv-mapping
+    doi: 10.64898/2026.04.29.721769
+  - paper: Artifacts in mtDNA lineage tracing (ReDeeM reanalysis)
+    year: 2026
+    repo: caleblareau/redeem-reanalysis-reproducibility
+    doi: 10.1038/s41586-026-10777-0
+  - paper: PERFF-seq
+    year: 2025
+    repo: clareaulab/perffseq_reproducibility
+    doi: 10.1038/s41588-024-02036-7
+  - paper: Pearson syndrome purifying selection
+    year: 2023
+    repo: caleblareau/pearson_syndrome
+    doi: 10.1038/s41588-023-01433-8
+  - paper: mtscATAC-seq protocol
+    year: 2023
+    repo: caleblareau/mtscatac_protocol
+    doi: 10.1038/s41596-022-00795-3
+  - paper: ASAP-seq and DOGMA-seq
+    year: 2021
+    repo: caleblareau/asap_reproducibility
+    doi: 10.1038/s41587-021-00927-2
+  - paper: mtscATAC-seq
+    year: 2020
+    repo: caleblareau/mtscATACpaper_reproducibility
+    doi: 10.1038/s41587-020-0645-6
+  - paper: Barcode multiplets in droplet assays
+    year: 2020
+    repo: caleblareau/barcode-multiplets
+    doi: 10.1038/s41467-020-14667-5

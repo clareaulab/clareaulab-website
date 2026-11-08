@@ -10,12 +10,12 @@
     light: {
       paperTop: '#f9fdff', paperBot: '#eaf3f9', ink: '#1a3850', card: '#ffffff',
       scrim: '249,253,255', water: '#2f6f96', cool: '#4aa8cf', grid: '#5d93b8',
-      accents: { home: '#0091c7', team: '#2fa98c', news: '#d1892b', research: '#d9644f', pubs: '#3963af', contact: '#7268cf' }
+      accents: { home: '#0091c7', team: '#2fa98c', news: '#d1892b', research: '#d9644f', pubs: '#3963af', contact: '#7268cf', software: '#b0499b' }
     },
     dark: {
       paperTop: '#0b1728', paperBot: '#060e1c', ink: '#a9c9e2', card: '#122438',
       scrim: '8,17,30', water: '#4f9ec4', cool: '#4fd8ff', grid: '#3d6c8f',
-      accents: { home: '#4fd8ff', team: '#45e6c4', news: '#f0b24f', research: '#ff8a70', pubs: '#7fb2ff', contact: '#a99cff' }
+      accents: { home: '#4fd8ff', team: '#45e6c4', news: '#f0b24f', research: '#ff8a70', pubs: '#7fb2ff', contact: '#a99cff', software: '#f08ad8' }
     }
   };
   var TH = THEMES.light;
@@ -451,9 +451,10 @@
     news: { accent: '#d1892b', tag: 'thread + timeline' },
     research: { accent: '#d9644f', tag: 'thread + specimens' },
     pubs: { accent: '#3963af', tag: 'thread + pages' },
-    contact: { accent: '#7268cf', tag: 'thread + city' }
+    contact: { accent: '#7268cf', tag: 'thread + city' },
+    software: { accent: '#b0499b', tag: 'thread + code' }
   };
-  var PHASE = { home: 0, team: 0.9, news: 1.7, research: 2.6, pubs: 3.4, contact: 4.2 };
+  var PHASE = { home: 0, team: 0.9, news: 1.7, research: 2.6, pubs: 3.4, contact: 4.2, software: 5.1 };
 
   // The recurring thread: one continuous hand-drawn strand crossing every
   // banner at the same band, with node beads. Its phase shifts per page so no
@@ -581,6 +582,15 @@
         add(M.paper(W * 0.5, H * 0.26, s * 0.14, s * 0.19, g, -0.13), 2.4);
         add(M.paper(W * 0.65, H * 0.4, s * 0.14, s * 0.19, g, 0.05), 2.6);
         add(M.paper(W * 0.81, H * 0.2, s * 0.14, s * 0.19, g, -0.06), 2.2);
+      },
+      software: function () {
+        // two code windows, a sequence-to-bits pipeline, and a folded protein
+        add(M.paper(W * 0.47, H * 0.12, s * 0.2, s * 0.15, g, -0.04), 2.4);
+        add(M.paper(W * 0.73, H * 0.2, s * 0.17, s * 0.13, g, 0.06), 2.6);
+        add(M.letters(W * 0.44, H * 0.88, s * 0.026, g), 2.4);
+        add([S([[W * 0.62, H * 0.875], [W * 0.66, H * 0.875]], { w: g.w, alpha: 0.4 }), S([[W * 0.648, H * 0.863], [W * 0.66, H * 0.875], [W * 0.648, H * 0.887]], { w: g.w * 0.8, alpha: 0.4 })], 0, 0);
+        add(M.letters(W * 0.7, H * 0.88, s * 0.026, g, ['0', '1']), 2.4);
+        add(M.foldChain(W * 0.93, H * 0.5, s * 0.045, g, 0.9), 2.6);
       },
       contact: function () {
         add(M.cable(W * 0.22, W * 0.8, H * 0.3, H * 0.11, g), 1.2);
