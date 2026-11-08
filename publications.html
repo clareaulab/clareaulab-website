@@ -7,7 +7,7 @@
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=20260725">
 <link rel="icon" type="image/png" href="assets/icon.png">
 <link rel="apple-touch-icon" href="assets/icon.png">
-<script>(function(){try{var m=localStorage.getItem('lareau-theme')||'auto';var d=m==='dark'||(m==='auto'&&window.matchMedia('(prefers-color-scheme: dark)').matches);var r=document.documentElement;r.setAttribute('data-theme',d?'dark':'light');r.setAttribute('data-theme-mode',m);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
+<script>(function(){try{try{localStorage.removeItem('lareau-theme');}catch(e){}var m=sessionStorage.getItem('lareau-theme')||'auto';var d=m==='dark'||(m==='auto'&&window.matchMedia('(prefers-color-scheme: dark)').matches);var r=document.documentElement;r.setAttribute('data-theme',d?'dark':'light');r.setAttribute('data-theme-mode',m);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
 <script src="./support.js"></script>
 <script src="./site.js?v=20260707"></script>
 </head>
@@ -140,9 +140,11 @@
 class Component extends DCLogic {
   state = { items: [], search: '', loading: true, done: 0, total: 0, errorMsg: '', collapsed: {} };
 
-  toggleYear(y) {
+  // `collapsed` only records years the visitor has toggled by hand; anything
+  // not in it falls back to the default from renderVals (older years closed).
+  toggleYear(y, isCollapsed) {
     const c = { ...this.state.collapsed };
-    c[y] = !c[y];
+    c[y] = !isCollapsed;
     this.setState({ collapsed: c });
   }
 
@@ -376,12 +378,20 @@ class Component extends DCLogic {
       byYear.get(y).push(it);
     });
 
+    // On first view only the most recent year is expanded; while a search or
+    // filter is active every year starts expanded so matches aren't hidden.
+    const years = [...byYear.keys()].filter(y => typeof y === 'number');
+    const newestYear = years.length ? Math.max(...years) : null;
+    const isCollapsed = (year) => (year in this.state.collapsed)
+      ? this.state.collapsed[year]
+      : (!q && typeof year === 'number' && year < newestYear);
+
     const groups = [...byYear.entries()].map(([year, list]) => ({
       year,
-      open: !this.state.collapsed[year],
-      caret: this.state.collapsed[year] ? '▸' : '▾',
+      open: !isCollapsed(year),
+      caret: isCollapsed(year) ? '▸' : '▾',
       count: list.length + (list.length === 1 ? ' paper' : ' papers'),
-      toggle: () => this.toggleYear(year),
+      toggle: () => this.toggleYear(year, isCollapsed(year)),
       pubs: list.map(it => {
         const m = it.meta || {};
         const bits = [m.journal, this.fmtDate(m), 'doi:' + it.doi].filter(Boolean);

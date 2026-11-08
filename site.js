@@ -94,16 +94,19 @@
     },
 
     // --- Light / Dark / Auto ------------------------------------------------
-    // The mode ('light' | 'dark' | 'auto') is stored in localStorage; 'auto'
-    // follows the device. An inline script in each page's <head> applies it
-    // before first paint, so there is no flash. Everything visual resolves
-    // through the CSS custom properties at the top of styles.css.
+    // The default is 'auto', which follows the device's light/dark setting.
+    // A Light/Dark choice from the footer is kept in sessionStorage, so it
+    // lasts for this visit only and every new visit starts from the device
+    // setting again (older versions saved it in localStorage forever; the
+    // inline script removes that). An inline script in each page's <head>
+    // applies the mode before first paint, so there is no flash. Everything
+    // visual resolves through the CSS custom properties at the top of styles.css.
     THEME_KEY: 'lareau-theme',
     _themeSubs: [],
 
     theme: {
       get mode() {
-        try { return localStorage.getItem(SITE.THEME_KEY) || 'auto'; } catch (e) { return 'auto'; }
+        try { return sessionStorage.getItem(SITE.THEME_KEY) || 'auto'; } catch (e) { return 'auto'; }
       },
       get resolved() {
         return document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
@@ -121,7 +124,7 @@
         SITE._themeSubs.forEach(function (fn) { try { fn(mode, dark ? 'dark' : 'light'); } catch (e) {} });
       },
       set: function (mode) {
-        try { localStorage.setItem(SITE.THEME_KEY, mode); } catch (e) {}
+        try { sessionStorage.setItem(SITE.THEME_KEY, mode); } catch (e) {}
         SITE.theme.apply();
       },
       init: function () {
@@ -133,10 +136,6 @@
           if (mq.addEventListener) mq.addEventListener('change', onChange);
           else if (mq.addListener) mq.addListener(onChange);
         }
-        // another tab changed it
-        window.addEventListener('storage', function (e) {
-          if (e.key === SITE.THEME_KEY) SITE.theme.apply();
-        });
         SITE.theme.apply();
       },
     },
