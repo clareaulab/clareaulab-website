@@ -24,8 +24,8 @@
 # =============================================================================
 
 intro:
-  - Our lab has a long-standing commitment to developing and maintaining open-source tools that supports our work. Further, we organize and release all custom code underlying key analyses in our major works to enable others reproducing and extending our analyses. 
-  - Please raise any questions and/or  bug reports as issue on the relevant GitHub repository.
+  - Our lab has a long-standing commitment to developing and maintaining open-source tools that support our work. Further, we organize and release all custom code underlying key analyses in our major works to enable others to reproduce and extend our analyses.
+  - Please raise any questions and/or bug reports as an issue on the relevant GitHub repository.
 
 tools:
   - name: mgatk
